@@ -42,17 +42,20 @@ def generate_mock_hiring_data(n=100):
 		position_close_date = random_date(position_open_date, "2025-08-15")
 		candidate_name = random_name()
 		source_channel = random.choice(source_channels)
+
 		# CV received after open date
 		stage_cv_received = random_date(position_open_date, position_close_date)
 		# CV filtered 3-5 days after received
 		cv_filtered_dt = datetime.strptime(stage_cv_received, "%Y-%m-%d") + timedelta(days=random.randint(3,5))
 		stage_cv_filtered = cv_filtered_dt.strftime("%Y-%m-%d")
-		# CV result
-		cv_result = f"{random.randint(0, 100)}%"
-		# Edge case: immediate rejection
-		immediate_reject = random.random() < 0.1
+
+		# Bias CV scores upwards
+		cv_result = f"{random.randint(30, 100)}%"
 		cv_result_value = int(cv_result.replace('%',''))
-		if immediate_reject or cv_result_value < 41:
+
+		# Edge case: immediate rejection
+		immediate_reject = random.random() < 0.05
+		if immediate_reject or cv_result_value < 50:
 			rejection_reason = random.choice([
 				"Working experiences does not match requirement",
 				"Lacking of required technical skills",
@@ -60,13 +63,16 @@ def generate_mock_hiring_data(n=100):
 			])
 		else:
 			rejection_reason = ""
-		# Test assigned/completed
-		if not immediate_reject:
+
+		# Test assigned/completed ONLY if CV > 50 and not immediate reject
+		if not immediate_reject and cv_result_value > 50:
 			test_assigned_dt = cv_filtered_dt + timedelta(days=random.randint(1,5))
 			stage_test_assigned = test_assigned_dt.strftime("%Y-%m-%d")
 			test_completed_dt = test_assigned_dt + timedelta(days=random.randint(1,14))
 			stage_test_completed = test_completed_dt.strftime("%Y-%m-%d")
-			test_score = random.randint(0,100)
+
+			# Bias test scores upwards
+			test_score = random.randint(50,100)
 			if test_score <= 40:
 				test_result = "Failed"
 			elif test_score <= 60:
@@ -75,6 +81,7 @@ def generate_mock_hiring_data(n=100):
 				test_result = "Good"
 			else:
 				test_result = "Perfect"
+
 			# Interview scheduled/completed
 			interview_scheduled = ""
 			interview_completed = ""
@@ -83,19 +90,26 @@ def generate_mock_hiring_data(n=100):
 			offer_status = ""
 			offer_rejection_reason = ""
 			final_status = ""
-			if test_score > 41:
+
+			# Interview only if test_score > 80
+			if test_score > 80:
 				interview_scheduled_dt = test_completed_dt + timedelta(days=random.randint(1,7))
 				interview_scheduled = interview_scheduled_dt.strftime("%Y-%m-%d")
 				interview_completed_dt = interview_scheduled_dt + timedelta(days=random.randint(1,14))
 				interview_completed = interview_completed_dt.strftime("%Y-%m-%d")
-				interview_result_score = random.randint(0,100)
+
+				#  Bias interview scores upwards
+				interview_result_score = random.randint(60,100)
 				interview_result = f"{interview_result_score}%"
-				# Edge case: delayed offer
-				delayed_offer = random.random() < 0.05
-				if interview_result_score > 70:
+
+				#  Offer only if interview > 80
+				if interview_result_score > 80:
+					delayed_offer = random.random() < 0.05
 					offer_sent_dt = interview_completed_dt + timedelta(days=random.randint(1,30) if delayed_offer else random.randint(1,7))
 					offer_sent_date = offer_sent_dt.strftime("%Y-%m-%d")
-					offer_status = random.choice(["accept", "reject"])
+
+					#  Weighing offer acceptance
+					offer_status = random.choices(["accept", "reject"], weights=[0.7, 0.3])[0]
 					if offer_status == "reject":
 						offer_rejection_reason = random.choice([
 							"salary does not met expectation",
@@ -104,7 +118,15 @@ def generate_mock_hiring_data(n=100):
 							"got another better offer elsewhere",
 							"reject with family issues"
 						])
-					final_status = offer_status
+						final_status = "rejected"   # only reject if candidate rejects offer
+					else:
+						final_status = "hired"     # hired only if accepted
+				else:
+					final_status = ""  # interview failed
+					rejection_reason = "Interview score too low"
+			else:
+				final_status = ""   # failed in process
+				rejection_reason = "Test score too low"
 		else:
 			stage_test_assigned = ""
 			stage_test_completed = ""
@@ -116,7 +138,8 @@ def generate_mock_hiring_data(n=100):
 			offer_sent_date = ""
 			offer_status = ""
 			offer_rejection_reason = ""
-			final_status = "reject"
+			final_status = ""
+		
 		data.append({
 			"Candidate_ID": candidate_id,
 			"Position_ID": position_id,
@@ -128,7 +151,6 @@ def generate_mock_hiring_data(n=100):
 			"Stage_CV_Received": stage_cv_received,
 			"Stage_CV_Filtered": stage_cv_filtered,
 			"CV_Result": cv_result,
-			"Rejection_Reason": rejection_reason,
 			"Stage_Test_Assigned": stage_test_assigned,
 			"Stage_Test_Completed": stage_test_completed,
 			"Test_Score": test_score,
@@ -136,6 +158,7 @@ def generate_mock_hiring_data(n=100):
 			"Stage_Interview_Scheduled": interview_scheduled,
 			"Stage_Interview_Completed": interview_completed,
 			"Interview_Result": interview_result,
+			"Rejection_Reason": rejection_reason,
 			"Offer_Sent_Date": offer_sent_date,
 			"Offer_Status": offer_status,
 			"Offer_Rejection_Reason": offer_rejection_reason,
@@ -146,3 +169,5 @@ def generate_mock_hiring_data(n=100):
 # Example usage:
 df = generate_mock_hiring_data(100)
 df.to_csv("mock_hiring_data.csv", index=False)
+
+print(df["Final_Status"].value_counts())
