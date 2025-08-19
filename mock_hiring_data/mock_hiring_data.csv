@@ -1,101 +1,101 @@
-Candidate_ID,Position_ID,Role_Title,Position_Open_Date,Position_Close_Date,Candidate_Name,Source_Channel,Stage_CV_Received,Stage_CV_Filtered,CV_Result,Rejection_Reason,Stage_Test_Assigned,Stage_Test_Completed,Test_Score,Test_Result,Stage_Interview_Scheduled,Stage_Interview_Completed,Interview_Result,Offer_Sent_Date,Offer_Status,Offer_Rejection_Reason,Final_Status
-MYC-00001,MER0004,Full Stack Developer for AI,2025-05-02,2025-08-09,Zhi Ming Tan,Job Street,2025-07-12,2025-07-16,95%,,2025-07-20,2025-08-03,25,Failed,,,,,,,
-MYC-00002,MER0009,Data Engineer,2025-04-01,2025-05-26,Faizal Abdullah,Michael Page,2025-05-06,2025-05-10,92%,,2025-05-11,2025-05-13,73,Good,2025-05-19,2025-05-30,23%,,,,
-MYC-00003,MER0015,Full Stack Developer in Golang,2025-06-01,2025-08-04,Farhan Rahman,Randstad,2025-06-22,2025-06-27,93%,,2025-06-29,2025-06-30,57,Passed,2025-07-02,2025-07-14,34%,,,,
-MYC-00004,MER0009,Data Engineer,2025-04-01,2025-06-01,Kumar Singh,Robert Walters,2025-05-04,2025-05-07,97%,,2025-05-12,2025-05-23,64,Good,2025-05-30,2025-06-04,56%,,,,
-MYC-00005,MER0003,Data Science,2025-04-01,2025-08-15,Zhi Ming Chew,Employee Referral,2025-08-11,2025-08-15,8%,Working experiences does not match requirement,2025-08-18,2025-08-19,56,Passed,2025-08-26,2025-08-30,99%,2025-09-01,accept,,accept
-MYC-00006,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-25,Xin Yi Chan,Employee Referral,2025-06-03,2025-06-07,68%,Lacking of leadership quality,,,,,,,,,,,reject
-MYC-00007,MER0004,Full Stack Developer for AI,2025-05-02,2025-06-17,Wai Jie Lim,Michael Page,2025-06-05,2025-06-08,26%,Lacking of required technical skills,2025-06-12,2025-06-13,46,Passed,2025-06-18,2025-06-26,99%,2025-07-02,reject,reject with family issues,reject
-MYC-00008,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-08,Farhan Hashim,Michael Page,2025-06-04,2025-06-08,96%,,2025-06-11,2025-06-15,64,Good,2025-06-21,2025-07-04,58%,,,,
-MYC-00009,MER0008,Full Stack Developer in Java,2025-05-10,2025-08-15,Zara Yusof,Robert Walters,2025-06-24,2025-06-29,38%,Working experiences does not match requirement,2025-07-02,2025-07-13,40,Failed,,,,,,,
-MYC-00010,MER0008,Full Stack Developer in Java,2025-05-10,2025-07-12,Aisyah Hassan,Job Street,2025-06-14,2025-06-17,65%,,2025-06-21,2025-07-04,70,Good,2025-07-07,2025-07-18,79%,2025-07-20,reject,salary does not met expectation,reject
-MYC-00011,MER0009,Data Engineer,2025-04-01,2025-04-26,Farhan Zainal,Robert Walters,2025-04-17,2025-04-22,45%,,2025-04-27,2025-05-02,10,Failed,,,,,,,
-MYC-00012,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-17,Zara Hassan,Michael Page,2025-06-17,2025-06-22,74%,,2025-06-24,2025-06-29,68,Good,2025-07-03,2025-07-09,39%,,,,
-MYC-00013,MER0004,Full Stack Developer for AI,2025-05-02,2025-05-02,Zara Omar,Randstad,2025-05-02,2025-05-06,91%,,2025-05-08,2025-05-20,64,Good,2025-05-24,2025-06-07,56%,,,,
-MYC-00014,MER0009,Data Engineer,2025-04-01,2025-07-31,Aisyah Zainal,LinkedIn,2025-05-12,2025-05-16,0%,Working experiences does not match requirement,2025-05-20,2025-06-01,61,Good,2025-06-03,2025-06-09,53%,,,,
-MYC-00015,MER0004,Full Stack Developer for AI,2025-05-02,2025-05-11,Priya Ramasamy,Job Street,2025-05-07,2025-05-12,54%,,2025-05-16,2025-05-21,53,Passed,2025-05-22,2025-05-29,49%,,,,
-MYC-00016,MER0004,Full Stack Developer for AI,2025-05-02,2025-06-26,Wei Ling Goh,LinkedIn,2025-05-18,2025-05-21,85%,,2025-05-25,2025-05-28,83,Perfect,2025-06-01,2025-06-02,12%,,,,
-MYC-00017,MER0015,Full Stack Developer in Golang,2025-06-01,2025-07-03,Kumar Subramaniam,Michael Page,2025-06-17,2025-06-21,77%,,2025-06-22,2025-07-02,81,Perfect,2025-07-03,2025-07-08,97%,2025-07-15,accept,,accept
-MYC-00018,MER0009,Data Engineer,2025-04-01,2025-04-18,Priya Pillai,Job Street,2025-04-08,2025-04-12,73%,,2025-04-16,2025-04-28,54,Passed,2025-05-02,2025-05-05,20%,,,,
-MYC-00019,MER0009,Data Engineer,2025-04-01,2025-06-25,Arun Vijay,Randstad,2025-05-24,2025-05-27,16%,Lacking of required technical skills,2025-05-31,2025-06-09,95,Perfect,2025-06-14,2025-06-28,60%,,,,
-MYC-00020,MER0003,Data Science,2025-04-01,2025-06-09,Deepa Raj,Robert Walters,2025-04-27,2025-04-30,20%,Working experiences does not match requirement,2025-05-02,2025-05-05,16,Failed,,,,,,,
-MYC-00021,MER0009,Data Engineer,2025-04-01,2025-07-11,Zara Zainal,Job Street,2025-04-26,2025-05-01,18%,Lacking of required technical skills,,,,,,,,,,,reject
-MYC-00022,MER0004,Full Stack Developer for AI,2025-05-02,2025-08-05,Hakimah Yusof,LinkedIn,2025-07-18,2025-07-21,69%,,2025-07-22,2025-07-23,57,Passed,2025-07-25,2025-08-07,96%,2025-08-11,accept,,accept
-MYC-00023,MER0009,Data Engineer,2025-04-01,2025-07-15,Liang Chen Chong,Employee Referral,2025-07-09,2025-07-12,30%,Lacking of leadership quality,2025-07-13,2025-07-17,60,Passed,2025-07-22,2025-07-25,44%,,,,
-MYC-00024,MER0003,Data Science,2025-04-01,2025-05-06,Yage Subramaniam,Robert Walters,2025-04-06,2025-04-10,10%,Lacking of required technical skills,2025-04-13,2025-04-26,79,Good,2025-04-29,2025-05-07,36%,,,,
-MYC-00025,MER0009,Data Engineer,2025-04-01,2025-04-17,Zhi Ming Lim,Robert Walters,2025-04-15,2025-04-20,61%,,2025-04-22,2025-04-25,78,Good,2025-04-28,2025-05-09,33%,,,,
-MYC-00026,MER0015,Full Stack Developer in Golang,2025-06-01,2025-08-03,Xin Yi Chew,LinkedIn,2025-06-18,2025-06-21,93%,Lacking of required technical skills,,,,,,,,,,,reject
-MYC-00027,MER0003,Data Science,2025-04-01,2025-05-02,Hui Min Teoh,Job Street,2025-04-12,2025-04-17,22%,Working experiences does not match requirement,2025-04-20,2025-04-27,22,Failed,,,,,,,
-MYC-00028,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-24,Aisyah Jamil,Michael Page,2025-06-04,2025-06-08,59%,,2025-06-10,2025-06-13,81,Perfect,2025-06-16,2025-06-29,34%,,,,
-MYC-00029,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-08,Liang Chen Lee,Employee Referral,2025-06-05,2025-06-09,88%,,2025-06-12,2025-06-13,35,Failed,,,,,,,
-MYC-00030,MER0009,Data Engineer,2025-04-01,2025-06-10,Faizal Hassan,LinkedIn,2025-04-27,2025-05-02,38%,Working experiences does not match requirement,2025-05-04,2025-05-17,92,Perfect,2025-05-20,2025-05-28,99%,2025-06-03,accept,,accept
-MYC-00031,MER0015,Full Stack Developer in Golang,2025-06-01,2025-07-03,Arun Muniandy,Michael Page,2025-06-29,2025-07-02,27%,Working experiences does not match requirement,2025-07-04,2025-07-18,56,Passed,2025-07-20,2025-07-23,87%,2025-07-29,accept,,accept
-MYC-00032,MER0008,Full Stack Developer in Java,2025-05-10,2025-05-19,Wai Jie Wong,Robert Walters,2025-05-15,2025-05-19,51%,,2025-05-22,2025-05-30,79,Good,2025-06-01,2025-06-05,61%,,,,
-MYC-00033,MER0003,Data Science,2025-04-01,2025-04-18,Priya Raj,Michael Page,2025-04-09,2025-04-14,74%,Working experiences does not match requirement,,,,,,,,,,,reject
-MYC-00034,MER0004,Full Stack Developer for AI,2025-05-02,2025-06-24,Zainab Hassan,LinkedIn,2025-05-08,2025-05-12,51%,,2025-05-15,2025-05-21,4,Failed,,,,,,,
-MYC-00035,MER0009,Data Engineer,2025-04-01,2025-08-08,Aiman Jamil,LinkedIn,2025-04-05,2025-04-08,94%,,2025-04-12,2025-04-24,29,Failed,,,,,,,
-MYC-00036,MER0008,Full Stack Developer in Java,2025-05-10,2025-07-15,Farhan Omar,Job Street,2025-06-25,2025-06-30,1%,Lacking of required technical skills,2025-07-05,2025-07-18,39,Failed,,,,,,,
-MYC-00037,MER0009,Data Engineer,2025-04-01,2025-07-17,Chandra Nair,Robert Walters,2025-06-27,2025-07-01,66%,,2025-07-04,2025-07-18,100,Perfect,2025-07-24,2025-07-25,47%,,,,
-MYC-00038,MER0004,Full Stack Developer for AI,2025-05-02,2025-05-04,Siti Omar,Employee Referral,2025-05-03,2025-05-06,67%,,2025-05-07,2025-05-13,96,Perfect,2025-05-16,2025-05-28,25%,,,,
-MYC-00039,MER0003,Data Science,2025-04-01,2025-05-09,Wai Jie Tan,Employee Referral,2025-05-01,2025-05-04,57%,,2025-05-08,2025-05-20,25,Failed,,,,,,,
-MYC-00040,MER0008,Full Stack Developer in Java,2025-05-10,2025-07-08,Aiman Rahman,LinkedIn,2025-05-27,2025-06-01,23%,Lacking of required technical skills,2025-06-02,2025-06-10,27,Failed,,,,,,,
-MYC-00041,MER0009,Data Engineer,2025-04-01,2025-06-03,Xiao Mei Liew,Michael Page,2025-04-02,2025-04-05,53%,,2025-04-10,2025-04-13,70,Good,2025-04-18,2025-04-27,93%,2025-04-29,accept,,accept
-MYC-00042,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-14,Li Wei Chew,Job Street,2025-06-04,2025-06-08,8%,Working experiences does not match requirement,2025-06-11,2025-06-18,81,Perfect,2025-06-22,2025-06-30,79%,2025-07-06,reject,reject with family issues,reject
-MYC-00043,MER0008,Full Stack Developer in Java,2025-05-10,2025-07-10,Faizal Hashim,Employee Referral,2025-05-17,2025-05-20,5%,Lacking of leadership quality,2025-05-23,2025-05-29,53,Passed,2025-05-30,2025-06-08,89%,2025-06-11,accept,,accept
-MYC-00044,MER0008,Full Stack Developer in Java,2025-05-10,2025-08-01,Siti Zainal,LinkedIn,2025-07-05,2025-07-08,68%,,2025-07-10,2025-07-15,29,Failed,,,,,,,
-MYC-00045,MER0003,Data Science,2025-04-01,2025-04-28,Aiman Rahman,LinkedIn,2025-04-19,2025-04-22,44%,Lacking of required technical skills,,,,,,,,,,,reject
-MYC-00046,MER0009,Data Engineer,2025-04-01,2025-07-01,Arun Krishnan,Job Street,2025-05-15,2025-05-19,98%,,2025-05-20,2025-05-22,14,Failed,,,,,,,
-MYC-00047,MER0004,Full Stack Developer for AI,2025-05-02,2025-08-12,Zainab Abdullah,LinkedIn,2025-05-27,2025-05-30,49%,,2025-06-02,2025-06-04,54,Passed,2025-06-10,2025-06-20,77%,2025-06-21,accept,,accept
-MYC-00048,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-25,Zainab Hashim,LinkedIn,2025-06-15,2025-06-19,41%,,2025-06-20,2025-06-28,82,Perfect,2025-07-03,2025-07-10,52%,,,,
-MYC-00049,MER0009,Data Engineer,2025-04-01,2025-04-11,Faizal Rahman,Job Street,2025-04-08,2025-04-13,30%,Lacking of required technical skills,2025-04-18,2025-04-21,54,Passed,2025-04-22,2025-04-27,50%,,,,
-MYC-00050,MER0009,Data Engineer,2025-04-01,2025-08-03,Faizal Ismail,Job Street,2025-07-07,2025-07-12,3%,Working experiences does not match requirement,2025-07-14,2025-07-15,50,Passed,2025-07-20,2025-07-24,21%,,,,
-MYC-00051,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-04,Xiao Mei Liew,Employee Referral,2025-06-02,2025-06-07,57%,,2025-06-09,2025-06-15,18,Failed,,,,,,,
-MYC-00052,MER0004,Full Stack Developer for AI,2025-05-02,2025-07-07,Li Wei Wong,Employee Referral,2025-05-05,2025-05-10,65%,,2025-05-11,2025-05-13,22,Failed,,,,,,,
-MYC-00053,MER0004,Full Stack Developer for AI,2025-05-02,2025-05-05,Siti Hashim,Employee Referral,2025-05-02,2025-05-05,98%,,2025-05-09,2025-05-20,72,Good,2025-05-23,2025-06-04,6%,,,,
-MYC-00054,MER0004,Full Stack Developer for AI,2025-05-02,2025-07-15,Vijay Vijay,LinkedIn,2025-05-05,2025-05-08,33%,Working experiences does not match requirement,2025-05-09,2025-05-15,79,Good,2025-05-20,2025-05-27,21%,,,,
-MYC-00055,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-11,Arif Rahman,Employee Referral,2025-05-27,2025-05-31,75%,,2025-06-03,2025-06-05,2,Failed,,,,,,,
-MYC-00056,MER0015,Full Stack Developer in Golang,2025-06-01,2025-07-29,Arif Ismail,LinkedIn,2025-06-30,2025-07-04,35%,Lacking of required technical skills,2025-07-09,2025-07-16,75,Good,2025-07-17,2025-07-31,100%,2025-08-28,accept,,accept
-MYC-00057,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-16,Arif Abdullah,Employee Referral,2025-06-05,2025-06-10,44%,,2025-06-11,2025-06-12,48,Passed,2025-06-15,2025-06-24,93%,2025-06-26,reject,reject with family issues,reject
-MYC-00058,MER0003,Data Science,2025-04-01,2025-07-18,Vijay Vijay,Job Street,2025-05-19,2025-05-22,21%,Lacking of required technical skills,2025-05-25,2025-06-03,82,Perfect,2025-06-07,2025-06-13,75%,2025-06-20,reject,got another better offer elsewhere,reject
-MYC-00059,MER0015,Full Stack Developer in Golang,2025-06-01,2025-08-10,Farhan Omar,Employee Referral,2025-06-08,2025-06-11,72%,,2025-06-15,2025-06-19,69,Good,2025-06-23,2025-07-04,2%,,,,
-MYC-00060,MER0003,Data Science,2025-04-01,2025-05-27,Hakimah Rahman,LinkedIn,2025-04-17,2025-04-22,57%,,2025-04-27,2025-05-01,45,Passed,2025-05-05,2025-05-06,79%,2025-05-08,accept,,accept
-MYC-00061,MER0003,Data Science,2025-04-01,2025-05-16,Ravi Vijay,Employee Referral,2025-04-30,2025-05-03,17%,Lacking of required technical skills,2025-05-07,2025-05-18,52,Passed,2025-05-24,2025-06-01,22%,,,,
-MYC-00062,MER0004,Full Stack Developer for AI,2025-05-02,2025-05-09,Priya Vijay,Randstad,2025-05-04,2025-05-08,28%,Lacking of required technical skills,2025-05-11,2025-05-19,65,Good,2025-05-25,2025-05-27,38%,,,,
-MYC-00063,MER0008,Full Stack Developer in Java,2025-05-10,2025-07-22,Mei Xin Lim,Robert Walters,2025-05-21,2025-05-24,90%,,2025-05-28,2025-06-11,67,Good,2025-06-13,2025-06-23,70%,,,,
-MYC-00064,MER0015,Full Stack Developer in Golang,2025-06-01,2025-07-28,Hakimah Salleh,LinkedIn,2025-07-09,2025-07-13,59%,,2025-07-16,2025-07-18,85,Perfect,2025-07-25,2025-08-07,84%,2025-08-14,reject,salary does not met expectation,reject
-MYC-00065,MER0004,Full Stack Developer for AI,2025-05-02,2025-06-06,Siti Zainal,Job Street,2025-05-22,2025-05-25,40%,Lacking of leadership quality,2025-05-27,2025-05-28,1,Failed,,,,,,,
-MYC-00066,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-20,Zainab Abdullah,Job Street,2025-06-01,2025-06-04,80%,,2025-06-07,2025-06-12,23,Failed,,,,,,,
-MYC-00067,MER0009,Data Engineer,2025-04-01,2025-06-26,Zara Hashim,Randstad,2025-06-03,2025-06-08,62%,Lacking of leadership quality,,,,,,,,,,,reject
-MYC-00068,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-10,Nurul Hashim,Employee Referral,2025-05-12,2025-05-16,8%,Lacking of required technical skills,2025-05-21,2025-05-31,1,Failed,,,,,,,
-MYC-00069,MER0003,Data Science,2025-04-01,2025-07-24,Deepa Pillai,Randstad,2025-06-29,2025-07-04,68%,,2025-07-07,2025-07-15,70,Good,2025-07-17,2025-07-31,11%,,,,
-MYC-00070,MER0015,Full Stack Developer in Golang,2025-06-01,2025-07-02,Arif Yusof,Randstad,2025-06-26,2025-06-29,82%,,2025-07-01,2025-07-15,27,Failed,,,,,,,
-MYC-00071,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-24,Vijay Kumar,Michael Page,2025-05-11,2025-05-15,55%,,2025-05-17,2025-05-21,100,Perfect,2025-05-22,2025-05-28,73%,2025-06-03,reject,salary does not met expectation,reject
-MYC-00072,MER0009,Data Engineer,2025-04-01,2025-08-15,Zainab Zainal,LinkedIn,2025-06-09,2025-06-14,69%,,2025-06-17,2025-06-24,47,Passed,2025-07-01,2025-07-10,9%,,,,
-MYC-00073,MER0004,Full Stack Developer for AI,2025-05-02,2025-07-19,Mei Xin Chew,Employee Referral,2025-05-15,2025-05-20,56%,,2025-05-21,2025-05-27,43,Passed,2025-06-03,2025-06-04,64%,,,,
-MYC-00074,MER0008,Full Stack Developer in Java,2025-05-10,2025-07-03,Wei Ling Lim,Job Street,2025-05-13,2025-05-16,85%,,2025-05-18,2025-05-27,29,Failed,,,,,,,
-MYC-00075,MER0008,Full Stack Developer in Java,2025-05-10,2025-05-14,Li Wei Tan,Employee Referral,2025-05-14,2025-05-18,33%,Lacking of leadership quality,2025-05-23,2025-05-28,76,Good,2025-05-31,2025-06-11,61%,,,,
-MYC-00076,MER0003,Data Science,2025-04-01,2025-08-03,Arun Vijay,LinkedIn,2025-07-12,2025-07-15,12%,Lacking of leadership quality,2025-07-20,2025-08-01,57,Passed,2025-08-07,2025-08-18,79%,2025-08-22,reject,reject with family issues,reject
-MYC-00077,MER0004,Full Stack Developer for AI,2025-05-02,2025-06-20,Mei Xin Lim,Job Street,2025-05-20,2025-05-25,22%,Lacking of leadership quality,,,,,,,,,,,reject
-MYC-00078,MER0003,Data Science,2025-04-01,2025-05-21,Wei Ling Chew,Employee Referral,2025-05-10,2025-05-15,36%,Lacking of required technical skills,2025-05-17,2025-05-29,5,Failed,,,,,,,
-MYC-00079,MER0009,Data Engineer,2025-04-01,2025-04-08,Xiao Mei Chong,Employee Referral,2025-04-01,2025-04-05,51%,,2025-04-07,2025-04-13,44,Passed,2025-04-16,2025-04-19,37%,,,,
-MYC-00080,MER0009,Data Engineer,2025-04-01,2025-06-16,Li Wei Wong,LinkedIn,2025-05-22,2025-05-27,56%,,2025-05-29,2025-06-01,83,Perfect,2025-06-08,2025-06-19,95%,2025-06-21,reject,job scope does not met expectation,reject
-MYC-00081,MER0015,Full Stack Developer in Golang,2025-06-01,2025-08-11,Ravi Krishnan,Employee Referral,2025-06-24,2025-06-27,38%,Lacking of required technical skills,2025-07-02,2025-07-13,91,Perfect,2025-07-16,2025-07-23,96%,2025-07-26,accept,,accept
-MYC-00082,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-10,Arun Ramasamy,Michael Page,2025-06-03,2025-06-06,50%,,2025-06-10,2025-06-19,70,Good,2025-06-24,2025-06-25,62%,,,,
-MYC-00083,MER0004,Full Stack Developer for AI,2025-05-02,2025-05-11,Xin Yi Chew,Job Street,2025-05-08,2025-05-13,44%,,2025-05-15,2025-05-17,68,Good,2025-05-18,2025-05-20,56%,,,,
-MYC-00084,MER0003,Data Science,2025-04-01,2025-05-07,Zhi Ming Chan,Job Street,2025-04-19,2025-04-23,42%,,2025-04-28,2025-04-30,58,Passed,2025-05-04,2025-05-06,11%,,,,
-MYC-00085,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-23,Wai Jie Goh,Robert Walters,2025-05-10,2025-05-15,46%,,2025-05-16,2025-05-25,29,Failed,,,,,,,
-MYC-00086,MER0008,Full Stack Developer in Java,2025-05-10,2025-08-15,Deepa Subramaniam,LinkedIn,2025-06-07,2025-06-10,86%,,2025-06-11,2025-06-13,93,Perfect,2025-06-18,2025-06-22,58%,,,,
-MYC-00087,MER0004,Full Stack Developer for AI,2025-05-02,2025-07-26,Li Wei Chong,Randstad,2025-05-17,2025-05-22,12%,Lacking of required technical skills,2025-05-26,2025-05-30,24,Failed,,,,,,,
-MYC-00088,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-11,Siti Hashim,LinkedIn,2025-06-08,2025-06-11,65%,,2025-06-14,2025-06-27,79,Good,2025-06-30,2025-07-14,55%,,,,
-MYC-00089,MER0008,Full Stack Developer in Java,2025-05-10,2025-06-11,Zhi Ming Wong,LinkedIn,2025-06-05,2025-06-10,51%,,2025-06-12,2025-06-13,94,Perfect,2025-06-18,2025-06-28,4%,,,,
-MYC-00090,MER0008,Full Stack Developer in Java,2025-05-10,2025-07-13,Aisyah Yusof,Employee Referral,2025-05-19,2025-05-24,47%,,2025-05-27,2025-06-09,78,Good,2025-06-12,2025-06-25,99%,2025-06-27,reject,working mode does not met expectation,reject
-MYC-00091,MER0008,Full Stack Developer in Java,2025-05-10,2025-05-13,Hakimah Abdullah,Randstad,2025-05-13,2025-05-18,23%,Lacking of required technical skills,2025-05-21,2025-05-25,4,Failed,,,,,,,
-MYC-00092,MER0004,Full Stack Developer for AI,2025-05-02,2025-05-07,Aiman Hashim,Job Street,2025-05-03,2025-05-08,29%,Lacking of leadership quality,2025-05-10,2025-05-13,92,Perfect,2025-05-14,2025-05-16,72%,2025-05-19,reject,working mode does not met expectation,reject
-MYC-00093,MER0004,Full Stack Developer for AI,2025-05-02,2025-07-27,Liang Chen Chong,Randstad,2025-05-04,2025-05-08,83%,,2025-05-13,2025-05-15,14,Failed,,,,,,,
-MYC-00094,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-04,Faizal Omar,Michael Page,2025-06-02,2025-06-06,34%,Lacking of leadership quality,2025-06-07,2025-06-16,48,Passed,2025-06-23,2025-07-07,96%,2025-07-11,accept,,accept
-MYC-00095,MER0015,Full Stack Developer in Golang,2025-06-01,2025-06-22,Aisyah Abdullah,Michael Page,2025-06-03,2025-06-08,96%,,2025-06-09,2025-06-11,3,Failed,,,,,,,
-MYC-00096,MER0009,Data Engineer,2025-04-01,2025-04-08,Wei Ling Wong,LinkedIn,2025-04-03,2025-04-08,28%,Lacking of required technical skills,2025-04-11,2025-04-20,74,Good,2025-04-24,2025-05-01,62%,,,,
-MYC-00097,MER0009,Data Engineer,2025-04-01,2025-06-02,Zara Zainal,Randstad,2025-05-29,2025-06-02,40%,Lacking of required technical skills,2025-06-07,2025-06-15,37,Failed,,,,,,,
-MYC-00098,MER0003,Data Science,2025-04-01,2025-05-15,Zhi Ming Goh,LinkedIn,2025-05-06,2025-05-10,51%,,2025-05-13,2025-05-25,92,Perfect,2025-05-28,2025-06-04,83%,2025-06-11,accept,,accept
-MYC-00099,MER0008,Full Stack Developer in Java,2025-05-10,2025-05-29,Arun Nair,Randstad,2025-05-28,2025-06-02,15%,Lacking of required technical skills,2025-06-05,2025-06-07,52,Passed,2025-06-09,2025-06-15,60%,,,,
-MYC-00100,MER0015,Full Stack Developer in Golang,2025-06-01,2025-07-24,Deepa Kumar,Robert Walters,2025-07-20,2025-07-25,56%,,2025-07-26,2025-07-29,22,Failed,,,,,,,
+Candidate_ID,Position_ID,Role_Title,Position_Open_Date,Position_Close_Date,Candidate_Name,Source_Channel,Stage_CV_Received,Stage_CV_Filtered,CV_Result,Stage_Test_Assigned,Stage_Test_Completed,Test_Score,Test_Result,Stage_Interview_Scheduled,Stage_Interview_Completed,Interview_Result,Rejection_Reason,Offer_Sent_Date,Offer_Status,Offer_Rejection_Reason,Final_Status
+MYC-00001,MER0015,Full Stack Developer in Golang,1/6/2025,25/7/2025,Anjali Raj,Randstad,6/7/2025,11/7/2025,81%,12/7/2025,17/7/2025,84,Perfect,24/7/2025,1/8/2025,66%,Interview score too low,,,,
+MYC-00002,MER0004,Full Stack Developer for AI,2/5/2025,30/7/2025,Yage Singh,LinkedIn,2/5/2025,7/5/2025,66%,12/5/2025,23/5/2025,78,Good,,,,Test score too low,,,,
+MYC-00003,MER0004,Full Stack Developer for AI,2/5/2025,8/6/2025,Wai Jie Goh,Job Street,4/5/2025,8/5/2025,67%,10/5/2025,24/5/2025,93,Perfect,27/5/2025,29/5/2025,62%,Interview score too low,,,,
+MYC-00004,MER0008,Full Stack Developer in Java,10/5/2025,10/7/2025,Faizal Abdullah,Randstad,24/5/2025,28/5/2025,63%,29/5/2025,30/5/2025,53,Passed,,,,Test score too low,,,,
+MYC-00005,MER0015,Full Stack Developer in Golang,1/6/2025,21/6/2025,Aiman Hassan,LinkedIn,7/6/2025,12/6/2025,51%,15/6/2025,28/6/2025,60,Passed,,,,Test score too low,,,,
+MYC-00006,MER0003,Data Science,1/4/2025,17/7/2025,Deepa Vijay,Job Street,7/7/2025,12/7/2025,97%,16/7/2025,20/7/2025,85,Perfect,22/7/2025,28/7/2025,94%,,4/8/2025,reject,salary does not met expectation,rejected
+MYC-00007,MER0015,Full Stack Developer in Golang,1/6/2025,14/7/2025,Arif Jamil,LinkedIn,5/6/2025,8/6/2025,44%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00008,MER0015,Full Stack Developer in Golang,1/6/2025,29/7/2025,Aisyah Hassan,LinkedIn,5/7/2025,8/7/2025,55%,13/7/2025,19/7/2025,74,Good,,,,Test score too low,,,,
+MYC-00009,MER0015,Full Stack Developer in Golang,1/6/2025,18/6/2025,Jia Hao Chan,Robert Walters,7/6/2025,10/6/2025,40%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00010,MER0009,Data Engineer,1/4/2025,28/7/2025,Chandra Pillai,Michael Page,20/7/2025,24/7/2025,35%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00011,MER0008,Full Stack Developer in Java,10/5/2025,14/6/2025,Chandra Muniandy,Job Street,28/5/2025,1/6/2025,85%,6/6/2025,8/6/2025,83,Perfect,14/6/2025,20/6/2025,96%,,21/6/2025,accept,,hired
+MYC-00012,MER0009,Data Engineer,1/4/2025,16/6/2025,Jia Hao Liew,Robert Walters,14/6/2025,19/6/2025,38%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00013,MER0008,Full Stack Developer in Java,10/5/2025,5/6/2025,Zainab Salleh,Robert Walters,2/6/2025,5/6/2025,40%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00014,MER0003,Data Science,1/4/2025,19/4/2025,Kavita Ramasamy,Job Street,15/4/2025,20/4/2025,69%,25/4/2025,28/4/2025,53,Passed,,,,Test score too low,,,,
+MYC-00015,MER0004,Full Stack Developer for AI,2/5/2025,30/5/2025,Kumar Nair,Michael Page,21/5/2025,24/5/2025,69%,26/5/2025,1/6/2025,51,Passed,,,,Test score too low,,,,
+MYC-00016,MER0015,Full Stack Developer in Golang,1/6/2025,2/8/2025,Hakimah Salleh,LinkedIn,13/7/2025,16/7/2025,76%,21/7/2025,25/7/2025,55,Passed,,,,Test score too low,,,,
+MYC-00017,MER0003,Data Science,1/4/2025,22/5/2025,Priya Ramasamy,Robert Walters,22/4/2025,25/4/2025,82%,30/4/2025,3/5/2025,91,Perfect,10/5/2025,22/5/2025,79%,Interview score too low,,,,
+MYC-00018,MER0008,Full Stack Developer in Java,10/5/2025,15/5/2025,Wai Jie Chong,Employee Referral,14/5/2025,19/5/2025,88%,24/5/2025,29/5/2025,93,Perfect,31/5/2025,11/6/2025,67%,Interview score too low,,,,
+MYC-00019,MER0004,Full Stack Developer for AI,2/5/2025,12/6/2025,Arif Salleh,LinkedIn,24/5/2025,27/5/2025,40%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00020,MER0009,Data Engineer,1/4/2025,5/5/2025,Farhan Jamil,Job Street,1/4/2025,6/4/2025,94%,9/4/2025,23/4/2025,61,Good,,,,Test score too low,,,,
+MYC-00021,MER0009,Data Engineer,1/4/2025,30/4/2025,Xin Yi Wong,Job Street,27/4/2025,30/4/2025,83%,4/5/2025,15/5/2025,93,Perfect,16/5/2025,29/5/2025,97%,,30/5/2025,accept,,hired
+MYC-00022,MER0009,Data Engineer,1/4/2025,14/4/2025,Jia Hao Chan,Randstad,10/4/2025,14/4/2025,54%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00023,MER0008,Full Stack Developer in Java,10/5/2025,2/7/2025,Yage Pillai,Robert Walters,30/5/2025,4/6/2025,97%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00024,MER0004,Full Stack Developer for AI,2/5/2025,31/7/2025,Anjali Singh,Employee Referral,16/5/2025,21/5/2025,56%,25/5/2025,7/6/2025,54,Passed,,,,Test score too low,,,,
+MYC-00025,MER0008,Full Stack Developer in Java,10/5/2025,12/6/2025,Nurul Jamil,Michael Page,30/5/2025,4/6/2025,67%,9/6/2025,22/6/2025,96,Perfect,27/6/2025,1/7/2025,62%,Interview score too low,,,,
+MYC-00026,MER0009,Data Engineer,1/4/2025,19/6/2025,Arun Raj,Employee Referral,12/4/2025,16/4/2025,30%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00027,MER0003,Data Science,1/4/2025,7/6/2025,Jia Hao Wong,Robert Walters,6/6/2025,11/6/2025,35%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00028,MER0009,Data Engineer,1/4/2025,11/5/2025,Kavita Nair,Robert Walters,14/4/2025,19/4/2025,75%,20/4/2025,30/4/2025,80,Good,,,,Test score too low,,,,
+MYC-00029,MER0003,Data Science,1/4/2025,14/8/2025,Priya Nair,Employee Referral,14/7/2025,18/7/2025,34%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00030,MER0003,Data Science,1/4/2025,15/6/2025,Deepa Vijay,Randstad,27/4/2025,30/4/2025,76%,4/5/2025,8/5/2025,83,Perfect,14/5/2025,20/5/2025,80%,Interview score too low,,,,
+MYC-00031,MER0003,Data Science,1/4/2025,10/6/2025,Kavita Nair,Employee Referral,28/4/2025,3/5/2025,49%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00032,MER0003,Data Science,1/4/2025,24/6/2025,Vijay Singh,Randstad,14/6/2025,17/6/2025,85%,19/6/2025,3/7/2025,98,Perfect,4/7/2025,12/7/2025,87%,,15/7/2025,accept,,hired
+MYC-00033,MER0015,Full Stack Developer in Golang,1/6/2025,28/7/2025,Zara Yusof,Employee Referral,6/7/2025,9/7/2025,58%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00034,MER0004,Full Stack Developer for AI,2/5/2025,23/5/2025,Wai Jie Lim,Employee Referral,17/5/2025,20/5/2025,39%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00035,MER0008,Full Stack Developer in Java,10/5/2025,13/8/2025,Jia Hao Liew,LinkedIn,12/7/2025,17/7/2025,59%,22/7/2025,23/7/2025,51,Passed,,,,Test score too low,,,,
+MYC-00036,MER0009,Data Engineer,1/4/2025,15/8/2025,Deepa Pillai,Robert Walters,2/8/2025,7/8/2025,44%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00037,MER0004,Full Stack Developer for AI,2/5/2025,27/7/2025,Xin Yi Goh,Job Street,3/6/2025,7/6/2025,88%,11/6/2025,21/6/2025,83,Perfect,22/6/2025,28/6/2025,98%,,29/6/2025,accept,,hired
+MYC-00038,MER0009,Data Engineer,1/4/2025,24/5/2025,Yage Subramaniam,Robert Walters,19/5/2025,23/5/2025,43%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00039,MER0009,Data Engineer,1/4/2025,11/7/2025,Arif Jamil,LinkedIn,17/5/2025,21/5/2025,76%,26/5/2025,9/6/2025,72,Good,,,,Test score too low,,,,
+MYC-00040,MER0015,Full Stack Developer in Golang,1/6/2025,24/7/2025,Kavita Ramasamy,Robert Walters,20/6/2025,25/6/2025,55%,30/6/2025,14/7/2025,62,Good,,,,Test score too low,,,,
+MYC-00041,MER0009,Data Engineer,1/4/2025,17/6/2025,Aisyah Rahman,LinkedIn,12/5/2025,17/5/2025,78%,22/5/2025,29/5/2025,79,Good,,,,Test score too low,,,,
+MYC-00042,MER0009,Data Engineer,1/4/2025,26/5/2025,Zainab Jamil,Employee Referral,8/4/2025,11/4/2025,36%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00043,MER0009,Data Engineer,1/4/2025,7/7/2025,Farhan Hassan,Robert Walters,20/4/2025,23/4/2025,73%,24/4/2025,6/5/2025,80,Good,,,,Test score too low,,,,
+MYC-00044,MER0004,Full Stack Developer for AI,2/5/2025,19/5/2025,Jia Hao Goh,Robert Walters,5/5/2025,8/5/2025,78%,9/5/2025,11/5/2025,87,Perfect,14/5/2025,23/5/2025,97%,,27/5/2025,accept,,hired
+MYC-00045,MER0004,Full Stack Developer for AI,2/5/2025,21/6/2025,Kavita Nair,Robert Walters,18/5/2025,22/5/2025,90%,26/5/2025,28/5/2025,62,Good,,,,Test score too low,,,,
+MYC-00046,MER0009,Data Engineer,1/4/2025,26/7/2025,Ravi Muniandy,Job Street,22/4/2025,26/4/2025,77%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00047,MER0003,Data Science,1/4/2025,30/4/2025,Chandra Kumar,LinkedIn,27/4/2025,1/5/2025,47%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00048,MER0004,Full Stack Developer for AI,2/5/2025,14/5/2025,Hakimah Hassan,Job Street,5/5/2025,10/5/2025,88%,15/5/2025,20/5/2025,100,Perfect,27/5/2025,4/6/2025,96%,,7/6/2025,reject,salary does not met expectation,rejected
+MYC-00049,MER0004,Full Stack Developer for AI,2/5/2025,23/7/2025,Xin Yi Goh,Job Street,12/6/2025,17/6/2025,41%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00050,MER0008,Full Stack Developer in Java,10/5/2025,14/8/2025,Arif Zainal,Job Street,30/7/2025,4/8/2025,80%,5/8/2025,18/8/2025,88,Perfect,24/8/2025,29/8/2025,92%,,1/9/2025,accept,,hired
+MYC-00051,MER0003,Data Science,1/4/2025,14/8/2025,Hakimah Ismail,Randstad,30/7/2025,2/8/2025,71%,5/8/2025,18/8/2025,94,Perfect,20/8/2025,28/8/2025,87%,,4/9/2025,accept,,hired
+MYC-00052,MER0008,Full Stack Developer in Java,10/5/2025,17/5/2025,Deepa Raj,Randstad,16/5/2025,21/5/2025,89%,24/5/2025,25/5/2025,96,Perfect,29/5/2025,10/6/2025,78%,Interview score too low,,,,
+MYC-00053,MER0015,Full Stack Developer in Golang,1/6/2025,6/6/2025,Kavita Vijay,LinkedIn,6/6/2025,10/6/2025,56%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00054,MER0015,Full Stack Developer in Golang,1/6/2025,11/8/2025,Kumar Muniandy,Randstad,3/6/2025,6/6/2025,94%,7/6/2025,10/6/2025,67,Good,,,,Test score too low,,,,
+MYC-00055,MER0015,Full Stack Developer in Golang,1/6/2025,6/7/2025,Ravi Nair,LinkedIn,12/6/2025,15/6/2025,82%,19/6/2025,21/6/2025,95,Perfect,23/6/2025,24/6/2025,97%,,25/6/2025,reject,got another better offer elsewhere,rejected
+MYC-00056,MER0009,Data Engineer,1/4/2025,7/8/2025,Jia Hao Teoh,Michael Page,5/5/2025,10/5/2025,66%,11/5/2025,13/5/2025,61,Good,,,,Test score too low,,,,
+MYC-00057,MER0015,Full Stack Developer in Golang,1/6/2025,5/7/2025,Nurul Yusof,Job Street,12/6/2025,17/6/2025,80%,22/6/2025,24/6/2025,88,Perfect,30/6/2025,4/7/2025,100%,,6/7/2025,reject,job scope does not met expectation,rejected
+MYC-00058,MER0008,Full Stack Developer in Java,10/5/2025,10/5/2025,Mei Xin Lee,Robert Walters,10/5/2025,14/5/2025,96%,19/5/2025,20/5/2025,62,Good,,,,Test score too low,,,,
+MYC-00059,MER0003,Data Science,1/4/2025,15/6/2025,Xiao Mei Teoh,Employee Referral,15/6/2025,18/6/2025,98%,20/6/2025,26/6/2025,54,Passed,,,,Test score too low,,,,
+MYC-00060,MER0015,Full Stack Developer in Golang,1/6/2025,15/6/2025,Chandra Pillai,Randstad,15/6/2025,18/6/2025,60%,23/6/2025,3/7/2025,86,Perfect,7/7/2025,12/7/2025,83%,,13/7/2025,accept,,hired
+MYC-00061,MER0009,Data Engineer,1/4/2025,18/7/2025,Xiao Mei Teoh,Robert Walters,1/7/2025,6/7/2025,57%,11/7/2025,19/7/2025,98,Perfect,25/7/2025,8/8/2025,73%,Interview score too low,,,,
+MYC-00062,MER0003,Data Science,1/4/2025,26/4/2025,Arun Subramaniam,Employee Referral,13/4/2025,18/4/2025,90%,21/4/2025,4/5/2025,82,Perfect,8/5/2025,20/5/2025,69%,Interview score too low,,,,
+MYC-00063,MER0015,Full Stack Developer in Golang,1/6/2025,7/8/2025,Ravi Nair,Employee Referral,10/7/2025,15/7/2025,73%,20/7/2025,21/7/2025,70,Good,,,,Test score too low,,,,
+MYC-00064,MER0004,Full Stack Developer for AI,2/5/2025,7/8/2025,Nurul Salleh,Michael Page,2/8/2025,6/8/2025,57%,11/8/2025,24/8/2025,97,Perfect,28/8/2025,8/9/2025,87%,,12/9/2025,accept,,hired
+MYC-00065,MER0004,Full Stack Developer for AI,2/5/2025,6/6/2025,Nurul Hashim,Employee Referral,15/5/2025,19/5/2025,35%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00066,MER0008,Full Stack Developer in Java,10/5/2025,26/7/2025,Nurul Jamil,Job Street,5/6/2025,9/6/2025,31%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00067,MER0008,Full Stack Developer in Java,10/5/2025,27/6/2025,Jia Hao Tan,Employee Referral,14/5/2025,17/5/2025,93%,18/5/2025,26/5/2025,80,Good,,,,Test score too low,,,,
+MYC-00068,MER0004,Full Stack Developer for AI,2/5/2025,11/6/2025,Li Wei Lee,Employee Referral,22/5/2025,27/5/2025,83%,31/5/2025,13/6/2025,68,Good,,,,Test score too low,,,,
+MYC-00069,MER0008,Full Stack Developer in Java,10/5/2025,8/6/2025,Deepa Subramaniam,Employee Referral,29/5/2025,3/6/2025,99%,7/6/2025,12/6/2025,86,Perfect,19/6/2025,20/6/2025,67%,Interview score too low,,,,
+MYC-00070,MER0008,Full Stack Developer in Java,10/5/2025,30/6/2025,Wei Ling Lee,Job Street,15/6/2025,19/6/2025,84%,24/6/2025,7/7/2025,99,Perfect,9/7/2025,18/7/2025,71%,Interview score too low,,,,
+MYC-00071,MER0015,Full Stack Developer in Golang,1/6/2025,4/8/2025,Vijay Vijay,Michael Page,18/7/2025,22/7/2025,44%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00072,MER0004,Full Stack Developer for AI,2/5/2025,25/7/2025,Kavita Ramasamy,Michael Page,15/6/2025,20/6/2025,57%,24/6/2025,27/6/2025,89,Perfect,29/6/2025,9/7/2025,74%,Interview score too low,,,,
+MYC-00073,MER0009,Data Engineer,1/4/2025,13/5/2025,Vijay Singh,Job Street,9/4/2025,13/4/2025,47%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00074,MER0003,Data Science,1/4/2025,22/5/2025,Hui Min Teoh,Robert Walters,8/5/2025,11/5/2025,38%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00075,MER0003,Data Science,1/4/2025,21/4/2025,Hui Min Chan,Robert Walters,3/4/2025,8/4/2025,51%,11/4/2025,23/4/2025,77,Good,,,,Test score too low,,,,
+MYC-00076,MER0004,Full Stack Developer for AI,2/5/2025,26/6/2025,Wai Jie Goh,Robert Walters,4/5/2025,9/5/2025,34%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00077,MER0004,Full Stack Developer for AI,2/5/2025,24/5/2025,Zhi Ming Teoh,LinkedIn,18/5/2025,23/5/2025,98%,28/5/2025,8/6/2025,89,Perfect,14/6/2025,17/6/2025,85%,,20/6/2025,reject,salary does not met expectation,rejected
+MYC-00078,MER0009,Data Engineer,1/4/2025,19/6/2025,Arif Omar,Randstad,28/4/2025,1/5/2025,72%,3/5/2025,9/5/2025,85,Perfect,12/5/2025,20/5/2025,66%,Interview score too low,,,,
+MYC-00079,MER0009,Data Engineer,1/4/2025,14/6/2025,Kumar Kumar,Robert Walters,11/6/2025,15/6/2025,68%,16/6/2025,30/6/2025,89,Perfect,4/7/2025,16/7/2025,81%,,18/7/2025,accept,,hired
+MYC-00080,MER0009,Data Engineer,1/4/2025,30/5/2025,Anjali Nair,LinkedIn,29/5/2025,3/6/2025,48%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00081,MER0009,Data Engineer,1/4/2025,7/6/2025,Farhan Rahman,Robert Walters,29/5/2025,3/6/2025,65%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00082,MER0004,Full Stack Developer for AI,2/5/2025,8/7/2025,Zhi Ming Teoh,Michael Page,25/5/2025,29/5/2025,61%,31/5/2025,2/6/2025,68,Good,,,,Test score too low,,,,
+MYC-00083,MER0004,Full Stack Developer for AI,2/5/2025,25/6/2025,Zhi Ming Tan,Robert Walters,2/5/2025,5/5/2025,40%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00084,MER0015,Full Stack Developer in Golang,1/6/2025,14/8/2025,Siti Hashim,LinkedIn,17/7/2025,20/7/2025,83%,25/7/2025,8/8/2025,66,Good,,,,Test score too low,,,,
+MYC-00085,MER0008,Full Stack Developer in Java,10/5/2025,22/6/2025,Li Wei Teoh,Michael Page,6/6/2025,11/6/2025,61%,14/6/2025,17/6/2025,56,Passed,,,,Test score too low,,,,
+MYC-00086,MER0015,Full Stack Developer in Golang,1/6/2025,14/7/2025,Liang Chen Chong,Robert Walters,15/6/2025,20/6/2025,74%,24/6/2025,2/7/2025,95,Perfect,5/7/2025,14/7/2025,68%,Interview score too low,,,,
+MYC-00087,MER0004,Full Stack Developer for AI,2/5/2025,31/7/2025,Aisyah Hashim,Randstad,20/7/2025,23/7/2025,95%,28/7/2025,7/8/2025,85,Perfect,13/8/2025,16/8/2025,84%,,23/8/2025,accept,,hired
+MYC-00088,MER0004,Full Stack Developer for AI,2/5/2025,2/8/2025,Aisyah Hashim,Employee Referral,26/5/2025,30/5/2025,34%,,,,,,,,Working experiences does not match requirement,,,,
+MYC-00089,MER0015,Full Stack Developer in Golang,1/6/2025,6/8/2025,Aiman Omar,LinkedIn,26/6/2025,30/6/2025,59%,4/7/2025,17/7/2025,89,Perfect,19/7/2025,20/7/2025,84%,,23/7/2025,accept,,hired
+MYC-00090,MER0015,Full Stack Developer in Golang,1/6/2025,8/6/2025,Siti Hassan,Job Street,1/6/2025,4/6/2025,52%,8/6/2025,12/6/2025,73,Good,,,,Test score too low,,,,
+MYC-00091,MER0009,Data Engineer,1/4/2025,11/6/2025,Xin Yi Lee,LinkedIn,12/4/2025,15/4/2025,47%,,,,,,,,Lacking of required technical skills,,,,
+MYC-00092,MER0008,Full Stack Developer in Java,10/5/2025,12/7/2025,Mei Xin Chan,Robert Walters,25/6/2025,30/6/2025,82%,2/7/2025,11/7/2025,51,Passed,,,,Test score too low,,,,
+MYC-00093,MER0015,Full Stack Developer in Golang,1/6/2025,14/7/2025,Li Wei Teoh,Robert Walters,17/6/2025,20/6/2025,79%,23/6/2025,28/6/2025,68,Good,,,,Test score too low,,,,
+MYC-00094,MER0015,Full Stack Developer in Golang,1/6/2025,1/8/2025,Mei Xin Chong,Employee Referral,10/7/2025,13/7/2025,84%,14/7/2025,24/7/2025,50,Passed,,,,Test score too low,,,,
+MYC-00095,MER0009,Data Engineer,1/4/2025,6/7/2025,Wei Ling Teoh,Job Street,7/4/2025,11/4/2025,66%,13/4/2025,27/4/2025,77,Good,,,,Test score too low,,,,
+MYC-00096,MER0008,Full Stack Developer in Java,10/5/2025,6/7/2025,Liang Chen Lee,Randstad,3/7/2025,8/7/2025,35%,,,,,,,,Lacking of leadership quality,,,,
+MYC-00097,MER0015,Full Stack Developer in Golang,1/6/2025,9/6/2025,Priya Vijay,Randstad,9/6/2025,13/6/2025,59%,16/6/2025,20/6/2025,65,Good,,,,Test score too low,,,,
+MYC-00098,MER0003,Data Science,1/4/2025,17/6/2025,Wai Jie Goh,LinkedIn,7/4/2025,10/4/2025,74%,11/4/2025,13/4/2025,64,Good,,,,Test score too low,,,,
+MYC-00099,MER0008,Full Stack Developer in Java,10/5/2025,29/5/2025,Siti Salleh,Employee Referral,22/5/2025,26/5/2025,78%,29/5/2025,10/6/2025,69,Good,,,,Test score too low,,,,
+MYC-00100,MER0009,Data Engineer,1/4/2025,14/5/2025,Zhi Ming Tan,Employee Referral,3/4/2025,8/4/2025,91%,9/4/2025,14/4/2025,75,Good,,,,Test score too low,,,,
