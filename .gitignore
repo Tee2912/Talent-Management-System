@@ -1,0 +1,40 @@
+# Node.js
+frontend/node_modules/
+
+# Python virtual environments
+backend/.venv/
+
+# Byte-compiled / optimized / DLL Python files
+*.pyc
+__pycache__/
+
+# VS Code settings
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Build output
+frontend/build/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Misc
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Ignore sample data
+backend/candidates_sample.json
+data/*.csv
+data/*.json
