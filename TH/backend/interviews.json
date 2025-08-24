@@ -1,0 +1,159 @@
+[
+  {
+    "id": 1,
+    "candidate_id": 1,
+    "candidate_name": "John Doe",
+    "position": "Senior Software Developer",
+    "interviewers": [
+      {
+        "id": 1,
+        "name": "John Smith",
+        "email": "john.smith@company.com",
+        "department": "Engineering",
+        "role": "Senior Developer"
+      },
+      {
+        "id": 2,
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@company.com",
+        "department": "Engineering",
+        "role": "Tech Lead"
+      }
+    ],
+    "scheduled_date": "2025-08-26T10:00:00.000Z",
+    "duration": 90,
+    "type": "technical",
+    "status": "scheduled",
+    "location": "Video Call - Zoom",
+    "meeting_link": "https://zoom.us/j/123456789",
+    "notes": "Technical interview focusing on JavaScript, React, and system design",
+    "template_id": 1
+  },
+  {
+    "id": 2,
+    "candidate_id": 2,
+    "candidate_name": "Jane Smith",
+    "position": "Marketing Manager",
+    "interviewers": [
+      {
+        "id": 3,
+        "name": "Mike Chen",
+        "email": "mike.chen@company.com",
+        "department": "HR",
+        "role": "HR Manager"
+      },
+      {
+        "id": 4,
+        "name": "Emily Davis",
+        "email": "emily.davis@company.com",
+        "department": "Product",
+        "role": "Product Manager"
+      }
+    ],
+    "scheduled_date": "2025-08-27T14:00:00.000Z",
+    "duration": 60,
+    "type": "behavioral",
+    "status": "completed",
+    "location": "Conference Room A",
+    "notes": "Behavioral interview focusing on leadership and team management",
+    "scores": [
+      {
+        "criteria_id": 4,
+        "criteria_name": "Leadership",
+        "score": 8,
+        "max_score": 10,
+        "feedback": "Demonstrated strong leadership experience with concrete examples",
+        "interviewer_id": 3
+      },
+      {
+        "criteria_id": 5,
+        "criteria_name": "Communication",
+        "score": 9,
+        "max_score": 10,
+        "feedback": "Excellent communication skills, clear and articulate responses",
+        "interviewer_id": 3
+      },
+      {
+        "criteria_id": 6,
+        "criteria_name": "Cultural Fit",
+        "score": 7,
+        "max_score": 10,
+        "feedback": "Good alignment with company values, some areas for growth",
+        "interviewer_id": 4
+      }
+    ],
+    "template_id": 2
+  },
+  {
+    "id": 3,
+    "candidate_id": 3,
+    "candidate_name": "Mike Johnson",
+    "position": "Data Scientist",
+    "interviewers": [
+      {
+        "id": 1,
+        "name": "John Smith",
+        "email": "john.smith@company.com",
+        "department": "Engineering",
+        "role": "Senior Developer"
+      }
+    ],
+    "scheduled_date": "2025-08-28T16:00:00.000Z",
+    "duration": 120,
+    "type": "technical",
+    "status": "in-progress",
+    "location": "Video Call - Teams",
+    "meeting_link": "https://teams.microsoft.com/l/meetup-join/...",
+    "notes": "Technical interview covering machine learning, Python, and data analysis"
+  },
+  {
+    "id": 4,
+    "candidate_id": 4,
+    "candidate_name": "Sarah Wilson",
+    "position": "UX Designer",
+    "interviewers": [
+      {
+        "id": 4,
+        "name": "Emily Davis",
+        "email": "emily.davis@company.com",
+        "department": "Product",
+        "role": "Product Manager"
+      }
+    ],
+    "scheduled_date": "2025-08-25T11:00:00.000Z",
+    "duration": 75,
+    "type": "cultural",
+    "status": "cancelled",
+    "location": "Office - Design Studio",
+    "notes": "Cultural fit interview to assess design thinking and collaboration skills"
+  },
+  {
+    "id": 5,
+    "candidate_id": 5,
+    "candidate_name": "David Brown",
+    "position": "Product Manager",
+    "interviewers": [
+      {
+        "id": 2,
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@company.com",
+        "department": "Engineering",
+        "role": "Tech Lead"
+      },
+      {
+        "id": 4,
+        "name": "Emily Davis",
+        "email": "emily.davis@company.com",
+        "department": "Product",
+        "role": "Product Manager"
+      }
+    ],
+    "scheduled_date": "2025-08-29T13:00:00.000Z",
+    "duration": 60,
+    "type": "final",
+    "status": "scheduled",
+    "location": "Video Call - Google Meet",
+    "meeting_link": "https://meet.google.com/abc-defg-hij",
+    "notes": "Final round interview with product and engineering leadership"
+  }
+]
