@@ -1,40 +1,218 @@
-# Node.js
-frontend/node_modules/
+# === Node.js & Frontend ===
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Python virtual environments
-backend/.venv/
+# Build outputs
+build/
+dist/
+out/
+.next/
+.nuxt/
+.output/
 
-# Byte-compiled / optimized / DLL Python files
-*.pyc
+# React/Frontend specific
+.eslintcache
+*.tsbuildinfo
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# === Python & Backend ===
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env/
+**/.venv/
+**/venv/
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
 __pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
 
-# VS Code settings
-.vscode/
+# PyInstaller
+*.manifest
+*.spec
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
 
-# Logs
-*.log
+# Jupyter Notebook
+.ipynb_checkpoints
 
-# Environment files
-.env
+# IPython
+profile_default/
+ipython_config.py
 
-# Build output
-frontend/build/
+# pipenv
+Pipfile.lock
 
-# Docker
+# Poetry
+poetry.lock
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# FastAPI/Uvicorn
 *.pid
-docker-compose.override.yml
 
-# Misc
+# === Environment & Configuration ===
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+!.env.example
+config.ini
+secrets.json
+
+# === IDEs & Editors ===
+# VS Code
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
 *.swp
 *.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# === Operating System ===
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# === Logs & Temporary Files ===
+logs/
+*.log
+log/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# === Database ===
+*.db
+*.sqlite
+*.sqlite3
+
+# === Docker ===
+docker-compose.override.yml
+.dockerignore
+
+# === Misc ===
 *.bak
 *.tmp
+*.temp
+.cache/
+.parcel-cache/
 
-# Ignore sample data
+# === Project Specific ===
+# Sample/Test data
 backend/candidates_sample.json
 data/*.csv
 data/*.json
+mock_data/
+test_data/
+
+# Uploads
+uploads/
+static/uploads/
+media/
+
+# Generated documentation
+docs/_build/
+site/
