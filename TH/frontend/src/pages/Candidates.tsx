@@ -47,10 +47,111 @@ function Candidates() {
 
   const fetchCandidates = async () => {
     try {
-      const response = await fetch('/api/v1/candidates/');
-      if (response.ok) {
-        const data = await response.json();
-        setCandidates(data);
+      // Try to fetch from backend first, fall back to mock data if backend is not available
+      try {
+        const response = await fetch('/api/v1/candidates/');
+        if (response.ok) {
+          const data = await response.json();
+          setCandidates(data);
+        } else {
+          throw new Error('Backend not available');
+        }
+      } catch (backendError) {
+        // Use mock data when backend is not available
+        console.log('Backend not available, using mock data for candidates');
+        
+        const mockCandidates: Candidate[] = [
+          {
+            id: 1,
+            first_name: "Sarah",
+            last_name: "Johnson",
+            email: "sarah.johnson@email.com",
+            position_applied: "Software Engineer",
+            experience_years: 5,
+            final_score: 4.2,
+            hiring_decision: "hired",
+            bias_score: 0.15
+          },
+          {
+            id: 2,
+            first_name: "Michael",
+            last_name: "Chen",
+            email: "michael.chen@email.com",
+            position_applied: "Product Manager",
+            experience_years: 7,
+            final_score: 3.8,
+            hiring_decision: "on_hold",
+            bias_score: 0.23
+          },
+          {
+            id: 3,
+            first_name: "Emily",
+            last_name: "Rodriguez",
+            email: "emily.rodriguez@email.com",
+            position_applied: "Data Scientist",
+            experience_years: 4,
+            final_score: 4.5,
+            hiring_decision: "hired",
+            bias_score: 0.12
+          },
+          {
+            id: 4,
+            first_name: "David",
+            last_name: "Thompson",
+            email: "david.thompson@email.com",
+            position_applied: "UX Designer",
+            experience_years: 6,
+            final_score: 3.2,
+            hiring_decision: "rejected",
+            bias_score: 0.67
+          },
+          {
+            id: 5,
+            first_name: "Lisa",
+            last_name: "Wang",
+            email: "lisa.wang@email.com",
+            position_applied: "DevOps Engineer",
+            experience_years: 8,
+            final_score: 4.1,
+            hiring_decision: "hired",
+            bias_score: 0.18
+          },
+          {
+            id: 6,
+            first_name: "James",
+            last_name: "Wilson",
+            email: "james.wilson@email.com",
+            position_applied: "Software Engineer",
+            experience_years: 3,
+            final_score: 3.6,
+            hiring_decision: "on_hold",
+            bias_score: 0.34
+          },
+          {
+            id: 7,
+            first_name: "Maria",
+            last_name: "Garcia",
+            email: "maria.garcia@email.com",
+            position_applied: "Product Manager",
+            experience_years: 5,
+            final_score: 4.0,
+            hiring_decision: "hired",
+            bias_score: 0.21
+          },
+          {
+            id: 8,
+            first_name: "Robert",
+            last_name: "Kim",
+            email: "robert.kim@email.com",
+            position_applied: "Data Scientist",
+            experience_years: 2,
+            final_score: 2.8,
+            hiring_decision: "rejected",
+            bias_score: 0.45
+          }
+        ];
+        
+        setCandidates(mockCandidates);
       }
     } catch (error) {
       console.error('Failed to fetch candidates:', error);

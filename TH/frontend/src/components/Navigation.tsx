@@ -17,6 +17,10 @@ import {
   Psychology as PsychologyIcon,
   Chat as ChatIcon,
   Schedule as ScheduleIcon,
+  Email as EmailIcon,
+  Assessment as AssessmentIcon,
+  Feedback as FeedbackIcon,
+  Event as CalendarIcon,
 } from '@mui/icons-material';
 
 export const drawerWidth = 240;
@@ -29,6 +33,10 @@ const navigationItems = [
   { text: 'Personality Evaluation', icon: <PsychologyIcon />, path: '/personality' },
   { text: 'AI Chat Assistant', icon: <ChatIcon />, path: '/chat' },
   { text: 'Bias Detection', icon: <SecurityIcon />, path: '/bias-detection' },
+  { text: 'Email Notifications', icon: <EmailIcon />, path: '/notifications' },
+  { text: 'Enhanced Reports', icon: <AssessmentIcon />, path: '/reports' },
+  { text: 'Interview Feedback', icon: <FeedbackIcon />, path: '/feedback' },
+  { text: 'Calendar Integration', icon: <CalendarIcon />, path: '/calendar' },
 ];
 
 function Navigation() {
