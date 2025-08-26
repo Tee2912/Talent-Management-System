@@ -34,6 +34,7 @@ fair-hiring-system/
 
 - **Bias Detection**: ML algorithms to detect bias in hiring decisions
 - **Fair Scoring**: Transparent scoring system for candidates
+- **Resume Analyzer**: Analyze and evaluate resume based on job descriptions with Azure OpenAI GPT-4o 
 - **Dashboard**: Real-time analytics and reporting
 - **Audit Trail**: Complete tracking of hiring decisions
 - **Compliance**: GDPR and equal opportunity compliance
@@ -47,6 +48,8 @@ fair-hiring-system/
 - pandas
 - NumPy
 - SQLAlchemy
+- Azure OpenAI GPT-4o
+- PyPDF2
 
 **Frontend:**
 - React 18
@@ -69,6 +72,7 @@ fair-hiring-system/
    cd backend
    # Create virtual environment (if not already done)
    python -m venv .venv
+
    # Activate virtual environment
    .venv\Scripts\activate  # Windows
    # or source .venv/bin/activate  # macOS/Linux
@@ -81,6 +85,15 @@ fair-hiring-system/
    ```bash
    cd frontend
    npm install
+   ```
+
+3. **API Key Setup:**
+   ```bash
+   # Create and configure the .env file
+   cp .env.example .env
+
+   # Add your Azure OpenAI API Key in the .env file
+   AZURE_OPENAI_API_KEY=<your-api-key-here>
    ```
 
 ### Running the Application
@@ -109,6 +122,7 @@ fair-hiring-system/
 3. Score candidates using the interface
 4. Run bias detection analysis from the Bias Detection page
 5. View analytics and insights on the Dashboard
+6. Upload resume or paste resume in text for analysis against job descriptions
 
 ### Sample Data
 
