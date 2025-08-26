@@ -422,7 +422,7 @@ function InterviewFeedback() {
 
   if (loading) {
     return (
-      <Box sx={{ ml: '240px', p: 3 }}>
+      <Box sx={{ p: 3 }}>
         <LinearProgress />
         <Typography sx={{ mt: 2 }}>Loading feedback data...</Typography>
       </Box>
@@ -431,14 +431,14 @@ function InterviewFeedback() {
 
   if (error) {
     return (
-      <Box sx={{ ml: '240px', p: 3 }}>
+      <Box sx={{ p: 3 }}>
         <Alert severity="error">{error}</Alert>
       </Box>
     );
   }
 
   return (
-    <Box sx={{ ml: '240px', p: 3 }}>
+    <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <FeedbackIcon /> Interview Feedback Collection
       </Typography>

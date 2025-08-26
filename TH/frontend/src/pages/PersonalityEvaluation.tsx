@@ -231,7 +231,7 @@ function PersonalityEvaluation() {
   }
 
   return (
-    <Box sx={{ ml: '240px', p: 3 }}>
+    <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
         <Psychology sx={{ mr: 2, color: 'primary.main' }} />
         Personality Evaluation (MBTI)

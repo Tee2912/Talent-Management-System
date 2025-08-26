@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import candidates, analytics, bias_detection, personality, chat, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration
+from app.api import candidates, analytics, bias_detection, personality, chat, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration, resume_analyzer
 from app.config import settings
 
 app = FastAPI(
@@ -30,6 +30,7 @@ app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["
 app.include_router(reports.router, prefix="/api/v1/reports", tags=["reports"])
 app.include_router(feedback.router, prefix="/api/v1/feedback", tags=["feedback"])
 app.include_router(calendar_integration.router, prefix="/api/v1/calendar", tags=["calendar"])
+app.include_router(resume_analyzer.router, prefix="/api/v1/resume", tags=["resume-analyzer"])
 
 @app.get("/")
 async def root():

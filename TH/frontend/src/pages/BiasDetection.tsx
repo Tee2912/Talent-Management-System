@@ -11,6 +11,7 @@ import {
   Chip,
 } from '@mui/material';
 import { Security, Warning, CheckCircle } from '@mui/icons-material';
+import SecurityIcon from '@mui/icons-material/Security';
 
 function BiasDetection() {
   const [biasScore, setBiasScore] = useState<number | null>(null);
@@ -84,8 +85,9 @@ function BiasDetection() {
   };
 
   return (
-    <Box sx={{ ml: '240px', p: 3 }}>
-      <Typography variant="h4" gutterBottom>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <SecurityIcon />
         Bias Detection
       </Typography>
 

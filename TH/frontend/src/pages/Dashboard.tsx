@@ -25,6 +25,7 @@ import {
   CheckCircle,
   Error,
   Info,
+  Dashboard as DashboardIcon,
 } from '@mui/icons-material';
 
 interface DashboardStats {
@@ -90,7 +91,7 @@ function Dashboard() {
 
   if (loading) {
     return (
-      <Box sx={{ ml: '240px', p: 3 }}>
+      <Box sx={{ p: 3 }}>
         <LinearProgress />
         <Typography sx={{ mt: 2 }}>Loading dashboard...</Typography>
       </Box>
@@ -99,7 +100,7 @@ function Dashboard() {
 
   if (error) {
     return (
-      <Box sx={{ ml: '240px', p: 3 }}>
+      <Box sx={{ p: 3 }}>
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
         </Alert>
@@ -129,10 +130,11 @@ function Dashboard() {
   };
 
   return (
-    <Box sx={{ ml: '240px', p: 3 }}>
+    <Box sx={{ p: 3 }}>
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4">
+        <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <DashboardIcon />
           Dashboard
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

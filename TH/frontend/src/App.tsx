@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Container, Box } from '@mui/material';
 import Dashboard from './pages/Dashboard';
 import Candidates from './pages/Candidates';
+import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import InterviewManagement from './pages/InterviewManagement';
 import Analytics from './pages/Analytics';
 import PersonalityEvaluation from './pages/PersonalityEvaluation';
@@ -17,7 +18,7 @@ import Navigation, { drawerWidth } from './components/Navigation';
 function App() {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Fair Hiring System
@@ -37,6 +38,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/candidates" element={<Candidates />} />
+            <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
             <Route path="/interviews" element={<InterviewManagement />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/personality" element={<PersonalityEvaluation />} />

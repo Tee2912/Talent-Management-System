@@ -450,7 +450,7 @@ function CalendarIntegration() {
 
   if (loading) {
     return (
-      <Box sx={{ ml: '240px', p: 3 }}>
+      <Box sx={{ p: 3 }}>
         <LinearProgress />
         <Typography sx={{ mt: 2 }}>Loading calendar data...</Typography>
       </Box>
@@ -459,14 +459,14 @@ function CalendarIntegration() {
 
   if (error) {
     return (
-      <Box sx={{ ml: '240px', p: 3 }}>
+      <Box sx={{ p: 3 }}>
         <Alert severity="error">{error}</Alert>
       </Box>
     );
   }
 
   return (
-    <Box sx={{ ml: '240px', p: 3 }}>
+    <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <CalendarIcon /> Calendar Integration
       </Typography>

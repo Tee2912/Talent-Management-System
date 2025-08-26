@@ -21,6 +21,7 @@ import {
   Assessment as AssessmentIcon,
   Feedback as FeedbackIcon,
   Event as CalendarIcon,
+  Description as ResumeIcon,
 } from '@mui/icons-material';
 
 export const drawerWidth = 240;
@@ -28,6 +29,7 @@ export const drawerWidth = 240;
 const navigationItems = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
   { text: 'Candidates', icon: <PeopleIcon />, path: '/candidates' },
+  { text: 'Resume Analyzer', icon: <ResumeIcon />, path: '/resume-analyzer' },
   { text: 'Interview Management', icon: <ScheduleIcon />, path: '/interviews' },
   { text: 'Analytics', icon: <AnalyticsIcon />, path: '/analytics' },
   { text: 'Personality Evaluation', icon: <PsychologyIcon />, path: '/personality' },

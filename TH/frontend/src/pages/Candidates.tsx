@@ -22,6 +22,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
+import { People } from '@mui/icons-material';
 
 interface Candidate {
   id: number;
@@ -181,9 +182,12 @@ function Candidates() {
   }
 
   return (
-    <Box sx={{ ml: '240px', p: 3 }}>
+    <Box sx={{ p: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-        <Typography variant="h4">Candidates</Typography>
+        <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <People />
+          Candidates
+        </Typography>
         <Button
           variant="contained"
           startIcon={<AddIcon />}

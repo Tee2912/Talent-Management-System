@@ -36,6 +36,7 @@ import {
   QuestionAnswer as QuestionIcon,
   CalendarToday as CalendarIcon,
   TrendingUp as TrendingUpIcon,
+  Analytics as AnalyticsIcon,
 } from '@mui/icons-material';
 import {
   Chart as ChartJS,
@@ -442,9 +443,10 @@ function Analytics() {
   };
 
   return (
-    <Box sx={{ ml: '240px', p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        Analytics Dashboard
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <AnalyticsIcon />
+        Analytics
       </Typography>
 
       {/* Summary Cards */}

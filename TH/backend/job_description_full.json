@@ -1,0 +1,229 @@
+[
+  {
+    "PositionTitle": "Data Scientist",
+    "CoreSkills": ["Python", "Problem Solving", "Machine Learning"],
+    "TaskDescription": [
+      "Advising the customer on the use of AI, capturing the requirement and translating the requirement into suitable mathematical models",
+      "Data preparation, exploratory data analysis and statistical analysis",
+      "Conception of labelling processes",
+      "Selection, implementation and configuration of suitable (machine learning / semantic) models and procedures",
+      "Conception and implementation of automated pipelines for model creation and quality assurance",
+      "Conception and implementation of infrastructure and software to integrate AI into software products in a scalable way",
+      "Ensuring compliance with applicable rules in the areas of data, AI and IT security compliance",
+      "Documentation and communication of the procedures and results in a target group-adequate form"
+    ],
+    "ResponsibilityAndScope": [
+      "Independent consulting of the customer to identify new areas of application of AI",
+      "Independent consulting of the customer on the use of AI, on capturing the requirement and translating the requirement into suitable mathematical models",
+      "Independent data preparation, exploratory data analysis and statistical analysis, conception of labeling processes",
+      "Independent selection, implementation and configuration of suitable (machine learning / semantic) models and procedures, also on the basis of scientific literature",
+      "Conception and implementation of automated pipelines for model creation and quality assurance",
+      "To integrate the design and implementation of infrastructure and software and AI into software products in a scalable manner",
+      "Independent assurance of compliance with the relevant rules from the areas of data, AI and IT security",
+      "Networking and sharing knowledge and experience within the company, within the Group and beyond"
+    ],
+    "QualificationsExperience": {
+      "MinimumExperienceYears": 5,
+      "DegreeRequirements": [
+        "Computer Science",
+        "Applied Mathematics",
+        "Engineering",
+        "Other technology related field"
+      ],
+      "OtherExperience": [
+        "Experience with Agile methodologies",
+        "Experience with Enterprise technologies",
+        "Experience with Product Oriented Teams",
+        "Programming or Data Architecture related certification"
+      ]
+    },
+    "SpecificKnowledgeSkill": [
+      "Excellent communication skills",
+      "Good customer service orientation",
+      "Analytical, passionate and drives technology and product quality",
+      "Result-oriented thinking and action",
+      "Has a broad and deep understanding of AI methods and their applicability in day-to-day operations",
+      "Possesses broad and constantly expanded knowledge of mathematical and formal methods with their strengths and weaknesses",
+      "Possesses broad and constantly expanded knowledge methods of data preparation, exploratory data analysis, data visualizations and statistical analysis",
+      "Ability to implement and configure machine learning / semantic models close to the state of research",
+      "Ability to design and implement automated pipelines for model creation and quality assurance",
+      "Knowledge of the conception and implementation of infrastructure to integrate software and AI into software products in a scalable way",
+      "Knowledge of applicable rules from the areas of data, AI and IT security compliance",
+      "Ability to document and communicate the procedures and results in target group-adequate form"
+    ],
+    "TechnicalSkills": [
+      "SQL/noSQL",
+      "Python or R",
+      "Spark",
+      "Apache libraries",
+      "Machine Learning algorithms",
+      "Cloud Computing",
+      "Data Architectures"
+    ]
+  },
+  {
+    "PositionTitle": "Full Stack Developer for Java",
+    "CoreSkills": ["Java", "Spring Boot", "Docker/Kubernetes"],
+    "JobDescription": [
+      "Implementation of product requirements in a software system based on one or more technologies or products",
+      "Development and consultation of the customer on the requirement of the product",
+      "Conception and design of system architecture and software components based on customer requirements (product visions)",
+      "Independent and self-responsible implementation and quality assurance of product increments (Test automation/ CI/CD / blackduck)",
+      "Creation and maintenance of technical documentation as part of a software development project",
+      "You build it – you test it - you run it"
+    ],
+    "QualificationExperience": {
+      "MinimumExperienceYears": 7,
+      "Education": "IT or related industry",
+      "OtherExperience": [
+        "Experience with Agile methodologies",
+        "Experience with free and open-source technologies, enterprise technologies like Jira/Confluence",
+        "IT and Programming related certification"
+      ]
+    },
+    "SpecificKnowledgeSkill": [
+      "Excellent communication skills in English",
+      "Good customer service orientation",
+      "Analytical, passionate and drives technology and product quality",
+      "Result-oriented thinking and action",
+      "Product Oriented mindset",
+      "Develops highly complex components and systems visionary and is responsible for them",
+      "Masters and implements solution and implementation alternatives (technologies and programming languages)",
+      "Is responsible for overarching software architecture and design",
+      "Abstracts technical relationships",
+      "Creates complex, technical documentation",
+      "Designs and develops reliable and scalable enterprise architectures",
+      "Advises customers and acquires projects",
+      "Manages medium and large development teams",
+      "Presents the designed and developed software solutions at customer and expert level"
+    ],
+    "ResponsibilityAndScope": [
+      "Designs the environment for the implementation of highly complex topics/projects/products",
+      "Applies alternative solutions and courses of action",
+      "Builds new teams and proactively organizes a harmonious and high-performance team",
+      "Integrates the relevant experts independently and proactively across BU",
+      "Acts with strategic and entrepreneurial vision"
+    ],
+    "TechnicalSkills": {
+      "FrontEnd": ["Angular", "React", "VueJS", "JavaScript/TypeScript"],
+      "BackEnd": ["Java", "Kotlin", "Golang"],
+      "Framework": ["Spring (Spring Boot, Webflux)"],
+      "WebServices": ["REST API"],
+      "Cloud": ["Microsoft Azure", "AWS"],
+      "Database": ["PostgreSQL", "MongoDB"],
+      "ContainerMicroservices": ["Kubernetes", "Docker"],
+      "Testing": ["JUnit/Mock"],
+      "Monitoring": ["Datadog"]
+    }
+  },
+  {
+    "PositionTitle": "Full Stack Developer for AI",
+    "CoreSkills": ["Java Spring Boot", "Python", "AI methods"],
+    "JobDescription": [
+      "Implementation of product requirements in a software system based on one or more technologies or products",
+      "Development and consultation of the customer on the requirement of the product",
+      "Conception and design of system architecture and software components based on customer requirements (product visions)",
+      "Independent and self-responsible implementation and quality assurance of product increments (Test automation/ CI/CD / blackduck)",
+      "Creation and maintenance of technical documentation as part of a software development project",
+      "You build it – you test it - you run it"
+    ],
+    "QualificationExperience": {
+      "MinimumExperienceYears": 7,
+      "Education": "IT or related industry",
+      "OtherExperience": [
+        "Experience with Agile methodologies",
+        "Experience with free and open-source technologies, enterprise technologies like Jira/Confluence",
+        "IT and Programming related certification"
+      ]
+    },
+    "SpecificKnowledgeSkill": [
+      "Excellent communication skills in English",
+      "Good customer service orientation",
+      "Analytical, passionate and drives technology and product quality",
+      "Result-oriented thinking and action",
+      "Product Oriented mindset",
+      "Develops highly complex components and systems visionary and is responsible for them",
+      "Masters and implements solution and implementation alternatives (technologies and programming languages)",
+      "Is responsible for overarching software architecture and design",
+      "Abstracts technical relationships",
+      "Creates complex, technical documentation",
+      "Designs and develops reliable and scalable enterprise architectures",
+      "Advises customers and acquires projects",
+      "Manages medium and large development teams",
+      "Presents the designed and developed software solutions at customer and expert level"
+    ],
+    "ResponsibilityAndScope": [
+      "Designs the environment for the implementation of highly complex topics/projects/products",
+      "Applies alternative solutions and courses of action",
+      "Builds new teams and proactively organizes a harmonious and high-performance team",
+      "Integrates the relevant experts independently and proactively across BU",
+      "Acts with strategic and entrepreneurial vision"
+    ],
+    "TechnicalSkills": {
+      "FrontEnd": ["Angular", "React", "VueJS", "JavaScript/TypeScript"],
+      "BackEnd": ["Java", "Kotlin", "Golang"],
+      "Framework": ["Spring (Spring Boot, Webflux)"],
+      "WebServices": ["REST API"],
+      "Cloud": ["Microsoft Azure", "AWS"],
+      "Database": ["PostgreSQL", "MongoDB"],
+      "ContainerMicroservices": ["Kubernetes", "Docker"],
+      "Testing": ["JUnit/Mock"],
+      "Monitoring": ["Datadog"]
+    }
+  },
+  {
+    "PositionTitle": "Full Stack Developer for Golang",
+    "CoreSkills": ["Golang", "Docker/Kubernetes"],
+    "JobDescription": [
+      "Implementation of product requirements in a software system based on one or more technologies or products",
+      "Development and consultation of the customer on the requirement of the product",
+      "Conception and design of system architecture and software components based on customer requirements (product visions)",
+      "Independent and self-responsible implementation and quality assurance of product increments (Test automation/ CI/CD / blackduck)",
+      "Creation and maintenance of technical documentation as part of a software development project",
+      "You build it – you test it - you run it"
+    ],
+    "QualificationExperience": {
+      "MinimumExperienceYears": 7,
+      "Education": "IT or related industry",
+      "OtherExperience": [
+        "Experience with Agile methodologies",
+        "Experience with free and open-source technologies, enterprise technologies like Jira/Confluence",
+        "IT and Programming related certification"
+      ]
+    },
+    "SpecificKnowledgeSkill": [
+      "Excellent communication skills in English",
+      "Good customer service orientation",
+      "Analytical, passionate and drives technology and product quality",
+      "Result-oriented thinking and action",
+      "Product Oriented mindset",
+      "Develops highly complex components and systems visionary and is responsible for them",
+      "Masters and implements solution and implementation alternatives (technologies and programming languages)",
+      "Is responsible for overarching software architecture and design",
+      "Abstracts technical relationships",
+      "Creates complex, technical documentation",
+      "Designs and develops reliable and scalable enterprise architectures",
+      "Advises customers and acquires projects",
+      "Manages medium and large development teams",
+      "Presents the designed and developed software solutions at customer and expert level"
+    ],
+    "ResponsibilityAndScope": [
+      "Designs the environment for the implementation of highly complex topics/projects/products",
+      "Applies alternative solutions and courses of action",
+      "Builds new teams and proactively organizes a harmonious and high-performance team",
+      "Integrates the relevant experts independently and proactively across BU",
+      "Acts with strategic and entrepreneurial vision"
+    ],
+    "TechnicalSkills": {
+      "FrontEnd": ["Angular", "React", "VueJS", "JavaScript/TypeScript"],
+      "BackEnd": ["Java", "Kotlin", "Golang"],
+      "Framework": ["Spring (Spring Boot, Webflux)"],
+      "WebServices": ["REST API"],
+      "Cloud": ["Microsoft Azure", "AWS"],
+      "Database": ["PostgreSQL", "MongoDB"],
+      "ContainerMicroservices": ["Kubernetes", "Docker"],
+      "Testing": ["JUnit/Mock"],
+      "Monitoring": ["Datadog"]
+    }
+  }
+]

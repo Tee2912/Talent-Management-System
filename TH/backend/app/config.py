@@ -19,6 +19,12 @@ class Settings(BaseSettings):
     bias_threshold: float = 0.7
     fairness_metrics: list = ["demographic_parity", "equalized_odds", "calibration"]
     
+    # Azure OpenAI settings
+    azure_openai_endpoint: str = "https://genai-nexus.int.api.corpinter.net/apikey/"
+    azure_openai_api_key: str = "your-api-key-here"
+    azure_openai_api_version: str = "2023-12-01-preview"
+    azure_openai_model: str = "gpt-4o"
+    
     # Application
     debug: bool = True
     log_level: str = "INFO"
