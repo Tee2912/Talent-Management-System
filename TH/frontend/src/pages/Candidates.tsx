@@ -23,18 +23,8 @@ import {
 } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import { People } from '@mui/icons-material';
-
-interface Candidate {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  position_applied: string;
-  experience_years: number;
-  final_score?: number;
-  hiring_decision?: string;
-  bias_score?: number;
-}
+import { Candidate, MOCK_CANDIDATES } from '../constants/mockData';
+import { BIAS_SCORE_THRESHOLDS, HIRING_DECISIONS } from '../constants/candidates';
 
 function Candidates() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
@@ -60,99 +50,7 @@ function Candidates() {
       } catch (backendError) {
         // Use mock data when backend is not available
         console.log('Backend not available, using mock data for candidates');
-        
-        const mockCandidates: Candidate[] = [
-          {
-            id: 1,
-            first_name: "Sarah",
-            last_name: "Johnson",
-            email: "sarah.johnson@email.com",
-            position_applied: "Software Engineer",
-            experience_years: 5,
-            final_score: 4.2,
-            hiring_decision: "hired",
-            bias_score: 0.15
-          },
-          {
-            id: 2,
-            first_name: "Michael",
-            last_name: "Chen",
-            email: "michael.chen@email.com",
-            position_applied: "Product Manager",
-            experience_years: 7,
-            final_score: 3.8,
-            hiring_decision: "on_hold",
-            bias_score: 0.23
-          },
-          {
-            id: 3,
-            first_name: "Emily",
-            last_name: "Rodriguez",
-            email: "emily.rodriguez@email.com",
-            position_applied: "Data Scientist",
-            experience_years: 4,
-            final_score: 4.5,
-            hiring_decision: "hired",
-            bias_score: 0.12
-          },
-          {
-            id: 4,
-            first_name: "David",
-            last_name: "Thompson",
-            email: "david.thompson@email.com",
-            position_applied: "UX Designer",
-            experience_years: 6,
-            final_score: 3.2,
-            hiring_decision: "rejected",
-            bias_score: 0.67
-          },
-          {
-            id: 5,
-            first_name: "Lisa",
-            last_name: "Wang",
-            email: "lisa.wang@email.com",
-            position_applied: "DevOps Engineer",
-            experience_years: 8,
-            final_score: 4.1,
-            hiring_decision: "hired",
-            bias_score: 0.18
-          },
-          {
-            id: 6,
-            first_name: "James",
-            last_name: "Wilson",
-            email: "james.wilson@email.com",
-            position_applied: "Software Engineer",
-            experience_years: 3,
-            final_score: 3.6,
-            hiring_decision: "on_hold",
-            bias_score: 0.34
-          },
-          {
-            id: 7,
-            first_name: "Maria",
-            last_name: "Garcia",
-            email: "maria.garcia@email.com",
-            position_applied: "Product Manager",
-            experience_years: 5,
-            final_score: 4.0,
-            hiring_decision: "hired",
-            bias_score: 0.21
-          },
-          {
-            id: 8,
-            first_name: "Robert",
-            last_name: "Kim",
-            email: "robert.kim@email.com",
-            position_applied: "Data Scientist",
-            experience_years: 2,
-            final_score: 2.8,
-            hiring_decision: "rejected",
-            bias_score: 0.45
-          }
-        ];
-        
-        setCandidates(mockCandidates);
+        setCandidates(MOCK_CANDIDATES);
       }
     } catch (error) {
       console.error('Failed to fetch candidates:', error);
@@ -163,17 +61,17 @@ function Candidates() {
 
   const getDecisionColor = (decision?: string) => {
     switch (decision) {
-      case 'hired': return 'success';
-      case 'rejected': return 'error';
-      case 'on_hold': return 'warning';
+      case HIRING_DECISIONS.HIRED: return 'success';
+      case HIRING_DECISIONS.REJECTED: return 'error';
+      case HIRING_DECISIONS.ON_HOLD: return 'warning';
       default: return 'default';
     }
   };
 
   const getBiasColor = (score?: number) => {
     if (!score) return 'default';
-    if (score <= 0.3) return 'success';
-    if (score <= 0.6) return 'warning';
+    if (score <= BIAS_SCORE_THRESHOLDS.LOW) return 'success';
+    if (score <= BIAS_SCORE_THRESHOLDS.MEDIUM) return 'warning';
     return 'error';
   };
 
@@ -205,6 +103,9 @@ function Candidates() {
               <TableCell>Email</TableCell>
               <TableCell>Position</TableCell>
               <TableCell>Experience</TableCell>
+              <TableCell>Resume Score</TableCell>
+              <TableCell>Technical Score</TableCell>
+              <TableCell>Interview Score</TableCell>
               <TableCell>Final Score</TableCell>
               <TableCell>Decision</TableCell>
               <TableCell>Bias Score</TableCell>
@@ -220,6 +121,15 @@ function Candidates() {
                 <TableCell>{candidate.email}</TableCell>
                 <TableCell>{candidate.position_applied}</TableCell>
                 <TableCell>{candidate.experience_years} years</TableCell>
+                <TableCell>
+                  {candidate.resume_score ? candidate.resume_score.toFixed(1) : 'N/A'}
+                </TableCell>
+                <TableCell>
+                  {candidate.technical_score ? candidate.technical_score.toFixed(1) : 'N/A'}
+                </TableCell>
+                <TableCell>
+                  {candidate.interview_score ? candidate.interview_score.toFixed(1) : 'N/A'}
+                </TableCell>
                 <TableCell>
                   {candidate.final_score ? candidate.final_score.toFixed(1) : 'N/A'}
                 </TableCell>
@@ -277,6 +187,179 @@ function Candidates() {
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
           <Button variant="contained">Add Candidate</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Candidate Detail Dialog */}
+      <Dialog 
+        open={selectedCandidate !== null} 
+        onClose={() => setSelectedCandidate(null)} 
+        maxWidth="md" 
+        fullWidth
+      >
+        <DialogTitle>
+          Candidate Details - {selectedCandidate?.first_name} {selectedCandidate?.last_name}
+        </DialogTitle>
+        <DialogContent>
+          {selectedCandidate && (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, mt: 2 }}>
+              {/* Position Applied */}
+              <Box>
+                <Typography variant="h6" gutterBottom color="primary">
+                  Position Applied
+                </Typography>
+                <Box sx={{ p: 2, bgcolor: 'grey.50', borderRadius: 1 }}>
+                  <Typography variant="h5" color="primary" fontWeight="bold">
+                    {selectedCandidate.position_applied}
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Basic Information */}
+              <Box>
+                <Typography variant="h6" gutterBottom color="primary">
+                  Basic Information
+                </Typography>
+                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Full Name</Typography>
+                    <Typography variant="body1">
+                      {selectedCandidate.first_name} {selectedCandidate.last_name}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Age</Typography>
+                    <Typography variant="body1">{selectedCandidate.age || 'N/A'}</Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Email</Typography>
+                    <Typography variant="body1">{selectedCandidate.email}</Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Phone</Typography>
+                    <Typography variant="body1">{selectedCandidate.phone || 'N/A'}</Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Gender</Typography>
+                    <Typography variant="body1">{selectedCandidate.gender || 'N/A'}</Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Ethnicity</Typography>
+                    <Typography variant="body1">{selectedCandidate.ethnicity || 'N/A'}</Typography>
+                  </Box>
+                </Box>
+              </Box>
+
+              {/* Skills and Experience */}
+              <Box>
+                <Typography variant="h6" gutterBottom color="primary">
+                  Skills and Experience
+                </Typography>
+                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Years of Experience</Typography>
+                    <Typography variant="h6" color="primary">
+                      {selectedCandidate.experience_years} years
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Education Level</Typography>
+                    <Typography variant="body1">{selectedCandidate.education_level || 'N/A'}</Typography>
+                  </Box>
+                  <Box sx={{ gridColumn: '1 / -1' }}>
+                    <Typography variant="body2" color="textSecondary" gutterBottom>
+                      Technical Skills
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {selectedCandidate.skills && selectedCandidate.skills.length > 0 ? (
+                        selectedCandidate.skills.map((skill, index) => (
+                          <Chip
+                            key={index}
+                            label={skill}
+                            size="small"
+                            variant="outlined"
+                            color="primary"
+                          />
+                        ))
+                      ) : (
+                        <Typography variant="body2" color="textSecondary">N/A</Typography>
+                      )}
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+
+              {/* Evaluation Scores */}
+              <Box>
+                <Typography variant="h6" gutterBottom color="primary">
+                  Evaluation Scores
+                </Typography>
+                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Resume Analysis Score</Typography>
+                    <Typography variant="h5" color="primary">
+                      {selectedCandidate.resume_score ? selectedCandidate.resume_score.toFixed(1) : 'N/A'}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Technical Interview Score</Typography>
+                    <Typography variant="h5" color="primary">
+                      {selectedCandidate.technical_score ? selectedCandidate.technical_score.toFixed(1) : 'N/A'}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Interview Score</Typography>
+                    <Typography variant="h5" color="primary">
+                      {selectedCandidate.interview_score ? selectedCandidate.interview_score.toFixed(1) : 'N/A'}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Final Score</Typography>
+                    <Typography variant="h4" color="success.main">
+                      {selectedCandidate.final_score ? selectedCandidate.final_score.toFixed(1) : 'N/A'}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+
+              {/* Hiring Decision & Analysis */}
+              <Box>
+                <Typography variant="h6" gutterBottom color="primary">
+                  Hiring Decision & Analysis
+                </Typography>
+                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Hiring Decision</Typography>
+                    <Chip
+                      label={selectedCandidate.hiring_decision || 'Pending'}
+                      color={getDecisionColor(selectedCandidate.hiring_decision)}
+                      size="medium"
+                      sx={{ mt: 1 }}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="textSecondary">Bias Score</Typography>
+                    <Chip
+                      label={selectedCandidate.bias_score ? selectedCandidate.bias_score.toFixed(2) : 'N/A'}
+                      color={getBiasColor(selectedCandidate.bias_score)}
+                      size="medium"
+                      sx={{ mt: 1 }}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button variant="outlined" color="primary">
+            View Full Resume
+          </Button>
+          <Box sx={{ flexGrow: 1 }} />
+          <Button onClick={() => setSelectedCandidate(null)}>Close</Button>
+          <Button variant="contained" color="primary">
+            Edit Candidate
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>
