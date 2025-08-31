@@ -1,6 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Container, Box } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, AppBar, Toolbar, Typography, Container, Box } from '@mui/material';
+import theme from './theme';
 import Dashboard from './pages/Dashboard';
 import Candidates from './pages/Candidates';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
@@ -16,11 +18,20 @@ import Navigation, { drawerWidth } from './components/Navigation';
 
 function App() {
   return (
-    <div>
-      <AppBar position="sticky">
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+      <AppBar position="sticky" sx={{ 
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
+      }}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Fair Hiring System
+          <Typography variant="h6" component="div" sx={{ 
+            flexGrow: 1, 
+            fontWeight: 700,
+            letterSpacing: '0.5px',
+          }}>
+            🎯 HireIQ Pro - AI-Powered Hiring Platform
           </Typography>
         </Toolbar>
       </AppBar>
@@ -30,7 +41,7 @@ function App() {
       <Box sx={{ 
         marginLeft: { xs: 0, md: `${drawerWidth}px` }, // Responsive: no margin on mobile, sidebar margin on desktop
         minHeight: 'calc(100vh - 64px)', // Full height minus AppBar
-        backgroundColor: '#fafafa', // Light background for main content
+        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)', // Enhanced gradient background
         transition: 'margin-left 0.3s ease', // Smooth transition
       }}> 
         <Container maxWidth="xl" sx={{ py: 3 }}> {/* Add vertical padding */}
@@ -51,6 +62,7 @@ function App() {
         </Container>
       </Box>
     </div>
+    </ThemeProvider>
   );
 }
 

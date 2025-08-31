@@ -1,6 +1,6 @@
 {
-  "short_name": "Fair Hiring",
-  "name": "Fair Hiring System",
+  "short_name": "HireIQ Pro",
+  "name": "HireIQ Pro - AI-Powered Hiring Platform",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#6366f1",
+  "background_color": "#f5f7fa"
 }

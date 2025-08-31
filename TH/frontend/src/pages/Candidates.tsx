@@ -25,6 +25,7 @@ import { Add as AddIcon } from '@mui/icons-material';
 import { People } from '@mui/icons-material';
 import { Candidate, MOCK_CANDIDATES } from '../constants/mockData';
 import { BIAS_SCORE_THRESHOLDS, HIRING_DECISIONS } from '../constants/candidates';
+import PageTransition from '../components/PageTransition';
 
 function Candidates() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
@@ -80,18 +81,19 @@ function Candidates() {
   }
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-        <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <People />
-          Candidates
-        </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => setOpenDialog(true)}
-        >
-          Add Candidate
+    <PageTransition animation="slideLeft">
+      <Box sx={{ p: 3 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+          <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <People />
+            Candidates
+          </Typography>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => setOpenDialog(true)}
+          >
+            Add Candidate
         </Button>
       </Box>
 
@@ -362,7 +364,8 @@ function Candidates() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+      </Box>
+    </PageTransition>
   );
 }
 

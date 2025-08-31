@@ -27,6 +27,8 @@ import {
   Info,
   Dashboard as DashboardIcon,
 } from '@mui/icons-material';
+import PageTransition from '../components/PageTransition';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 interface DashboardStats {
   total_candidates: number;
@@ -91,23 +93,24 @@ function Dashboard() {
 
   if (loading) {
     return (
-      <Box sx={{ p: 3 }}>
-        <LinearProgress />
-        <Typography sx={{ mt: 2 }}>Loading dashboard...</Typography>
-      </Box>
+      <PageTransition animation="fadeUp">
+        <LoadingSpinner size="large" />
+      </PageTransition>
     );
   }
 
   if (error) {
     return (
-      <Box sx={{ p: 3 }}>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-        <Button variant="contained" onClick={handleRefresh} startIcon={<Refresh />}>
-          Retry
-        </Button>
-      </Box>
+      <PageTransition animation="fadeUp">
+        <Box sx={{ p: 3 }}>
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+          <Button variant="contained" onClick={handleRefresh} startIcon={<Refresh />}>
+            Retry
+          </Button>
+        </Box>
+      </PageTransition>
     );
   }
 
@@ -130,22 +133,23 @@ function Dashboard() {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <DashboardIcon />
-          Dashboard
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          {lastUpdated && (
-            <Typography variant="body2" color="textSecondary">
-              Last updated: {lastUpdated.toLocaleTimeString()}
-            </Typography>
-          )}
-          <Button
-            variant="outlined"
-            size="small"
+    <PageTransition animation="fadeUp">
+      <Box sx={{ p: 3 }}>
+        {/* Header */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <DashboardIcon />
+            HireIQ Pro Dashboard
+          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            {lastUpdated && (
+              <Typography variant="body2" color="textSecondary">
+                Last updated: {lastUpdated.toLocaleTimeString()}
+              </Typography>
+            )}
+            <Button
+              variant="outlined"
+              size="small"
             onClick={handleRefresh}
             startIcon={<Refresh />}
             disabled={loading}
@@ -404,6 +408,7 @@ function Dashboard() {
         </Grid>
       </Grid>
     </Box>
+    </PageTransition>
   );
 }
 

@@ -31,6 +31,16 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Fade,
+  Grow,
+  Slide,
+  Zoom,
+  Avatar,
+  styled,
+  keyframes,
+  alpha,
+  useTheme,
+  Stack,
 } from '@mui/material';
 import {
   Refresh as RefreshIcon,
@@ -55,7 +65,6 @@ import {
   LinearScale,
   BarElement,
   Title,
-  Tooltip,
   Legend,
   LineElement,
   PointElement,
@@ -69,13 +78,114 @@ ChartJS.register(
   LinearScale,
   BarElement,
   Title,
-  Tooltip,
   Legend,
   LineElement,
   PointElement,
   ArcElement,
   RadialLinearScale
 );
+
+// Styled components for fancy UI
+const pulseAnimation = keyframes`
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(25, 118, 210, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(25, 118, 210, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(25, 118, 210, 0);
+  }
+`;
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  position: 'relative',
+  overflow: 'hidden',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  background: `linear-gradient(145deg, ${theme.palette.background.paper} 0%, ${alpha(theme.palette.primary.light, 0.1)} 100%)`,
+  border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+  '&:hover': {
+    transform: 'translateY(-4px)',
+    boxShadow: `0 20px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+    '& .card-icon': {
+      animation: `${pulseAnimation} 2s infinite`,
+    },
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '4px',
+    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+  },
+}));
+
+const MetricCard = styled(Card)(({ theme }) => ({
+  position: 'relative',
+  overflow: 'hidden',
+  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+  color: 'white',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'scale(1.03)',
+    boxShadow: `0 12px 24px ${alpha(theme.palette.primary.main, 0.3)}`,
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: '-50%',
+    right: '-50%',
+    width: '100%',
+    height: '100%',
+    background: `radial-gradient(circle, ${alpha('#fff', 0.1)} 0%, transparent 70%)`,
+    transition: 'all 0.3s ease',
+  },
+  '&:hover::after': {
+    top: '-25%',
+    right: '-25%',
+  },
+}));
+
+const GlassCard = styled(Paper)(({ theme }) => ({
+  background: `linear-gradient(145deg, ${alpha('#fff', 0.1)} 0%, ${alpha('#fff', 0.05)} 100%)`,
+  backdropFilter: 'blur(10px)',
+  border: `1px solid ${alpha('#fff', 0.2)}`,
+  borderRadius: '16px',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    background: `linear-gradient(145deg, ${alpha('#fff', 0.15)} 0%, ${alpha('#fff', 0.1)} 100%)`,
+    transform: 'translateY(-2px)',
+  },
+}));
+
+const AnimatedChip = styled(Chip)(({ theme }) => ({
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'scale(1.1)',
+    boxShadow: `0 4px 12px ${alpha(theme.palette.primary.main, 0.3)}`,
+  },
+}));
+
+const GradientButton = styled(Button)(({ theme }) => ({
+  background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
+  border: 0,
+  borderRadius: '25px',
+  boxShadow: `0 3px 15px 2px ${alpha(theme.palette.primary.main, 0.3)}`,
+  color: 'white',
+  height: 48,
+  padding: '0 30px',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    background: `linear-gradient(45deg, ${theme.palette.primary.dark} 30%, ${theme.palette.secondary.dark} 90%)`,
+    transform: 'translateY(-2px)',
+    boxShadow: `0 6px 20px 4px ${alpha(theme.palette.primary.main, 0.4)}`,
+  },
+}));
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -100,6 +210,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 function Analytics() {
+  const theme = useTheme();
   const [currentTab, setCurrentTab] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -657,231 +768,395 @@ function Analytics() {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <AnalyticsIcon />
-        Analytics & Enhanced Reporting
-      </Typography>
+    <Box sx={{ 
+      p: 3,
+      background: `linear-gradient(135deg, ${alpha('#f5f7fa', 0.8)} 0%, ${alpha('#c3cfe2', 0.4)} 100%)`,
+      minHeight: '100vh',
+    }}>
+      <Fade in timeout={800}>
+        <Box>
+          <Typography 
+            variant="h3" 
+            gutterBottom 
+            sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 2,
+              fontWeight: 700,
+              background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              mb: 4,
+            }}
+          >
+            <Avatar 
+              className="card-icon"
+              sx={{ 
+                bgcolor: 'primary.main', 
+                width: 56, 
+                height: 56,
+                boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.4)}`,
+              }}
+            >
+              <AnalyticsIcon sx={{ fontSize: 32 }} />
+            </Avatar>
+            Analytics & Enhanced Reporting
+          </Typography>
 
-      {/* Real-time Metrics Summary */}
-      {realTimeDashboard && (
-        <Grid container spacing={3} sx={{ mb: 3 }}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" color="primary">
-                  {realTimeDashboard.live_metrics?.active_interviews || 0}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  Active Interviews
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" color="primary">
-                  {realTimeDashboard.live_metrics?.applications_today || 0}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  Applications Today
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" color="primary">
-                  {realTimeDashboard.live_metrics?.interviews_scheduled_today || 0}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  Interviews Scheduled
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" color="primary">
-                  {realTimeDashboard.live_metrics?.offers_pending || 0}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  Pending Offers
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      )}
+          {/* Real-time Metrics Summary */}
+          {realTimeDashboard && (
+            <Grow in timeout={1000}>
+              <Grid container spacing={3} sx={{ mb: 4 }}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <MetricCard>
+                    <CardContent sx={{ position: 'relative', zIndex: 1 }}>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar sx={{ bgcolor: alpha('#fff', 0.2), color: 'white' }}>
+                          <ScheduleIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography variant="h4" fontWeight="bold">
+                            {realTimeDashboard.live_metrics?.active_interviews || 0}
+                          </Typography>
+                          <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                            Active Interviews
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </MetricCard>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <MetricCard sx={{ 
+                    background: `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
+                  }}>
+                    <CardContent sx={{ position: 'relative', zIndex: 1 }}>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar sx={{ bgcolor: alpha('#fff', 0.2), color: 'white' }}>
+                          <GroupIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography variant="h4" fontWeight="bold">
+                            {realTimeDashboard.live_metrics?.applications_today || 0}
+                          </Typography>
+                          <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                            Applications Today
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </MetricCard>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <MetricCard sx={{ 
+                    background: `linear-gradient(135deg, ${theme.palette.success.main} 0%, ${theme.palette.success.dark} 100%)`,
+                  }}>
+                    <CardContent sx={{ position: 'relative', zIndex: 1 }}>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar sx={{ bgcolor: alpha('#fff', 0.2), color: 'white' }}>
+                          <CalendarIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography variant="h4" fontWeight="bold">
+                            {realTimeDashboard.live_metrics?.interviews_scheduled_today || 0}
+                          </Typography>
+                          <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                            Interviews Scheduled
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </MetricCard>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <MetricCard sx={{ 
+                    background: `linear-gradient(135deg, ${theme.palette.warning.main} 0%, ${theme.palette.warning.dark} 100%)`,
+                  }}>
+                    <CardContent sx={{ position: 'relative', zIndex: 1 }}>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar sx={{ bgcolor: alpha('#fff', 0.2), color: 'white' }}>
+                          <MoneyIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography variant="h4" fontWeight="bold">
+                            {realTimeDashboard.live_metrics?.offers_pending || 0}
+                          </Typography>
+                          <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                            Pending Offers
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </MetricCard>
+                </Grid>
+              </Grid>
+            </Grow>
+          )}
 
-      {/* Action Buttons */}
-      <Box sx={{ mb: 3, display: 'flex', gap: 2 }}>
-        <Button
-          variant="contained"
-          startIcon={<CreateIcon />}
-          onClick={() => setCreateReportDialogOpen(true)}
-        >
-          Create Custom Report
-        </Button>
-        <Button
-          variant="outlined"
-          startIcon={<ExportIcon />}
-          onClick={() => setExportDialogOpen(true)}
-        >
-          Export Report
-        </Button>
-        <Button
-          variant="outlined"
-          startIcon={<ScheduleIcon />}
-        >
-          Schedule Report
-        </Button>
-        <Button
-          variant="outlined"
-          startIcon={<RefreshIcon />}
-          onClick={() => {
-            fetchAnalyticsData();
-            fetchEnhancedReportsData();
-          }}
-        >
-          Refresh Data
-        </Button>
-      </Box>
+          {/* Action Buttons */}
+          <Slide direction="up" in timeout={1200}>
+            <Box sx={{ mb: 4, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              <GradientButton
+                startIcon={<CreateIcon />}
+                onClick={() => setCreateReportDialogOpen(true)}
+              >
+                Create Custom Report
+              </GradientButton>
+              <GradientButton
+                startIcon={<ExportIcon />}
+                onClick={() => setExportDialogOpen(true)}
+                sx={{
+                  background: `linear-gradient(45deg, ${theme.palette.secondary.main} 30%, ${theme.palette.success.main} 90%)`,
+                  '&:hover': {
+                    background: `linear-gradient(45deg, ${theme.palette.secondary.dark} 30%, ${theme.palette.success.dark} 90%)`,
+                  },
+                }}
+              >
+                Export Report
+              </GradientButton>
+              <GradientButton
+                startIcon={<ScheduleIcon />}
+                sx={{
+                  background: `linear-gradient(45deg, ${theme.palette.info.main} 30%, ${theme.palette.primary.main} 90%)`,
+                  '&:hover': {
+                    background: `linear-gradient(45deg, ${theme.palette.info.dark} 30%, ${theme.palette.primary.dark} 90%)`,
+                  },
+                }}
+              >
+                Schedule Report
+              </GradientButton>
+              <GradientButton
+                startIcon={<RefreshIcon />}
+                onClick={() => {
+                  fetchAnalyticsData();
+                  fetchEnhancedReportsData();
+                }}
+                sx={{
+                  background: `linear-gradient(45deg, ${theme.palette.grey[600]} 30%, ${theme.palette.grey[800]} 90%)`,
+                  '&:hover': {
+                    background: `linear-gradient(45deg, ${theme.palette.grey[700]} 30%, ${theme.palette.grey[900]} 90%)`,
+                  },
+                }}
+              >
+                Refresh Data
+              </GradientButton>
+            </Box>
+          </Slide>
 
-      {/* Summary Cards */}
-      {summary && (
-        <Grid container spacing={3} sx={{ mb: 3 }}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                  Total Candidates
-                </Typography>
-                <Typography variant="h4">
-                  {summary.total_candidates}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                  Total Hired
-                </Typography>
-                <Typography variant="h4">
-                  {summary.total_hired}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                  Hiring Rate
-                </Typography>
-                <Typography variant="h4">
-                  {summary.hiring_rate?.toFixed(1)}%
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                  Avg Final Score
-                </Typography>
-                <Typography variant="h4">
-                  {summary.average_scores?.final_score?.toFixed(1) || 'N/A'}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      )}
+          {/* Summary Cards */}
+          {summary && (
+            <Zoom in timeout={1400}>
+              <Grid container spacing={3} sx={{ mb: 4 }}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <StyledCard>
+                    <CardContent>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar className="card-icon" sx={{ bgcolor: 'primary.main' }}>
+                          <GroupIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography color="textSecondary" variant="body2" gutterBottom>
+                            Total Candidates
+                          </Typography>
+                          <Typography variant="h4" fontWeight="bold" color="primary">
+                            {summary.total_candidates}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </StyledCard>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <StyledCard>
+                    <CardContent>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar className="card-icon" sx={{ bgcolor: 'success.main' }}>
+                          <TrendingUpIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography color="textSecondary" variant="body2" gutterBottom>
+                            Total Hired
+                          </Typography>
+                          <Typography variant="h4" fontWeight="bold" color="success.main">
+                            {summary.total_hired}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </StyledCard>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <StyledCard>
+                    <CardContent>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar className="card-icon" sx={{ bgcolor: 'warning.main' }}>
+                          <SpeedIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography color="textSecondary" variant="body2" gutterBottom>
+                            Hiring Rate
+                          </Typography>
+                          <Typography variant="h4" fontWeight="bold" color="warning.main">
+                            {summary.hiring_rate?.toFixed(1)}%
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </StyledCard>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <StyledCard>
+                    <CardContent>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Avatar className="card-icon" sx={{ bgcolor: 'secondary.main' }}>
+                          <BarChartIcon />
+                        </Avatar>
+                        <Box>
+                          <Typography color="textSecondary" variant="body2" gutterBottom>
+                            Avg Final Score
+                          </Typography>
+                          <Typography variant="h4" fontWeight="bold" color="secondary.main">
+                            {summary.average_scores?.final_score?.toFixed(1) || 'N/A'}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </StyledCard>
+                </Grid>
+              </Grid>
+            </Zoom>
+          )}
 
-      {/* Tabs */}
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <Tabs
-          value={currentTab}
-          onChange={handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="scrollable"
-          scrollButtons="auto"
-        >
-          <Tab label="Position Analysis" />
-          <Tab label="Demographics" />
-          <Tab label="Timeline" />
-          <Tab label="Score Analysis" />
-          <Tab label="Conversion Funnel" />
-          <Tab label="Predictive Analytics" icon={<TrendingUpIcon />} />
-          <Tab label="Interviewer Performance" icon={<ScheduleIcon />} />
-          <Tab label="Cost Analysis" icon={<MoneyIcon />} />
-          <Tab label="Funnel Optimization" />
-          <Tab label="Question Effectiveness" icon={<QuestionIcon />} />
-          <Tab label="Seasonal Trends" icon={<CalendarIcon />} />
-          <Tab label="Executive Summary" icon={<ReportsIcon />} />
-          <Tab label="KPI Dashboard" icon={<SpeedIcon />} />
-          <Tab label="Benchmarks" icon={<BarChartIcon />} />
-          <Tab label="Custom Reports" icon={<CreateIcon />} />
-        </Tabs>
-      </Paper>
+          {/* Tabs */}
+          <GlassCard sx={{ width: '100%', mb: 3, p: 0, overflow: 'hidden' }}>
+            <Tabs
+              value={currentTab}
+              onChange={handleTabChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="scrollable"
+              scrollButtons="auto"
+              sx={{
+                '& .MuiTab-root': {
+                  fontWeight: 600,
+                  textTransform: 'none',
+                  fontSize: '0.95rem',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    color: 'primary.main',
+                    transform: 'translateY(-2px)',
+                  },
+                  '&.Mui-selected': {
+                    color: 'primary.main',
+                    fontWeight: 700,
+                  },
+                },
+                '& .MuiTabs-indicator': {
+                  height: 3,
+                  borderRadius: '3px 3px 0 0',
+                  background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                },
+              }}
+            >
+              <Tab label="Position Analysis" icon={<BarChartIcon />} iconPosition="start" />
+              <Tab label="Demographics" icon={<GroupIcon />} iconPosition="start" />
+              <Tab label="Timeline" icon={<CalendarIcon />} iconPosition="start" />
+              <Tab label="Score Analysis" icon={<SpeedIcon />} iconPosition="start" />
+              <Tab label="Conversion Funnel" icon={<TrendingUpIcon />} iconPosition="start" />
+              <Tab label="Predictive Analytics" icon={<TrendingUpIcon />} iconPosition="start" />
+              <Tab label="Interviewer Performance" icon={<ScheduleIcon />} iconPosition="start" />
+              <Tab label="Cost Analysis" icon={<MoneyIcon />} iconPosition="start" />
+              <Tab label="Funnel Optimization" icon={<TrendingUpIcon />} iconPosition="start" />
+              <Tab label="Question Effectiveness" icon={<QuestionIcon />} iconPosition="start" />
+              <Tab label="Seasonal Trends" icon={<CalendarIcon />} iconPosition="start" />
+              <Tab label="Executive Summary" icon={<ReportsIcon />} iconPosition="start" />
+              <Tab label="KPI Dashboard" icon={<SpeedIcon />} iconPosition="start" />
+              <Tab label="Benchmarks" icon={<BarChartIcon />} iconPosition="start" />
+              <Tab label="Custom Reports" icon={<CreateIcon />} iconPosition="start" />
+            </Tabs>
+          </GlassCard>
 
       {/* Position Analysis Tab */}
       <TabPanel value={currentTab} index={0}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-            <Paper sx={{ p: 3 }}>
-              <Typography variant="h6" gutterBottom>
-                Candidates by Position
-              </Typography>
-              {positionChartData && (
-                <Bar data={positionChartData} options={chartOptions} />
-              )}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Paper sx={{ p: 3 }}>
-              <Typography variant="h6" gutterBottom>
-                Position Details
-              </Typography>
-              {positions && (
-                <TableContainer>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Position</TableCell>
-                        <TableCell align="right">Rate</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {Object.entries(positions).map(([position, data]: [string, any]) => (
-                        <TableRow key={position}>
-                          <TableCell component="th" scope="row">
-                            {position}
-                          </TableCell>
-                          <TableCell align="right">
-                            <Chip
-                              label={`${data.hiring_rate?.toFixed(1)}%`}
-                              color={data.hiring_rate > 50 ? 'success' : 'default'}
-                              size="small"
-                            />
-                          </TableCell>
+        <Fade in timeout={500}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={8}>
+              <StyledCard sx={{ p: 3, height: '100%' }}>
+                <Typography variant="h6" gutterBottom sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 1,
+                  color: 'primary.main',
+                  fontWeight: 600,
+                }}>
+                  <BarChartIcon />
+                  Candidates by Position
+                </Typography>
+                {positionChartData && (
+                  <Box sx={{ height: 400 }}>
+                    <Bar data={positionChartData} options={{
+                      ...chartOptions,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        ...chartOptions.plugins,
+                        legend: {
+                          ...chartOptions.plugins.legend,
+                          labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                          },
+                        },
+                      },
+                    }} />
+                  </Box>
+                )}
+              </StyledCard>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <StyledCard sx={{ p: 3, height: '100%' }}>
+                <Typography variant="h6" gutterBottom sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 1,
+                  color: 'secondary.main',
+                  fontWeight: 600,
+                }}>
+                  <SpeedIcon />
+                  Position Details
+                </Typography>
+                {positions && (
+                  <TableContainer>
+                    <Table size="small">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell sx={{ fontWeight: 600 }}>Position</TableCell>
+                          <TableCell align="right" sx={{ fontWeight: 600 }}>Rate</TableCell>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              )}
-            </Paper>
+                      </TableHead>
+                      <TableBody>
+                        {Object.entries(positions).map(([position, data]: [string, any]) => (
+                          <TableRow key={position} hover>
+                            <TableCell component="th" scope="row">
+                              {position}
+                            </TableCell>
+                            <TableCell align="right">
+                              <AnimatedChip
+                                label={`${data.hiring_rate?.toFixed(1)}%`}
+                                color={data.hiring_rate > 50 ? 'success' : 'default'}
+                                size="small"
+                              />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                )}
+              </StyledCard>
+            </Grid>
           </Grid>
-        </Grid>
+        </Fade>
       </TabPanel>
 
       {/* Demographics Tab */}
@@ -1815,6 +2090,8 @@ function Analytics() {
           <Button onClick={handleExportReport} variant="contained">Export</Button>
         </DialogActions>
       </Dialog>
+        </Box>
+      </Fade>
     </Box>
   );
 }
