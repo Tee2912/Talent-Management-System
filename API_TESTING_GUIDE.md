@@ -1,120 +1,125 @@
-# Fair Hiring System - API Testing Guide
+# HireIQ Pro - API Testing Guide
 
-## Backend API Endpoints
+This guide provides instructions and examples for testing the HireIQ Pro backend API.
 
-### Base URL: http://localhost:8000
+## Base URL: `http://localhost:8000`
+
+## Health & Status
 
 ### Health Check
+Check if the API is running and healthy.
 ```bash
 curl http://localhost:8000/health
 ```
 
-### Get All Candidates
+### Root Endpoint
+Get basic information about the API version and features.
 ```bash
-curl http://localhost:8000/api/v1/candidates/
+curl http://localhost:8000/
 ```
 
-### Create New Candidate
+## Core API Endpoints
+
+### Candidates
+- **Get All Candidates**: `GET /api/v1/candidates/`
+- **Create Candidate**: `POST /api/v1/candidates/`
+- **Get Candidate by ID**: `GET /api/v1/candidates/{candidate_id}`
+
+**Example: Create a new candidate**
 ```bash
 curl -X POST http://localhost:8000/api/v1/candidates/ \
   -H "Content-Type: application/json" \
   -d '{
-    "first_name": "John",
-    "last_name": "Doe",
-    "email": "john.doe@example.com",
-    "position_applied": "Software Engineer",
-    "experience_years": 5,
-    "education_level": "Bachelor",
-    "skills": ["Python", "JavaScript"],
-    "gender": "male",
-    "ethnicity": "white",
-    "age": 30
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "jane.smith@example.com",
+    "position_applied": "Data Scientist",
+    "experience_years": 7,
+    "education_level": "Master",
+    "skills": ["Python", "R", "Machine Learning"],
+    "gender": "female",
+    "ethnicity": "hispanic",
+    "age": 34
   }'
 ```
 
-### Update Candidate Scores
+### Analytics
+- **Get Consolidated Analytics**: `GET /api/v1/analytics/`
+- **Get Analytics by Type**: `GET /api/v1/analytics/{analytics_type}` (e.g., `positions`, `demographics`, `timeline`)
+
+**Example: Get consolidated analytics data**
 ```bash
-curl -X POST http://localhost:8000/api/v1/candidates/1/scores \
-  -H "Content-Type: application/json" \
-  -d '{
-    "resume_score": 85,
-    "interview_score": 90,
-    "technical_score": 88
-  }'
+curl http://localhost:8000/api/v1/analytics/
 ```
 
-### Make Hiring Decision
-```bash
-curl -X POST http://localhost:8000/api/v1/candidates/1/decision \
-  -H "Content-Type: application/json" \
-  -d '"hired"'
-```
+### Bias Detection
+- **Run Bias Analysis**: `POST /api/v1/bias/analyze`
+- **Get Bias Dashboard**: `GET /api/v1/bias/dashboard`
 
-### Run Bias Analysis
+**Example: Run a new bias analysis**
 ```bash
 curl -X POST http://localhost:8000/api/v1/bias/analyze \
   -H "Content-Type: application/json" \
+  -d '{"candidate_ids": [1, 2, 3]}'
+```
+
+## Smart AI Features Endpoints (`/api/v1/ai-copilot`)
+
+### AI-Powered Resume Analysis
+- **Analyze Resume**: `POST /api/v1/ai-copilot/analyze-resume`
+
+**Example: Analyze a resume against a job description**
+```bash
+curl -X POST http://localhost:8000/api/v1/ai-copilot/analyze-resume \
+  -H "Content-Type: application/json" \
   -d '{
-    "candidate_ids": []
+    "resume_text": "...",
+    "job_description": "..."
   }'
 ```
 
-### Get Bias Dashboard
+### Intelligent Candidate Matching
+- **Find Similar Candidates**: `POST /api/v1/ai-copilot/find-similar-candidates`
+
+**Example: Find candidates similar to a profile**
 ```bash
-curl http://localhost:8000/api/v1/bias/dashboard
+curl -X POST http://localhost:8000/api/v1/ai-copilot/find-similar-candidates \
+  -H "Content-Type: application/json" \
+  -d '{
+    "source_candidate_id": 1,
+    "top_n": 5
+  }'
 ```
 
-### Get Analytics Summary
+### Predictive Analytics
+- **Predict Hiring Success**: `POST /api/v1/ai-copilot/predict-hiring-success/{candidate_id}`
+
+**Example: Predict success for a candidate**
 ```bash
-curl http://localhost:8000/api/v1/analytics/summary
+curl -X POST http://localhost:8000/api/v1/ai-copilot/predict-hiring-success/1
 ```
 
-### Get Position Analytics
-```bash
-curl http://localhost:8000/api/v1/analytics/positions
-```
+## Test Workflow
 
-### Get Demographic Analytics
-```bash
-curl http://localhost:8000/api/v1/analytics/demographics
-```
+1.  **Start Backend & Frontend**:
+    ```bash
+    # Terminal 1 (backend)
+    cd backend
+    uvicorn app.main:app --reload
 
-## Frontend URLs
+    # Terminal 2 (frontend)
+    cd frontend
+    npm start
+    ```
 
-### Main Application: http://localhost:3000
+2.  **Populate Data**: Use the frontend or API to create candidates.
 
-- **Dashboard**: http://localhost:3000/ - Overview of hiring metrics and bias scores
-- **Candidates**: http://localhost:3000/candidates - Manage candidate information
-- **Analytics**: http://localhost:3000/analytics - Detailed hiring analytics
-- **Bias Detection**: http://localhost:3000/bias-detection - Run and view bias analysis
+3.  **Test Analytics**:
+    - Access `http://localhost:3000/analytics` to see the consolidated dashboard.
+    - Use `curl` to test the `/api/v1/analytics/` endpoint.
 
-## Sample Test Workflow
+4.  **Test AI Features**:
+    - Navigate to the "AI Copilot" page in the frontend.
+    - Use `curl` to test the `/api/v1/ai-copilot/` endpoints.
 
-1. **Start the servers**:
-   ```bash
-   # Terminal 1 - Backend
-   cd backend
-   C:/Users/warre/vibathon/.venv/Scripts/uvicorn.exe app.main:app --host 0.0.0.0 --port 8000 --reload
-   
-   # Terminal 2 - Frontend  
-   cd frontend
-   npm start
-   ```
-
-2. **Add test candidates** using the API or frontend interface
-
-3. **Score candidates** through the candidates interface
-
-4. **Make hiring decisions** 
-
-5. **Run bias analysis** to check for fairness issues
-
-6. **Review analytics** for insights into hiring patterns
-
-## Key Features Demonstrated
-
-- **Bias Detection**: ML-based analysis of hiring decisions for demographic bias
-- **Fair Scoring**: Transparent candidate evaluation system  
-- **Real-time Analytics**: Dashboard showing hiring trends and metrics
-- **Audit Trail**: Complete tracking of all hiring decisions
-- **Compliance Reporting**: Fairness metrics for regulatory compliance
+5.  **Review API Docs**: For a full, interactive list of all endpoints, visit `http://localhost:8000/docs`.

@@ -1,142 +1,124 @@
-# Fair Hiring System
+# HireIQ Pro - Smart Hiring System
 
-A comprehensive system to ensure fairness in the hiring process using machine learning bias detection and mitigation techniques.
+A comprehensive, AI-powered system to ensure fairness and efficiency in the hiring process using machine learning bias detection, intelligent analytics, and workflow automation.
 
 ## Project Structure
 
 ```
-fair-hiring-system/
-├── backend/                 # Python Flask/FastAPI backend
+hireiq-pro/
+├── backend/                 # Python FastAPI backend
 │   ├── app/
 │   │   ├── __init__.py
 │   │   ├── main.py         # Main application entry
-│   │   ├── models/         # ML models for bias detection
-│   │   ├── api/            # API endpoints
-│   │   ├── services/       # Business logic
-│   │   └── utils/          # Utility functions
+│   │   ├── models/         # Pydantic models and schemas
+│   │   ├── api/            # API endpoints for all features
+│   │   └── ai/             # AI orchestration and services
 │   ├── requirements.txt
-│   └── config.py
+│   └── Dockerfile
 ├── frontend/               # React frontend
 │   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── pages/          # Page components
+│   │   ├── components/     # Reusable React components
+│   │   ├── pages/          # Page components including ConsolidatedAnalytics.tsx
 │   │   ├── services/       # API services
-│   │   └── utils/          # Utility functions
+│   │   └── theme.ts        # Material-UI theme configuration
 │   ├── public/
 │   └── package.json
-├── data/                   # Sample data and datasets
-├── tests/                  # Test files
-├── docs/                   # Documentation
-└── docker-compose.yml      # Docker setup
+├── data/                   # Sample data, datasets, and generation scripts
+├── tests/                  # Test files for backend and frontend
+├── docs/                   # Project documentation
+└── docker-compose.yml      # Docker setup for multi-container deployment
 ```
 
 ## Features
 
-- **Bias Detection**: ML algorithms to detect bias in hiring decisions
-- **Fair Scoring**: Transparent scoring system for candidates
-- **Resume Analyzer**: Analyze and evaluate resume based on job descriptions with Azure OpenAI GPT-4o 
-- **Dashboard**: Real-time analytics and reporting
-- **Audit Trail**: Complete tracking of hiring decisions
-- **Compliance**: GDPR and equal opportunity compliance
+- **Consolidated Analytics Dashboard**: A unified interface for all hiring analytics, from basic metrics to advanced predictive models.
+- **AI-Powered Resume Analyzer**: Evaluate resumes against job descriptions using Azure OpenAI GPT-4o.
+- **Real-time Bias Detection**: ML algorithms to detect and flag potential bias in hiring decisions.
+- **Fair Scoring System**: Transparent and configurable scoring for candidates.
+- **AI Copilot**: Smart assistant for interview question generation, candidate summaries, and more.
+- **Automated Workflows**: Integration with n8n for automating hiring processes.
+- **Interactive Candidate Chat**: Engage with candidates through an AI-powered chatbot.
+- **Personality & Skill Evaluation**: Assess candidate personality and skills using advanced models.
+- **Compliance & Reporting**: GDPR compliance and comprehensive reporting features.
 
 ## Technology Stack
 
 **Backend:**
-- Python 3.9+
-- FastAPI/Flask
-- scikit-learn
-- pandas
-- NumPy
-- SQLAlchemy
-- Azure OpenAI GPT-4o
-- PyPDF2
+- Python 3.13
+- FastAPI
+- scikit-learn, pandas, NumPy
+- LangChain, Langfuse for AI orchestration
+- Uvicorn for serving
 
 **Frontend:**
 - React 18
 - TypeScript
 - Material-UI
-- Chart.js
-- Axios
+- Chart.js for data visualization
+- React Router for navigation
 
 ## Getting Started
 
 ### Prerequisites
 - Python 3.9+
 - Node.js 16+
-- npm or yarn
+- Docker and Docker Compose (optional, for containerized setup)
 
 ### Installation
 
-1. **Backend Setup:**
-   ```bash
-   cd backend
-   # Create virtual environment (if not already done)
-   python -m venv .venv
+1.  **Backend Setup:**
+    ```bash
+    cd backend
+    # Create and activate a virtual environment
+    python -m venv venv
+    # On Windows
+    .\venv\Scripts\activate
+    # On macOS/Linux
+    source venv/bin/activate
+    
+    # Install dependencies
+    pip install -r requirements.txt
+    ```
 
-   # Activate virtual environment
-   .venv\Scripts\activate  # Windows
-   # or source .venv/bin/activate  # macOS/Linux
-   
-   # Install dependencies
-   pip install -r requirements.txt
-   ```
+2.  **Frontend Setup:**
+    ```bash
+    cd frontend
+    npm install
+    ```
 
-2. **Frontend Setup:**
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-3. **API Key Setup:**
-   ```bash
-   # Create and configure the .env file
-   cp .env.example .env
-
-   # Add your Azure OpenAI API Key in the .env file
-   AZURE_OPENAI_API_KEY=<your-api-key-here>
-   ```
+3.  **Environment Variables:**
+    - Create a `.env` file in the `backend` directory.
+    - Add necessary API keys and configurations (e.g., `AZURE_OPENAI_API_KEY`).
 
 ### Running the Application
 
-1. **Start the Backend:**
-   ```bash
-   cd backend
-   uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-   ```
+1.  **Start the Backend:**
+    ```bash
+    cd backend
+    uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ```
 
-2. **Start the Frontend:**
-   ```bash
-   cd frontend
-   npm start
-   ```
+2.  **Start the Frontend:**
+    ```bash
+    cd frontend
+    npm start
+    ```
 
-3. **Access the Application:**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Documentation: http://localhost:8000/docs
+3.  **Access the Application:**
+    - Frontend: http://localhost:3000
+    - Backend API Docs: http://localhost:8000/docs
 
 ### Quick Demo
 
-1. Open http://localhost:3000 in your browser
-2. Navigate to the Candidates page to add sample candidates
-3. Score candidates using the interface
-4. Run bias detection analysis from the Bias Detection page
-5. View analytics and insights on the Dashboard
-6. Upload resume or paste resume in text for analysis against job descriptions
-
-### Sample Data
-
-Use the sample data generator to create test data:
-```bash
-cd data
-python generate_sample_data.py
-```
-
-This creates 100 sample candidates with realistic data and some bias patterns for testing.
+1.  Open http://localhost:3000 in your browser.
+2.  Navigate to the **Candidates** page to add sample candidates.
+3.  Use the **Resume Analyzer** to evaluate resumes against job descriptions.
+4.  Explore the **Analytics** dashboard to view hiring metrics and predictive insights.
+5.  Use the **AI Copilot** for smart assistance.
 
 ## API Documentation
 
-The API documentation will be available at `http://localhost:8000/docs` when the backend is running.
+The API documentation is automatically generated by FastAPI and is available at `http://localhost:8000/docs` when the backend is running.
 
 ## Contributing
 
