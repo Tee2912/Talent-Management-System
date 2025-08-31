@@ -18,13 +18,8 @@ import {
   People as PeopleIcon,
   Analytics as AnalyticsIcon,
   Security as SecurityIcon,
-  Psychology as PsychologyIcon,
   Chat as ChatIcon,
   Schedule as ScheduleIcon,
-  Email as EmailIcon,
-  Feedback as FeedbackIcon,
-  Event as CalendarIcon,
-  Description as ResumeIcon,
 } from '@mui/icons-material';
 
 export const drawerWidth = 240;
@@ -32,15 +27,10 @@ export const drawerWidth = 240;
 const navigationItems = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
   { text: 'Candidates', icon: <PeopleIcon />, path: '/candidates' },
-  { text: 'Resume Analyzer', icon: <ResumeIcon />, path: '/resume-analyzer' },
-  { text: 'Interview Management', icon: <ScheduleIcon />, path: '/interviews' },
+  { text: 'Interviews', icon: <ScheduleIcon />, path: '/interviews' },
   { text: 'Analytics & Reports', icon: <AnalyticsIcon />, path: '/analytics' },
-  { text: 'Personality Evaluation', icon: <PsychologyIcon />, path: '/personality' },
-  { text: 'AI Chat Assistant', icon: <ChatIcon />, path: '/chat' },
-  { text: 'Bias Detection', icon: <SecurityIcon />, path: '/bias-detection' },
-  { text: 'Email Notifications', icon: <EmailIcon />, path: '/notifications' },
-  { text: 'Interview Feedback', icon: <FeedbackIcon />, path: '/feedback' },
-  { text: 'Calendar Integration', icon: <CalendarIcon />, path: '/calendar' },
+  { text: 'AI Assistant', icon: <ChatIcon />, path: '/chat' },
+  { text: 'Settings', icon: <SecurityIcon />, path: '/notifications' },
 ];
 
 function Navigation() {

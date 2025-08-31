@@ -10,10 +10,7 @@ import InterviewManagement from './pages/InterviewManagement';
 import Analytics from './pages/Analytics';
 import PersonalityEvaluation from './pages/PersonalityEvaluation';
 import CandidateChat from './pages/CandidateChat';
-import BiasDetection from './pages/BiasDetection';
-import EmailNotifications from './pages/EmailNotifications';
-import InterviewFeedback from './pages/InterviewFeedback';
-import CalendarIntegration from './pages/CalendarIntegration';
+import Settings from './pages/Settings';
 import Navigation, { drawerWidth } from './components/Navigation';
 
 function App() {
@@ -54,10 +51,7 @@ function App() {
             <Route path="/reports" element={<Analytics />} />
             <Route path="/personality" element={<PersonalityEvaluation />} />
             <Route path="/chat" element={<CandidateChat />} />
-            <Route path="/bias-detection" element={<BiasDetection />} />
-            <Route path="/notifications" element={<EmailNotifications />} />
-            <Route path="/feedback" element={<InterviewFeedback />} />
-            <Route path="/calendar" element={<CalendarIntegration />} />
+            <Route path="/notifications" element={<Settings />} />
           </Routes>
         </Container>
       </Box>
