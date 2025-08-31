@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, AppBar, Toolbar, Typography, Container, Box } from '@mui/material';
-import theme from './theme';
+import { AppBar, Toolbar, Typography, Container, Box, IconButton, Tooltip, useTheme } from '@mui/material';
+import { DarkMode, LightMode, NotificationsNone, HelpOutline, TrackChanges } from '@mui/icons-material';
+import PageTransition from './components/PageTransition';
 import Dashboard from './pages/Dashboard';
 import Candidates from './pages/Candidates';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
@@ -17,58 +17,85 @@ import InterviewFeedback from './pages/InterviewFeedback';
 import CandidateChat from './pages/CandidateChat';
 import EmailNotifications from './pages/EmailNotifications';
 import Navigation, { drawerWidth } from './components/Navigation';
+import { ColorModeContext } from './theme';
 
 function App() {
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+  <>
       <div>
-      <AppBar position="sticky" sx={{ 
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
-      }}>
+  <AppBar position="sticky">
         <Toolbar>
+          <TrackChanges sx={{ mr: 1, fontSize: '2rem', color: 'primary.main' }} />
           <Typography variant="h6" component="div" sx={{ 
             flexGrow: 1, 
             fontWeight: 700,
             letterSpacing: '0.5px',
           }}>
-            🎯 HireIQ Pro - AI-Powered Hiring Platform
+            HireIQ Pro
           </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Tooltip title="Notifications">
+              <IconButton color="inherit" size="large" sx={{
+                transition: 'transform 0.2s ease',
+                '&:hover': { transform: 'translateY(-2px) rotate(-2deg)' }
+              }}>
+                <NotificationsNone />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Help & Shortcuts">
+              <IconButton color="inherit" size="large" sx={{
+                transition: 'transform 0.2s ease',
+                '&:hover': { transform: 'translateY(-2px) rotate(2deg)' }
+              }}>
+                <HelpOutline />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={theme.palette.mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+              <IconButton onClick={colorMode.toggleColorMode} color="inherit" size="large" aria-label="toggle theme" sx={{
+                transition: 'transform 0.2s ease',
+                '&:hover': { transform: 'translateY(-2px) scale(1.05)' }
+              }}>
+                {theme.palette.mode === 'dark' ? <LightMode /> : <DarkMode />}
+              </IconButton>
+            </Tooltip>
+          </Box>
         </Toolbar>
       </AppBar>
       
       <Navigation />
       
       <Box sx={{ 
-        marginLeft: { xs: 0, md: `${drawerWidth}px` }, // Responsive: no margin on mobile, sidebar margin on desktop
-        minHeight: 'calc(100vh - 64px)', // Full height minus AppBar
-        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)', // Enhanced gradient background
-        transition: 'margin-left 0.3s ease', // Smooth transition
+        marginLeft: { xs: 0, md: `${drawerWidth}px` },
+        minHeight: 'calc(100vh - 64px)',
+        transition: 'margin-left 0.3s ease',
       }}> 
-        <Container maxWidth="xl" sx={{ py: 3 }}> {/* Add vertical padding */}
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/candidates" element={<Candidates />} />
-            <Route path="/candidate-chat" element={<CandidateChat />} />
-            <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
-            <Route path="/interviews" element={<InterviewManagement />} />
-            <Route path="/calendar" element={<CalendarIntegration />} />
-            <Route path="/interview-feedback" element={<InterviewFeedback />} />
-            <Route path="/analytics" element={<ConsolidatedAnalytics />} />
-            <Route path="/advanced-analytics" element={<ConsolidatedAnalytics />} />
-            <Route path="/reports" element={<ConsolidatedAnalytics />} />
-            <Route path="/ai-copilot" element={<AICopilot />} />
-            <Route path="/personality" element={<PersonalityEvaluation />} />
-            <Route path="/bias-detection" element={<BiasDetection />} />
-            <Route path="/email-notifications" element={<EmailNotifications />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/notifications" element={<Settings />} />
-          </Routes>
+        <Container maxWidth="xl" sx={{ py: 3 }}>
+          <PageTransition animation="fadeUp">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/candidates" element={<Candidates />} />
+              <Route path="/candidate-chat" element={<CandidateChat />} />
+              <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
+              <Route path="/interviews" element={<InterviewManagement />} />
+              <Route path="/calendar" element={<CalendarIntegration />} />
+              <Route path="/interview-feedback" element={<InterviewFeedback />} />
+              <Route path="/analytics" element={<ConsolidatedAnalytics />} />
+              <Route path="/advanced-analytics" element={<ConsolidatedAnalytics />} />
+              <Route path="/reports" element={<ConsolidatedAnalytics />} />
+              <Route path="/ai-copilot" element={<AICopilot />} />
+              <Route path="/personality" element={<PersonalityEvaluation />} />
+              <Route path="/bias-detection" element={<BiasDetection />} />
+              <Route path="/email-notifications" element={<EmailNotifications />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/notifications" element={<Settings />} />
+            </Routes>
+          </PageTransition>
         </Container>
       </Box>
     </div>
-    </ThemeProvider>
+    </>
   );
 }
 
