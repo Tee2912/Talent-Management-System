@@ -7,10 +7,15 @@ import Dashboard from './pages/Dashboard';
 import Candidates from './pages/Candidates';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import InterviewManagement from './pages/InterviewManagement';
-import Analytics from './pages/Analytics';
+import ConsolidatedAnalytics from './pages/ConsolidatedAnalytics';
 import PersonalityEvaluation from './pages/PersonalityEvaluation';
-import CandidateChat from './pages/CandidateChat';
+import AICopilot from './pages/AICopilot';
 import Settings from './pages/Settings';
+import BiasDetection from './pages/BiasDetection';
+import CalendarIntegration from './pages/CalendarIntegration';
+import InterviewFeedback from './pages/InterviewFeedback';
+import CandidateChat from './pages/CandidateChat';
+import EmailNotifications from './pages/EmailNotifications';
 import Navigation, { drawerWidth } from './components/Navigation';
 
 function App() {
@@ -45,12 +50,19 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/candidates" element={<Candidates />} />
+            <Route path="/candidate-chat" element={<CandidateChat />} />
             <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
             <Route path="/interviews" element={<InterviewManagement />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/reports" element={<Analytics />} />
+            <Route path="/calendar" element={<CalendarIntegration />} />
+            <Route path="/interview-feedback" element={<InterviewFeedback />} />
+            <Route path="/analytics" element={<ConsolidatedAnalytics />} />
+            <Route path="/advanced-analytics" element={<ConsolidatedAnalytics />} />
+            <Route path="/reports" element={<ConsolidatedAnalytics />} />
+            <Route path="/ai-copilot" element={<AICopilot />} />
             <Route path="/personality" element={<PersonalityEvaluation />} />
-            <Route path="/chat" element={<CandidateChat />} />
+            <Route path="/bias-detection" element={<BiasDetection />} />
+            <Route path="/email-notifications" element={<EmailNotifications />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/notifications" element={<Settings />} />
           </Routes>
         </Container>

@@ -1,0 +1,298 @@
+{
+  "name": "Automated Interview Scheduling",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "interview-trigger",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "interview-scheduling"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract interview request data\nconst data = items[0].json;\n\n// Process and validate the data\nreturn [{\n  json: {\n    candidate_id: data.candidate_id,\n    interviewer_ids: data.interviewer_ids,\n    interview_type: data.interview_type || 'technical',\n    duration: data.duration || 60,\n    preferred_times: data.preferred_times || [],\n    timezone: data.timezone || 'UTC',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Process Request",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/calendar/availability",
+        "options": {
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "interviewer_ids",
+              "value": "={{$json.interviewer_ids.join(',')}}"
+            },
+            {
+              "name": "date_range",
+              "value": "7"
+            }
+          ]
+        }
+      },
+      "name": "Check Interviewer Availability",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// AI-powered optimal time slot selection\nconst availability = items[0].json.availability;\nconst preferences = items[0].json.preferred_times;\n\n// Smart scheduling algorithm\nconst optimalSlots = availability.filter(slot => {\n  return slot.all_available && \n         (!preferences.length || preferences.some(pref => \n           new Date(slot.start_time).getHours() >= new Date(pref.start).getHours() &&\n           new Date(slot.end_time).getHours() <= new Date(pref.end).getHours()\n         ));\n}).slice(0, 3); // Top 3 options\n\nreturn [{\n  json: {\n    ...items[0].json,\n    optimal_slots: optimalSlots,\n    selected_slot: optimalSlots[0] || null,\n    ai_recommendation: true\n  }\n}];"
+      },
+      "name": "AI Optimal Scheduling",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.selected_slot !== null}}",
+              "operation": "equal",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "Slot Available?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/calendar/create-meeting",
+        "options": {
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "bodyParametersUi": {
+          "parameter": [
+            {
+              "name": "title",
+              "value": "Interview - {{$json.candidate_name}} ({{$json.interview_type}})"
+            },
+            {
+              "name": "start_time",
+              "value": "={{$json.selected_slot.start_time}}"
+            },
+            {
+              "name": "end_time",
+              "value": "={{$json.selected_slot.end_time}}"
+            },
+            {
+              "name": "attendees",
+              "value": "={{$json.interviewer_ids}}"
+            },
+            {
+              "name": "candidate_email",
+              "value": "={{$json.candidate_email}}"
+            }
+          ]
+        }
+      },
+      "name": "Create Calendar Event",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/ai-copilot/smart-interview-questions/{{$json.candidate_id}}",
+        "options": {
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "interview_type",
+              "value": "={{$json.interview_type}}"
+            }
+          ]
+        }
+      },
+      "name": "Generate AI Questions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1560, 200]
+    },
+    {
+      "parameters": {
+        "subject": "Interview Scheduled - {{$json.candidate_name}}",
+        "text": "Your interview has been scheduled!\n\n📅 Date: {{$json.selected_slot.start_time}}\n⏰ Duration: {{$json.duration}} minutes\n👥 Interview Type: {{$json.interview_type}}\n🔗 Meeting Link: {{$json.meeting_link}}\n\nAI-generated interview questions have been prepared for the interviewers.\n\nBest regards,\nHireIQ Pro Team",
+        "toEmail": "={{$json.candidate_email}}"
+      },
+      "name": "Send Confirmation Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1780, 200]
+    },
+    {
+      "parameters": {
+        "subject": "Interview Scheduling Failed",
+        "text": "Unable to find suitable time slot for interview with {{$json.candidate_name}}.\n\nReason: No overlapping availability found\nRequested duration: {{$json.duration}} minutes\nPreferred times: {{$json.preferred_times}}\n\nPlease manually coordinate scheduling or adjust requirements.",
+        "toEmail": "hiring@company.com"
+      },
+      "name": "Send Scheduling Failure Notice",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1340, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 200,
+        "responseBody": "{\n  \"success\": true,\n  \"interview_scheduled\": true,\n  \"meeting_details\": {\n    \"date\": \"{{$json.selected_slot.start_time}}\",\n    \"duration\": \"{{$json.duration}}\",\n    \"type\": \"{{$json.interview_type}}\",\n    \"meeting_link\": \"{{$json.meeting_link}}\"\n  },\n  \"ai_generated_questions\": true\n}"
+      },
+      "name": "Response Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [2000, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 400,
+        "responseBody": "{\n  \"success\": false,\n  \"error\": \"No available time slots found\",\n  \"suggested_alternatives\": \"{{$json.optimal_slots}}\"\n}"
+      },
+      "name": "Response Failure",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 400]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Process Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Request": {
+      "main": [
+        [
+          {
+            "node": "Check Interviewer Availability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Interviewer Availability": {
+      "main": [
+        [
+          {
+            "node": "AI Optimal Scheduling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Optimal Scheduling": {
+      "main": [
+        [
+          {
+            "node": "Slot Available?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slot Available?": {
+      "main": [
+        [
+          {
+            "node": "Create Calendar Event",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Scheduling Failure Notice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Calendar Event": {
+      "main": [
+        [
+          {
+            "node": "Generate AI Questions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate AI Questions": {
+      "main": [
+        [
+          {
+            "node": "Send Confirmation Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Confirmation Email": {
+      "main": [
+        [
+          {
+            "node": "Response Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Scheduling Failure Notice": {
+      "main": [
+        [
+          {
+            "node": "Response Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "versionId": "1.0.0",
+  "id": "automated-interview-scheduling",
+  "meta": {
+    "instanceId": "hireiq-pro"
+  }
+}

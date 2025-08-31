@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import candidates, analytics, bias_detection, personality, chat, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration, resume_analyzer
+from app.api import candidates, analytics, bias_detection, personality, chat, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration, resume_analyzer, ai_copilot
 from app.config import settings
 
 app = FastAPI(
-    title="Fair Hiring System API",
-    description="API for bias detection and fair hiring processes",
-    version="1.0.0"
+    title="HireIQ Pro - Smart Hiring System API",
+    description="AI-powered bias detection and intelligent hiring platform with LangChain, Langfuse, and n8n integration",
+    version="2.0.0"
 )
 
 # Configure CORS
@@ -32,13 +32,35 @@ app.include_router(feedback.router, prefix="/api/v1/feedback", tags=["feedback"]
 app.include_router(calendar_integration.router, prefix="/api/v1/calendar", tags=["calendar"])
 app.include_router(resume_analyzer.router, prefix="/api/v1/resume", tags=["resume-analyzer"])
 
+# NEW: AI Copilot and Smart Features
+app.include_router(ai_copilot.router, prefix="/api/v1/ai-copilot", tags=["ai-copilot", "smart-features"])
+
 @app.get("/")
 async def root():
-    return {"message": "Fair Hiring System API", "version": "1.0.0"}
+    return {
+        "message": "HireIQ Pro - Smart Hiring System API", 
+        "version": "2.0.0",
+        "features": [
+            "AI-Powered Resume Analysis",
+            "Real-time Bias Detection", 
+            "Intelligent Candidate Matching",
+            "Automated Workflow Processing",
+            "Predictive Hiring Analytics",
+            "Smart Interview Question Generation",
+            "LangChain Integration",
+            "Langfuse Observability",
+            "n8n Workflow Automation"
+        ]
+    }
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    return {
+        "status": "healthy",
+        "ai_services": "operational",
+        "smart_features": "enabled",
+        "version": "2.0.0"
+    }
 
 if __name__ == "__main__":
     import uvicorn

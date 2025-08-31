@@ -1,0 +1,227 @@
+{
+  "name": "Smart Candidate Screening Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "When clicking \"Start\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract candidate data from input\nconst candidateData = items[0].json;\n\n// Prepare for AI analysis\nreturn [{\n  json: {\n    candidate_id: candidateData.id,\n    resume_text: candidateData.resume_text,\n    job_description: candidateData.job_description,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Prepare Candidate Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/ai-copilot/analyze-resume-intelligence",
+        "options": {
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "bodyParametersUi": {
+          "parameter": [
+            {
+              "name": "resume_text",
+              "value": "={{$json.resume_text}}"
+            },
+            {
+              "name": "job_description",
+              "value": "={{$json.job_description}}"
+            }
+          ]
+        }
+      },
+      "name": "AI Resume Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/ai-copilot/detect-bias",
+        "options": {
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "bodyParametersUi": {
+          "parameter": [
+            {
+              "name": "text",
+              "value": "={{$json.resume_text}}"
+            },
+            {
+              "name": "context",
+              "value": "candidate_screening"
+            }
+          ]
+        }
+      },
+      "name": "Bias Detection",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.bias_analysis.risk_level}}",
+              "operation": "equal",
+              "value2": "low"
+            }
+          ],
+          "number": [
+            {
+              "value1": "={{$json.analysis.overall_match}}",
+              "operation": "larger",
+              "value2": 0.7
+            }
+          ]
+        }
+      },
+      "name": "Screening Decision",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/ai-copilot/smart-interview-questions/{{$json.candidate_id}}",
+        "options": {
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "job_description",
+              "value": "={{$json.job_description}}"
+            },
+            {
+              "name": "interview_type",
+              "value": "technical"
+            }
+          ]
+        }
+      },
+      "name": "Generate Interview Questions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "subject": "Candidate Screening Results - {{$json.candidate_name}}",
+        "text": "AI screening completed for {{$json.candidate_name}}.\n\nResults:\n- Overall Match: {{$json.analysis.overall_match}}%\n- Bias Risk: {{$json.bias_analysis.risk_level}}\n- Recommendation: {{$json.decision}}\n\nNext Steps:\n{{$json.next_steps}}",
+        "toEmail": "hiring@company.com"
+      },
+      "name": "Send Screening Results",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "subject": "Candidate Rejected - {{$json.candidate_name}}",
+        "text": "Candidate {{$json.candidate_name}} did not meet screening criteria.\n\nReason: {{$json.rejection_reason}}\nBias Check: {{$json.bias_analysis.risk_level}}\n\nPlease review for future opportunities.",
+        "toEmail": "hiring@company.com"
+      },
+      "name": "Send Rejection Notice",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1340, 400]
+    }
+  ],
+  "connections": {
+    "When clicking \"Start\"": {
+      "main": [
+        [
+          {
+            "node": "Prepare Candidate Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Candidate Data": {
+      "main": [
+        [
+          {
+            "node": "AI Resume Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Resume Analysis": {
+      "main": [
+        [
+          {
+            "node": "Bias Detection",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bias Detection": {
+      "main": [
+        [
+          {
+            "node": "Screening Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screening Decision": {
+      "main": [
+        [
+          {
+            "node": "Generate Interview Questions",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Rejection Notice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Interview Questions": {
+      "main": [
+        [
+          {
+            "node": "Send Screening Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "versionId": "1.0.0",
+  "id": "smart-candidate-screening",
+  "meta": {
+    "instanceId": "hireiq-pro"
+  }
+}
