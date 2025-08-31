@@ -26,6 +26,11 @@ import {
   AccordionSummary,
   AccordionDetails,
   CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
 } from '@mui/material';
 import {
   Refresh as RefreshIcon,
@@ -37,6 +42,12 @@ import {
   CalendarToday as CalendarIcon,
   TrendingUp as TrendingUpIcon,
   Analytics as AnalyticsIcon,
+  Assessment as ReportsIcon,
+  Create as CreateIcon,
+  Visibility as ViewIcon,
+  BarChart as BarChartIcon,
+  Group as GroupIcon,
+  Speed as SpeedIcon,
 } from '@mui/icons-material';
 import {
   Chart as ChartJS,
@@ -109,10 +120,40 @@ function Analytics() {
   const [questionEffectiveness, setQuestionEffectiveness] = useState<any>(null);
   const [seasonalTrends, setSeasonalTrends] = useState<any>(null);
   const [advancedLoading, setAdvancedLoading] = useState(false);
-  const [selectedTimeRange, setSelectedTimeRange] = useState('3months');
+
+  // Enhanced Reports states
+  const [executiveSummary, setExecutiveSummary] = useState<any>(null);
+  const [benchmarks, setBenchmarks] = useState<any>(null);
+  const [customReports, setCustomReports] = useState<any>(null);
+  const [kpiDashboard, setKpiDashboard] = useState<any>(null);
+  const [realTimeDashboard, setRealTimeDashboard] = useState<any>(null);
+
+  // Dialog states
+  const [createReportDialogOpen, setCreateReportDialogOpen] = useState(false);
+  const [exportDialogOpen, setExportDialogOpen] = useState(false);
+
+  // Form states
+  const [reportForm, setReportForm] = useState({
+    name: '',
+    description: '',
+    frequency: 'weekly',
+    metrics: [],
+    recipients: ''
+  });
+  const [exportForm, setExportForm] = useState({
+    format: 'pdf',
+    report_type: 'executive_summary',
+    date_range: '1month'
+  });
 
   useEffect(() => {
     fetchAnalyticsData();
+    fetchEnhancedReportsData();
+    
+    // Set up real-time data refresh
+    const interval = setInterval(fetchRealTimeData, 30000); // 30 seconds
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchAnalyticsData = async () => {
@@ -349,12 +390,185 @@ function Analytics() {
     }
   };
 
+  const fetchEnhancedReportsData = async () => {
+    try {
+      // Try to fetch from backend first, fall back to mock data if backend is not available
+      try {
+        const [
+          summaryRes,
+          benchmarksRes,
+          reportsRes,
+          kpiRes
+        ] = await Promise.all([
+          fetch('/api/v1/reports/executive-summary'),
+          fetch('/api/v1/reports/benchmarks'),
+          fetch('/api/v1/reports/custom-reports'),
+          fetch('/api/v1/reports/kpi-dashboard')
+        ]);
+
+        if (summaryRes.ok && benchmarksRes.ok && reportsRes.ok && kpiRes.ok) {
+          const [
+            summaryData,
+            benchmarksData,
+            reportsData,
+            kpiData
+          ] = await Promise.all([
+            summaryRes.json(),
+            benchmarksRes.json(),
+            reportsRes.json(),
+            kpiRes.json()
+          ]);
+
+          setExecutiveSummary(summaryData.summary);
+          setBenchmarks(benchmarksData.benchmarks);
+          setCustomReports(reportsData.reports);
+          setKpiDashboard(kpiData.dashboard);
+        } else {
+          throw new Error('Backend not available');
+        }
+      } catch (backendError) {
+        // Use mock data when backend is not available
+        console.log('Backend not available, using mock data for enhanced reports');
+        
+        const mockExecutiveSummary = {
+          total_candidates: 1247,
+          total_interviews: 856,
+          total_hires: 98,
+          conversion_rate: 7.86,
+          average_time_to_hire: 21.5,
+          cost_per_hire: 3200,
+          quality_of_hire_score: 4.2,
+          interviewer_efficiency: 87.5,
+          diversity_metrics: {
+            gender_distribution: { male: 52, female: 48 },
+            ethnicity_distribution: { caucasian: 45, asian: 25, hispanic: 15, african_american: 10, other: 5 }
+          }
+        };
+
+        const mockBenchmarks = {
+          company_vs_industry: {
+            time_to_hire: { company: 21.5, industry: 28.3, performance: "23% better than industry" },
+            conversion_rate: { company: 7.86, industry: 6.2, performance: "27% better than industry" },
+            cost_per_hire: { company: 3200, industry: 4100, performance: "22% better than industry" }
+          }
+        };
+
+        const mockCustomReports = [
+          {
+            id: 1,
+            name: "Weekly Hiring Report",
+            description: "Weekly summary of hiring activities",
+            frequency: "weekly",
+            last_generated: "2024-01-22T09:00:00"
+          },
+          {
+            id: 2,
+            name: "Diversity Analytics",
+            description: "Detailed diversity and inclusion metrics",
+            frequency: "monthly",
+            last_generated: "2024-01-21T16:00:00"
+          }
+        ];
+
+        const mockKpiDashboard = {
+          primary_kpis: [
+            { name: "Time to Hire", value: 21.5, target: 25, status: "exceeding", unit: "days" },
+            { name: "Conversion Rate", value: 7.86, target: 7.0, status: "exceeding", unit: "%" },
+            { name: "Quality of Hire", value: 4.2, target: 4.0, status: "on_track", unit: "/5" },
+            { name: "Cost per Hire", value: 3200, target: 3500, status: "exceeding", unit: "$" }
+          ]
+        };
+
+        setExecutiveSummary(mockExecutiveSummary);
+        setBenchmarks(mockBenchmarks);
+        setCustomReports(mockCustomReports);
+        setKpiDashboard(mockKpiDashboard);
+      }
+      
+      await fetchRealTimeData();
+    } catch (error) {
+      console.error('Failed to fetch enhanced reports data:', error);
+    }
+  };
+
+  const fetchRealTimeData = async () => {
+    try {
+      const response = await fetch('/api/v1/reports/real-time-dashboard');
+      if (response.ok) {
+        const data = await response.json();
+        setRealTimeDashboard(data.dashboard);
+      } else {
+        // Mock real-time data
+        const mockRealTimeData = {
+          live_metrics: {
+            active_interviews: 5,
+            applications_today: 23,
+            interviews_scheduled_today: 8,
+            offers_pending: 12
+          }
+        };
+        setRealTimeDashboard(mockRealTimeData);
+      }
+    } catch (error) {
+      console.error('Failed to fetch real-time data:', error);
+    }
+  };
+
+  const handleCreateReport = async () => {
+    try {
+      const response = await fetch('/api/v1/reports/custom-reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...reportForm,
+          recipients: reportForm.recipients.split(',').map((email: string) => email.trim())
+        })
+      });
+
+      if (response.ok) {
+        setCreateReportDialogOpen(false);
+        setReportForm({ name: '', description: '', frequency: 'weekly', metrics: [], recipients: '' });
+        fetchEnhancedReportsData();
+        alert('Custom report created successfully!');
+      } else {
+        alert('Failed to create report');
+      }
+    } catch (error) {
+      alert('Error creating report');
+    }
+  };
+
+  const handleExportReport = async () => {
+    try {
+      const response = await fetch('/api/v1/reports/export', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(exportForm)
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setExportDialogOpen(false);
+        alert(`Report export initiated. Download will be available at: ${data.export.download_url}`);
+      } else {
+        alert('Failed to export report');
+      }
+    } catch (error) {
+      alert('Error exporting report');
+    }
+  };
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
     
     // Fetch advanced analytics when switching to advanced tabs
     if (newValue >= 6 && !predictiveMetrics) {
       fetchAdvancedAnalytics();
+    }
+    
+    // Fetch enhanced reports data when switching to enhanced reports tabs
+    if ((newValue >= 11 && newValue <= 14) && !executiveSummary) {
+      fetchEnhancedReportsData();
     }
   };
 
@@ -446,8 +660,96 @@ function Analytics() {
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <AnalyticsIcon />
-        Analytics
+        Analytics & Enhanced Reporting
       </Typography>
+
+      {/* Real-time Metrics Summary */}
+      {realTimeDashboard && (
+        <Grid container spacing={3} sx={{ mb: 3 }}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" color="primary">
+                  {realTimeDashboard.live_metrics?.active_interviews || 0}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Active Interviews
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" color="primary">
+                  {realTimeDashboard.live_metrics?.applications_today || 0}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Applications Today
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" color="primary">
+                  {realTimeDashboard.live_metrics?.interviews_scheduled_today || 0}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Interviews Scheduled
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" color="primary">
+                  {realTimeDashboard.live_metrics?.offers_pending || 0}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Pending Offers
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      )}
+
+      {/* Action Buttons */}
+      <Box sx={{ mb: 3, display: 'flex', gap: 2 }}>
+        <Button
+          variant="contained"
+          startIcon={<CreateIcon />}
+          onClick={() => setCreateReportDialogOpen(true)}
+        >
+          Create Custom Report
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<ExportIcon />}
+          onClick={() => setExportDialogOpen(true)}
+        >
+          Export Report
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<ScheduleIcon />}
+        >
+          Schedule Report
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<RefreshIcon />}
+          onClick={() => {
+            fetchAnalyticsData();
+            fetchEnhancedReportsData();
+          }}
+        >
+          Refresh Data
+        </Button>
+      </Box>
 
       {/* Summary Cards */}
       {summary && (
@@ -524,6 +826,10 @@ function Analytics() {
           <Tab label="Funnel Optimization" />
           <Tab label="Question Effectiveness" icon={<QuestionIcon />} />
           <Tab label="Seasonal Trends" icon={<CalendarIcon />} />
+          <Tab label="Executive Summary" icon={<ReportsIcon />} />
+          <Tab label="KPI Dashboard" icon={<SpeedIcon />} />
+          <Tab label="Benchmarks" icon={<BarChartIcon />} />
+          <Tab label="Custom Reports" icon={<CreateIcon />} />
         </Tabs>
       </Paper>
 
@@ -1212,6 +1518,303 @@ function Analytics() {
           )}
         </Grid>
       </TabPanel>
+      
+      {/* Executive Summary Tab */}
+      <TabPanel value={currentTab} index={11}>
+        {executiveSummary && (
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={4}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <GroupIcon /> Hiring Metrics
+                  </Typography>
+                  <Typography variant="h4" color="primary" gutterBottom>
+                    {executiveSummary.total_hires}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" gutterBottom>
+                    Total Hires
+                  </Typography>
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    {executiveSummary.total_candidates}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Total Candidates
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <SpeedIcon /> Efficiency
+                  </Typography>
+                  <Typography variant="h4" color="primary" gutterBottom>
+                    {executiveSummary.average_time_to_hire}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" gutterBottom>
+                    Avg. Time to Hire (days)
+                  </Typography>
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    {executiveSummary.interviewer_efficiency}%
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Interviewer Efficiency
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <MoneyIcon /> Cost & Quality
+                  </Typography>
+                  <Typography variant="h4" color="primary" gutterBottom>
+                    ${executiveSummary.cost_per_hire?.toLocaleString()}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" gutterBottom>
+                    Cost per Hire
+                  </Typography>
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    {executiveSummary.quality_of_hire_score}/5
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Quality of Hire
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        )}
+      </TabPanel>
+
+      {/* KPI Dashboard Tab */}
+      <TabPanel value={currentTab} index={12}>
+        {kpiDashboard && (
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Typography variant="h6" gutterBottom>Primary KPIs</Typography>
+            </Grid>
+            {kpiDashboard.primary_kpis?.map((kpi: any, index: number) => (
+              <Grid item xs={12} sm={6} md={3} key={index}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      {kpi.name}
+                    </Typography>
+                    <Typography variant="h4" color="primary" gutterBottom>
+                      {kpi.value} {kpi.unit}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" gutterBottom>
+                      Target: {kpi.target} {kpi.unit}
+                    </Typography>
+                    <Chip
+                      label={kpi.status}
+                      color={
+                        kpi.status === 'exceeding' ? 'success' :
+                        kpi.status === 'on_track' ? 'primary' : 'warning'
+                      }
+                      size="small"
+                    />
+                    <LinearProgress
+                      variant="determinate"
+                      value={(kpi.value / kpi.target) * 100}
+                      sx={{ mt: 1 }}
+                    />
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </TabPanel>
+
+      {/* Benchmarks Tab */}
+      <TabPanel value={currentTab} index={13}>
+        {benchmarks && (
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={8}>
+              <Paper sx={{ p: 3 }}>
+                <Typography variant="h6" gutterBottom>
+                  Company vs Industry Benchmarks
+                </Typography>
+                {benchmarks.company_vs_industry && (
+                  <Bar
+                    data={{
+                      labels: Object.keys(benchmarks.company_vs_industry),
+                      datasets: [
+                        {
+                          label: 'Company',
+                          data: Object.values(benchmarks.company_vs_industry).map((item: any) => item.company),
+                          backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                        },
+                        {
+                          label: 'Industry Average',
+                          data: Object.values(benchmarks.company_vs_industry).map((item: any) => item.industry),
+                          backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                        }
+                      ]
+                    }}
+                    options={chartOptions}
+                  />
+                )}
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper sx={{ p: 3 }}>
+                <Typography variant="h6" gutterBottom>
+                  Performance Summary
+                </Typography>
+                {benchmarks.company_vs_industry && Object.entries(benchmarks.company_vs_industry).map(([key, value]: [string, any]) => (
+                  <Box key={key} sx={{ mb: 2 }}>
+                    <Typography variant="body2" gutterBottom>
+                      {key.replace(/_/g, ' ').toUpperCase()}
+                    </Typography>
+                    <Chip
+                      label={value.performance}
+                      color={value.performance.includes('better') ? 'success' : 'warning'}
+                      size="small"
+                    />
+                  </Box>
+                ))}
+              </Paper>
+            </Grid>
+          </Grid>
+        )}
+      </TabPanel>
+
+      {/* Custom Reports Tab */}
+      <TabPanel value={currentTab} index={14}>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Report Name</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Frequency</TableCell>
+                <TableCell>Last Generated</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {customReports?.map((report: any) => (
+                <TableRow key={report.id}>
+                  <TableCell>{report.name}</TableCell>
+                  <TableCell>{report.description}</TableCell>
+                  <TableCell>
+                    <Chip label={report.frequency} size="small" />
+                  </TableCell>
+                  <TableCell>
+                    {new Date(report.last_generated).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>
+                    <Button size="small" startIcon={<ViewIcon />}>
+                      View
+                    </Button>
+                    <Button size="small" startIcon={<ExportIcon />}>
+                      Download
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TabPanel>
+
+      {/* Create Report Dialog */}
+      <Dialog open={createReportDialogOpen} onClose={() => setCreateReportDialogOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle>Create Custom Report</DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+            <TextField
+              fullWidth
+              label="Report Name"
+              value={reportForm.name}
+              onChange={(e) => setReportForm(prev => ({ ...prev, name: e.target.value }))}
+            />
+            <TextField
+              fullWidth
+              label="Description"
+              multiline
+              rows={3}
+              value={reportForm.description}
+              onChange={(e) => setReportForm(prev => ({ ...prev, description: e.target.value }))}
+            />
+            <FormControl fullWidth>
+              <InputLabel>Frequency</InputLabel>
+              <Select
+                value={reportForm.frequency}
+                onChange={(e) => setReportForm(prev => ({ ...prev, frequency: e.target.value }))}
+              >
+                <MenuItem value="daily">Daily</MenuItem>
+                <MenuItem value="weekly">Weekly</MenuItem>
+                <MenuItem value="monthly">Monthly</MenuItem>
+                <MenuItem value="quarterly">Quarterly</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              fullWidth
+              label="Recipients (comma-separated emails)"
+              value={reportForm.recipients}
+              onChange={(e) => setReportForm(prev => ({ ...prev, recipients: e.target.value }))}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setCreateReportDialogOpen(false)}>Cancel</Button>
+          <Button onClick={handleCreateReport} variant="contained">Create Report</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Export Dialog */}
+      <Dialog open={exportDialogOpen} onClose={() => setExportDialogOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>Export Report</DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+            <FormControl fullWidth>
+              <InputLabel>Format</InputLabel>
+              <Select
+                value={exportForm.format}
+                onChange={(e) => setExportForm(prev => ({ ...prev, format: e.target.value }))}
+              >
+                <MenuItem value="pdf">PDF</MenuItem>
+                <MenuItem value="excel">Excel</MenuItem>
+                <MenuItem value="csv">CSV</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel>Report Type</InputLabel>
+              <Select
+                value={exportForm.report_type}
+                onChange={(e) => setExportForm(prev => ({ ...prev, report_type: e.target.value }))}
+              >
+                <MenuItem value="executive_summary">Executive Summary</MenuItem>
+                <MenuItem value="detailed_metrics">Detailed Metrics</MenuItem>
+                <MenuItem value="performance_trends">Performance Trends</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel>Date Range</InputLabel>
+              <Select
+                value={exportForm.date_range}
+                onChange={(e) => setExportForm(prev => ({ ...prev, date_range: e.target.value }))}
+              >
+                <MenuItem value="1week">Last Week</MenuItem>
+                <MenuItem value="1month">Last Month</MenuItem>
+                <MenuItem value="3months">Last 3 Months</MenuItem>
+                <MenuItem value="1year">Last Year</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setExportDialogOpen(false)}>Cancel</Button>
+          <Button onClick={handleExportReport} variant="contained">Export</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
