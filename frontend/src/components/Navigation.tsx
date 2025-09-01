@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Drawer,
@@ -13,6 +13,8 @@ import {
   Divider,
   Typography,
   alpha,
+  Collapse,
+  IconButton,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -30,6 +32,7 @@ import {
   Tune as SettingsIcon,
   TrackChanges,
   BarChart as TableauIcon,
+  ExpandMore,
 } from '@mui/icons-material';
 
 export const drawerWidth = 260;
@@ -94,9 +97,26 @@ function Navigation() {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  
+  // State to track which sections are expanded
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    "Overview": true, // Overview always expanded since it's just Dashboard
+    "Candidate Management": false, 
+    "Interview Management": false,
+    "Analytics & Insights": false,
+    "AI & Assessment": false,
+    "Communication & Settings": false,
+  });
 
   const handleNavigation = (path: string) => {
     navigate(path);
+  };
+
+  const toggleSection = (sectionTitle: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionTitle]: !prev[sectionTitle]
+    }));
   };
 
   return (
@@ -120,7 +140,7 @@ function Navigation() {
       <Box sx={{
         overflow: 'auto',
         height: '100%',
-        pt: '64px',
+        pt: '8px', 
         '&::-webkit-scrollbar': {
           width: '6px',
         },
@@ -130,7 +150,7 @@ function Navigation() {
         },
       }}>
         <Box sx={{
-          padding: '24px',
+          padding: '24px', 
           borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
           marginBottom: '8px',
           display: 'flex',
@@ -178,59 +198,110 @@ function Navigation() {
         <List sx={{ p: '8px' }}>
           {navigationSections.map((section, sectionIndex) => (
             <React.Fragment key={section.title}>
-              <ListItem sx={{ pt: sectionIndex === 0 ? 0 : 2, pb: 1 }}>
-                <Typography 
-                  variant="caption" 
-                  sx={{ 
-                    color: theme.palette.text.secondary,
-                    fontWeight: 600,
-                    letterSpacing: '0.8px',
-                    paddingLeft: '16px',
-                    textTransform: 'uppercase',
+              {/* Section Header - Clickable to expand/collapse */}
+              <ListItem disablePadding>
+                <ListItemButton
+                  onClick={() => toggleSection(section.title)}
+                  sx={{
+                    py: 1.5,
+                    px: 2,
+                    borderRadius: '8px',
+                    mb: 0.5,
+                    '&:hover': {
+                      backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                    },
                   }}
                 >
-                  {section.title}
-                </Typography>
+                  <ListItemText 
+                    primary={
+                      <Typography 
+                        variant="subtitle2" 
+                        sx={{ 
+                          color: theme.palette.text.primary,
+                          fontWeight: 600,
+                          letterSpacing: '0.5px',
+                          fontSize: '0.85rem',
+                        }}
+                      >
+                        {section.title}
+                      </Typography>
+                    }
+                  />
+                  <IconButton
+                    size="small"
+                    sx={{
+                      color: theme.palette.text.secondary,
+                      transition: 'transform 0.2s ease',
+                      transform: expandedSections[section.title] ? 'rotate(0deg)' : 'rotate(-90deg)',
+                    }}
+                  >
+                    <ExpandMore fontSize="small" />
+                  </IconButton>
+                </ListItemButton>
               </ListItem>
               
-              {section.items.map((item, itemIndex) => (
-                <ListItem key={item.text} disablePadding>
-                  <ListItemButton
-                    selected={location.pathname === item.path}
-                    onClick={() => handleNavigation(item.path)}
-                  >
-                    <ListItemIcon 
-                      sx={{ 
-                        color: location.pathname === item.path 
-                          ? theme.palette.primary.main 
-                          : alpha(theme.palette.text.secondary, 0.7),
-                        minWidth: 40,
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        transform: location.pathname === item.path ? 'scale(1.1)' : 'scale(1)',
-                      }}
-                    >
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText 
-                      primary={item.text} 
-                      sx={{
-                        '& .MuiTypography-root': {
-                          fontWeight: location.pathname === item.path ? 600 : 500,
-                          color: location.pathname === item.path 
-                            ? theme.palette.text.primary
-                            : theme.palette.text.secondary,
-                          fontSize: '0.9rem',
-                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        }
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              ))}
+              {/* Collapsible Section Items */}
+              <Collapse in={expandedSections[section.title]} timeout={300}>
+                <List component="div" disablePadding sx={{ pl: 1 }}>
+                  {section.items.map((item) => (
+                    <ListItem key={item.text} disablePadding>
+                      <ListItemButton
+                        selected={location.pathname === item.path}
+                        onClick={() => handleNavigation(item.path)}
+                        sx={{
+                          py: 1,
+                          px: 2,
+                          borderRadius: '6px',
+                          mb: 0.5,
+                          transition: 'all 0.2s ease',
+                          '&:hover': {
+                            backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                            transform: 'translateX(4px)',
+                          },
+                          '&.Mui-selected': {
+                            backgroundColor: alpha(theme.palette.primary.main, 0.12),
+                            borderLeft: `3px solid ${theme.palette.primary.main}`,
+                            '&:hover': {
+                              backgroundColor: alpha(theme.palette.primary.main, 0.16),
+                            },
+                          },
+                        }}
+                      >
+                        <ListItemIcon 
+                          sx={{ 
+                            color: location.pathname === item.path 
+                              ? theme.palette.primary.main 
+                              : alpha(theme.palette.text.secondary, 0.7),
+                            minWidth: 36,
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            transform: location.pathname === item.path ? 'scale(1.1)' : 'scale(1)',
+                          }}
+                        >
+                          {item.icon}
+                        </ListItemIcon>
+                        <ListItemText 
+                          primary={item.text} 
+                          sx={{
+                            '& .MuiTypography-root': {
+                              fontWeight: location.pathname === item.path ? 600 : 500,
+                              color: location.pathname === item.path 
+                                ? theme.palette.text.primary
+                                : theme.palette.text.secondary,
+                              fontSize: '0.875rem',
+                              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            }
+                          }}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
               
+              {/* Divider between sections */}
               {sectionIndex < navigationSections.length - 1 && (
                 <Divider sx={{ 
-                  margin: '16px',
+                  margin: '8px',
                   backgroundColor: alpha(theme.palette.divider, 0.08),
                 }} />
               )}
