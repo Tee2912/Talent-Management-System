@@ -29,6 +29,7 @@ import {
   MarkunreadMailbox as EmailIcon,
   Tune as SettingsIcon,
   TrackChanges,
+  BarChart as TableauIcon,
 } from '@mui/icons-material';
 
 export const drawerWidth = 260;
@@ -69,6 +70,7 @@ const navigationSections: NavigationSection[] = [
     title: "Analytics & Insights",
     items: [
       { text: 'Analytics Dashboard', icon: <AnalyticsIcon />, path: '/analytics' },
+      { text: 'Hiring Analytics', icon: <TableauIcon />, path: '/hiring-analytics' },
     ]
   },
   {

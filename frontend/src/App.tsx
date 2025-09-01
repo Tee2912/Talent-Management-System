@@ -8,6 +8,7 @@ import Candidates from './pages/Candidates';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import InterviewManagement from './pages/InterviewManagement';
 import ConsolidatedAnalytics from './pages/ConsolidatedAnalytics';
+import HiringAnalytics from './pages/HiringAnalytics';
 import PersonalityEvaluation from './pages/PersonalityEvaluation';
 import AICopilot from './pages/AICopilot';
 import Settings from './pages/Settings';
@@ -37,26 +38,40 @@ function App() {
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Tooltip title="Notifications">
-              <IconButton color="inherit" size="large" sx={{
-                transition: 'transform 0.2s ease',
-                '&:hover': { transform: 'translateY(-2px) rotate(-2deg)' }
-              }}>
+              <IconButton 
+                size="large" 
+                sx={{
+                  color: theme.palette.mode === 'dark' ? 'white' : 'text.primary',
+                  transition: 'transform 0.2s ease',
+                  '&:hover': { transform: 'translateY(-2px) rotate(-2deg)' }
+                }}
+              >
                 <NotificationsNone />
               </IconButton>
             </Tooltip>
             <Tooltip title="Help & Shortcuts">
-              <IconButton color="inherit" size="large" sx={{
-                transition: 'transform 0.2s ease',
-                '&:hover': { transform: 'translateY(-2px) rotate(2deg)' }
-              }}>
+              <IconButton 
+                size="large" 
+                sx={{
+                  color: theme.palette.mode === 'dark' ? 'white' : 'text.primary',
+                  transition: 'transform 0.2s ease',
+                  '&:hover': { transform: 'translateY(-2px) rotate(2deg)' }
+                }}
+              >
                 <HelpOutline />
               </IconButton>
             </Tooltip>
             <Tooltip title={theme.palette.mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-              <IconButton onClick={colorMode.toggleColorMode} color="inherit" size="large" aria-label="toggle theme" sx={{
-                transition: 'transform 0.2s ease',
-                '&:hover': { transform: 'translateY(-2px) scale(1.05)' }
-              }}>
+              <IconButton 
+                onClick={colorMode.toggleColorMode} 
+                size="large" 
+                aria-label="toggle theme" 
+                sx={{
+                  color: theme.palette.mode === 'dark' ? 'white' : 'text.primary',
+                  transition: 'transform 0.2s ease',
+                  '&:hover': { transform: 'translateY(-2px) scale(1.05)' }
+                }}
+              >
                 {theme.palette.mode === 'dark' ? <LightMode /> : <DarkMode />}
               </IconButton>
             </Tooltip>
@@ -82,6 +97,7 @@ function App() {
               <Route path="/calendar" element={<CalendarIntegration />} />
               <Route path="/interview-feedback" element={<InterviewFeedback />} />
               <Route path="/analytics" element={<ConsolidatedAnalytics />} />
+              <Route path="/hiring-analytics" element={<HiringAnalytics />} />
               <Route path="/advanced-analytics" element={<ConsolidatedAnalytics />} />
               <Route path="/reports" element={<ConsolidatedAnalytics />} />
               <Route path="/ai-copilot" element={<AICopilot />} />
