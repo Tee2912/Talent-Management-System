@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import candidates, analytics, bias_detection, personality, chat, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration, resume_analyzer, ai_copilot
+from app.api import candidates, analytics, bias_detection, personality, chat, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration, resume_analyzer, ai_copilot, enhanced_personality
 from app.config import settings
 
 app = FastAPI(
@@ -24,6 +24,7 @@ app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytic
 app.include_router(advanced_analytics.router, tags=["advanced-analytics"])
 app.include_router(bias_detection.router, prefix="/api/v1/bias", tags=["bias-detection"])
 app.include_router(personality.router, prefix="/api/v1/personality", tags=["personality"])
+app.include_router(enhanced_personality.router, prefix="/api/personality", tags=["enhanced-personality"])
 app.include_router(chat.router, prefix="/api/v1/chat", tags=["ai-chat"])
 app.include_router(interviews.router, prefix="/api/v1/interviews", tags=["interviews"])
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["notifications"])

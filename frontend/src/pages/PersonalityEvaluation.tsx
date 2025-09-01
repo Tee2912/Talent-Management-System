@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -6,43 +6,43 @@ import {
   Paper,
   Card,
   CardContent,
-  TextField,
   Button,
-  Select,
-  MenuItem,
-  FormControl,
-  Chip,
   LinearProgress,
   Alert,
   Tabs,
   Tab,
-  Table,
-  TableBody,
-  TableCell,
+  TextField,
   TableContainer,
+  Table,
   TableHead,
   TableRow,
+  TableCell,
+  TableBody,
   Avatar,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
+  Chip,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-} from '@mui/material';
+  FormControl,
+  Select,
+  MenuItem,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from "@mui/material";
 import {
   Psychology,
   Person,
-  Search,
   Assessment,
   TrendingUp,
   Insights,
-  AutoAwesome,
+  Search,
   CheckCircle,
   Info,
-} from '@mui/icons-material';
+  AutoAwesome,
+} from "@mui/icons-material";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -83,48 +83,141 @@ interface Candidate {
 }
 
 const mbtiQuestions = [
-  { id: 1, question: "I prefer to work in teams rather than alone", dimension: "E" },
-  { id: 2, question: "I focus on details and facts rather than possibilities", dimension: "S" },
-  { id: 3, question: "I make decisions based on logic rather than feelings", dimension: "T" },
-  { id: 4, question: "I prefer to have things planned and organized", dimension: "J" },
-  { id: 5, question: "I enjoy meeting new people and socializing", dimension: "E" },
+  {
+    id: 1,
+    question: "I prefer to work in teams rather than alone",
+    dimension: "E",
+  },
+  {
+    id: 2,
+    question: "I focus on details and facts rather than possibilities",
+    dimension: "S",
+  },
+  {
+    id: 3,
+    question: "I make decisions based on logic rather than feelings",
+    dimension: "T",
+  },
+  {
+    id: 4,
+    question: "I prefer to have things planned and organized",
+    dimension: "J",
+  },
+  {
+    id: 5,
+    question: "I enjoy meeting new people and socializing",
+    dimension: "E",
+  },
   { id: 6, question: "I trust my hunches and intuition", dimension: "N" },
-  { id: 7, question: "I consider the impact on people when making decisions", dimension: "F" },
-  { id: 8, question: "I prefer to keep my options open and be flexible", dimension: "P" },
-  { id: 9, question: "I feel energized after social interactions", dimension: "E" },
-  { id: 10, question: "I like to explore new ideas and concepts", dimension: "N" },
-  { id: 11, question: "I value fairness and logical consistency", dimension: "T" },
-  { id: 12, question: "I like to finish projects before starting new ones", dimension: "J" },
+  {
+    id: 7,
+    question: "I consider the impact on people when making decisions",
+    dimension: "F",
+  },
+  {
+    id: 8,
+    question: "I prefer to keep my options open and be flexible",
+    dimension: "P",
+  },
+  {
+    id: 9,
+    question: "I feel energized after social interactions",
+    dimension: "E",
+  },
+  {
+    id: 10,
+    question: "I like to explore new ideas and concepts",
+    dimension: "N",
+  },
+  {
+    id: 11,
+    question: "I value fairness and logical consistency",
+    dimension: "T",
+  },
+  {
+    id: 12,
+    question: "I like to finish projects before starting new ones",
+    dimension: "J",
+  },
 ];
 
 const mbtiTypes = {
-  "INTJ": { name: "The Architect", description: "Strategic, analytical, and independent" },
-  "INTP": { name: "The Thinker", description: "Logical, analytical, and innovative" },
-  "ENTJ": { name: "The Commander", description: "Natural leaders, strategic and assertive" },
-  "ENTP": { name: "The Debater", description: "Innovative, enthusiastic, and strategic" },
-  "INFJ": { name: "The Advocate", description: "Creative, insightful, and principled" },
-  "INFP": { name: "The Mediator", description: "Idealistic, creative, and caring" },
-  "ENFJ": { name: "The Protagonist", description: "Charismatic, inspiring, and empathetic" },
-  "ENFP": { name: "The Campaigner", description: "Enthusiastic, creative, and sociable" },
-  "ISTJ": { name: "The Logistician", description: "Practical, fact-minded, and reliable" },
-  "ISFJ": { name: "The Protector", description: "Warm, responsible, and conscientious" },
-  "ESTJ": { name: "The Executive", description: "Organized, practical, and decisive" },
-  "ESFJ": { name: "The Consul", description: "Caring, social, and community-minded" },
-  "ISTP": { name: "The Virtuoso", description: "Bold, practical, and adaptable" },
-  "ISFP": { name: "The Adventurer", description: "Flexible, charming, and artistic" },
-  "ESTP": { name: "The Entrepreneur", description: "Bold, perceptive, and direct" },
-  "ESFP": { name: "The Entertainer", description: "Spontaneous, energetic, and enthusiastic" },
+  INTJ: {
+    name: "The Architect",
+    description: "Strategic, analytical, and independent",
+  },
+  INTP: {
+    name: "The Thinker",
+    description: "Logical, analytical, and innovative",
+  },
+  ENTJ: {
+    name: "The Commander",
+    description: "Natural leaders, strategic and assertive",
+  },
+  ENTP: {
+    name: "The Debater",
+    description: "Innovative, enthusiastic, and strategic",
+  },
+  INFJ: {
+    name: "The Advocate",
+    description: "Creative, insightful, and principled",
+  },
+  INFP: {
+    name: "The Mediator",
+    description: "Idealistic, creative, and caring",
+  },
+  ENFJ: {
+    name: "The Protagonist",
+    description: "Charismatic, inspiring, and empathetic",
+  },
+  ENFP: {
+    name: "The Campaigner",
+    description: "Enthusiastic, creative, and sociable",
+  },
+  ISTJ: {
+    name: "The Logistician",
+    description: "Practical, fact-minded, and reliable",
+  },
+  ISFJ: {
+    name: "The Protector",
+    description: "Warm, responsible, and conscientious",
+  },
+  ESTJ: {
+    name: "The Executive",
+    description: "Organized, practical, and decisive",
+  },
+  ESFJ: {
+    name: "The Consul",
+    description: "Caring, social, and community-minded",
+  },
+  ISTP: { name: "The Virtuoso", description: "Bold, practical, and adaptable" },
+  ISFP: {
+    name: "The Adventurer",
+    description: "Flexible, charming, and artistic",
+  },
+  ESTP: {
+    name: "The Entrepreneur",
+    description: "Bold, perceptive, and direct",
+  },
+  ESFP: {
+    name: "The Entertainer",
+    description: "Spontaneous, energetic, and enthusiastic",
+  },
 };
 
 function PersonalityEvaluation() {
   const [currentTab, setCurrentTab] = useState(0);
   const [candidates, setCandidates] = useState<Candidate[]>([]);
-  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [assessmentOpen, setAssessmentOpen] = useState(false);
-  const [assessmentResponses, setAssessmentResponses] = useState<Record<string, number>>({});
-  const [searchTerm, setSearchTerm] = useState('');
+  const [assessmentResponses, setAssessmentResponses] = useState<
+    Record<string, number>
+  >({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchCandidates();
@@ -133,15 +226,16 @@ function PersonalityEvaluation() {
   const fetchCandidates = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/v1/candidates/');
+      const response = await fetch("/api/v1/candidates/");
       if (response.ok) {
         const data = await response.json();
         setCandidates(data);
       } else {
-        throw new Error('Failed to fetch candidates');
+        throw new Error("Failed to fetch candidates");
       }
     } catch (error) {
-      const errorMessage = (error as Error)?.message || 'Failed to fetch candidates';
+      const errorMessage =
+        (error as Error)?.message || "Failed to fetch candidates";
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -159,9 +253,9 @@ function PersonalityEvaluation() {
   };
 
   const handleAssessmentResponse = (questionId: string, value: number) => {
-    setAssessmentResponses(prev => ({
+    setAssessmentResponses((prev) => ({
       ...prev,
-      [questionId]: value
+      [questionId]: value,
     }));
   };
 
@@ -169,52 +263,60 @@ function PersonalityEvaluation() {
     if (!selectedCandidate) return;
 
     try {
-      const response = await fetch('/api/v1/personality/assess', {
-        method: 'POST',
+      const response = await fetch("/api/v1/personality/assess", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           candidate_id: selectedCandidate.id,
-          responses: assessmentResponses
-        })
+          responses: assessmentResponses,
+        }),
       });
 
       if (response.ok) {
         const result = await response.json();
-        
+
         // Update candidate with MBTI results
         const updatedCandidate = {
           ...selectedCandidate,
           mbti_type: result.result.mbti_type,
           personality_scores: result.result.personality_scores,
           personality_traits: result.result.personality_traits,
-          assessment_date: new Date().toISOString()
+          assessment_date: new Date().toISOString(),
         };
 
         // Update local state
-        setCandidates(prev => 
-          prev.map(c => c.id === selectedCandidate.id ? updatedCandidate : c)
+        setCandidates((prev) =>
+          prev.map((c) =>
+            c.id === selectedCandidate.id ? updatedCandidate : c
+          )
         );
 
         setAssessmentOpen(false);
         setSelectedCandidate(null);
       } else {
-        throw new Error('Failed to submit assessment');
+        throw new Error("Failed to submit assessment");
       }
     } catch (error) {
-      const errorMessage = (error as Error)?.message || 'Failed to submit assessment';
+      const errorMessage =
+        (error as Error)?.message || "Failed to submit assessment";
       setError(errorMessage);
     }
   };
 
-  const filteredCandidates = candidates.filter(candidate =>
-    `${candidate.first_name} ${candidate.last_name}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    candidate.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    candidate.position_applied.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCandidates = candidates.filter(
+    (candidate) =>
+      `${candidate.first_name} ${candidate.last_name}`
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      candidate.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      candidate.position_applied
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
   );
 
-  const candidatesWithMBTI = candidates.filter(c => c.mbti_type);
+  const candidatesWithMBTI = candidates.filter((c) => c.mbti_type);
   const mbtiDistribution = candidatesWithMBTI.reduce((acc, candidate) => {
     const type = candidate.mbti_type!;
     acc[type] = (acc[type] || 0) + 1;
@@ -223,7 +325,7 @@ function PersonalityEvaluation() {
 
   if (loading) {
     return (
-      <Box sx={{ ml: '240px', p: 3 }}>
+      <Box sx={{ ml: "240px", p: 3 }}>
         <LinearProgress />
         <Typography sx={{ mt: 2 }}>Loading candidates...</Typography>
       </Box>
@@ -232,8 +334,12 @@ function PersonalityEvaluation() {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-        <Psychology sx={{ mr: 2, color: 'primary.main' }} />
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Psychology sx={{ mr: 2, color: "primary.main" }} />
         Personality Evaluation (MBTI)
       </Typography>
 
@@ -248,11 +354,13 @@ function PersonalityEvaluation() {
         <Grid item xs={12} sm={6} md={3}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Person sx={{ mr: 2, color: 'primary.main', fontSize: 40 }} />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Person sx={{ mr: 2, color: "primary.main", fontSize: 40 }} />
                 <Box>
                   <Typography variant="h4">{candidates.length}</Typography>
-                  <Typography color="textSecondary">Total Candidates</Typography>
+                  <Typography color="textSecondary">
+                    Total Candidates
+                  </Typography>
                 </Box>
               </Box>
             </CardContent>
@@ -261,10 +369,14 @@ function PersonalityEvaluation() {
         <Grid item xs={12} sm={6} md={3}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Assessment sx={{ mr: 2, color: 'success.main', fontSize: 40 }} />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Assessment
+                  sx={{ mr: 2, color: "success.main", fontSize: 40 }}
+                />
                 <Box>
-                  <Typography variant="h4">{candidatesWithMBTI.length}</Typography>
+                  <Typography variant="h4">
+                    {candidatesWithMBTI.length}
+                  </Typography>
                   <Typography color="textSecondary">Assessed</Typography>
                 </Box>
               </Box>
@@ -274,11 +386,16 @@ function PersonalityEvaluation() {
         <Grid item xs={12} sm={6} md={3}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <TrendingUp sx={{ mr: 2, color: 'info.main', fontSize: 40 }} />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <TrendingUp sx={{ mr: 2, color: "info.main", fontSize: 40 }} />
                 <Box>
                   <Typography variant="h4">
-                    {candidates.length > 0 ? Math.round((candidatesWithMBTI.length / candidates.length) * 100) : 0}%
+                    {candidates.length > 0
+                      ? Math.round(
+                          (candidatesWithMBTI.length / candidates.length) * 100
+                        )
+                      : 0}
+                    %
                   </Typography>
                   <Typography color="textSecondary">Completion Rate</Typography>
                 </Box>
@@ -289,10 +406,12 @@ function PersonalityEvaluation() {
         <Grid item xs={12} sm={6} md={3}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Insights sx={{ mr: 2, color: 'warning.main', fontSize: 40 }} />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Insights sx={{ mr: 2, color: "warning.main", fontSize: 40 }} />
                 <Box>
-                  <Typography variant="h4">{Object.keys(mbtiDistribution).length}</Typography>
+                  <Typography variant="h4">
+                    {Object.keys(mbtiDistribution).length}
+                  </Typography>
                   <Typography color="textSecondary">Unique Types</Typography>
                 </Box>
               </Box>
@@ -302,7 +421,7 @@ function PersonalityEvaluation() {
       </Grid>
 
       {/* Tabs */}
-      <Paper sx={{ width: '100%', mb: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
         <Tabs
           value={currentTab}
           onChange={handleTabChange}
@@ -320,7 +439,14 @@ function PersonalityEvaluation() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper sx={{ p: 3 }}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mb: 3,
+                }}
+              >
                 <Typography variant="h6">Candidate List</Typography>
                 <TextField
                   size="small"
@@ -328,12 +454,14 @@ function PersonalityEvaluation() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   InputProps={{
-                    startAdornment: <Search sx={{ color: 'action.active', mr: 1 }} />
+                    startAdornment: (
+                      <Search sx={{ color: "action.active", mr: 1 }} />
+                    ),
                   }}
                   sx={{ minWidth: 300 }}
                 />
               </Box>
-              
+
               <TableContainer>
                 <Table>
                   <TableHead>
@@ -349,9 +477,10 @@ function PersonalityEvaluation() {
                     {filteredCandidates.map((candidate) => (
                       <TableRow key={candidate.id}>
                         <TableCell>
-                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Avatar sx={{ mr: 2, bgcolor: 'primary.main' }}>
-                              {candidate.first_name[0]}{candidate.last_name[0]}
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Avatar sx={{ mr: 2, bgcolor: "primary.main" }}>
+                              {candidate.first_name[0]}
+                              {candidate.last_name[0]}
                             </Avatar>
                             <Box>
                               <Typography variant="subtitle2">
@@ -376,19 +505,22 @@ function PersonalityEvaluation() {
                           )}
                         </TableCell>
                         <TableCell>
-                          {candidate.assessment_date ? 
-                            new Date(candidate.assessment_date).toLocaleDateString() : 
-                            '-'
-                          }
+                          {candidate.assessment_date
+                            ? new Date(
+                                candidate.assessment_date
+                              ).toLocaleDateString()
+                            : "-"}
                         </TableCell>
                         <TableCell>
                           <Button
-                            variant={candidate.mbti_type ? "outlined" : "contained"}
+                            variant={
+                              candidate.mbti_type ? "outlined" : "contained"
+                            }
                             size="small"
                             onClick={() => startAssessment(candidate)}
                             startIcon={<Psychology />}
                           >
-                            {candidate.mbti_type ? 'Re-assess' : 'Assess'}
+                            {candidate.mbti_type ? "Re-assess" : "Assess"}
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -408,9 +540,10 @@ function PersonalityEvaluation() {
             <Grid item xs={12} md={6} lg={4} key={candidate.id}>
               <Card>
                 <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Avatar sx={{ mr: 2, bgcolor: 'primary.main' }}>
-                      {candidate.first_name[0]}{candidate.last_name[0]}
+                  <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                    <Avatar sx={{ mr: 2, bgcolor: "primary.main" }}>
+                      {candidate.first_name[0]}
+                      {candidate.last_name[0]}
                     </Avatar>
                     <Box>
                       <Typography variant="h6">
@@ -421,36 +554,46 @@ function PersonalityEvaluation() {
                       </Typography>
                     </Box>
                   </Box>
-                  
+
                   <Chip
                     label={candidate.mbti_type}
                     color="primary"
                     sx={{ mb: 2 }}
                   />
-                  
+
                   {candidate.personality_traits && (
                     <Typography variant="body2" sx={{ mb: 2 }}>
                       {candidate.personality_traits[1]}
                     </Typography>
                   )}
-                  
+
                   {candidate.personality_scores && (
                     <Box>
-                      {Object.entries(candidate.personality_scores).map(([trait, score]) => (
-                        <Box key={trait} sx={{ mb: 1 }}>
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
-                              {trait}
-                            </Typography>
-                            <Typography variant="body2">{score}%</Typography>
+                      {Object.entries(candidate.personality_scores).map(
+                        ([trait, score]) => (
+                          <Box key={trait} sx={{ mb: 1 }}>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Typography
+                                variant="body2"
+                                sx={{ textTransform: "capitalize" }}
+                              >
+                                {trait}
+                              </Typography>
+                              <Typography variant="body2">{score}%</Typography>
+                            </Box>
+                            <LinearProgress
+                              variant="determinate"
+                              value={score}
+                              sx={{ height: 6, borderRadius: 3 }}
+                            />
                           </Box>
-                          <LinearProgress
-                            variant="determinate"
-                            value={score}
-                            sx={{ height: 6, borderRadius: 3 }}
-                          />
-                        </Box>
-                      ))}
+                        )
+                      )}
                     </Box>
                   )}
                 </CardContent>
@@ -471,12 +614,20 @@ function PersonalityEvaluation() {
               {Object.entries(mbtiDistribution).map(([type, count]) => {
                 const typeInfo = mbtiTypes[type as keyof typeof mbtiTypes];
                 const percentage = (count / candidatesWithMBTI.length) * 100;
-                
+
                 return (
                   <Box key={type} sx={{ mb: 2 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        mb: 1,
+                      }}
+                    >
                       <Box>
-                        <Typography variant="subtitle2">{type} - {typeInfo.name}</Typography>
+                        <Typography variant="subtitle2">
+                          {type} - {typeInfo.name}
+                        </Typography>
                         <Typography variant="body2" color="textSecondary">
                           {typeInfo.description}
                         </Typography>
@@ -495,7 +646,7 @@ function PersonalityEvaluation() {
               })}
             </Paper>
           </Grid>
-          
+
           <Grid item xs={12} md={4}>
             <Paper sx={{ p: 3 }}>
               <Typography variant="h6" gutterBottom>
@@ -511,7 +662,7 @@ function PersonalityEvaluation() {
                     secondary={`${candidatesWithMBTI.length} of ${candidates.length} candidates`}
                   />
                 </ListItem>
-                
+
                 {Object.keys(mbtiDistribution).length > 0 && (
                   <ListItem>
                     <ListItemIcon>
@@ -519,18 +670,24 @@ function PersonalityEvaluation() {
                     </ListItemIcon>
                     <ListItemText
                       primary="Most Common Type"
-                      secondary={Object.entries(mbtiDistribution).sort((a, b) => b[1] - a[1])[0][0]}
+                      secondary={
+                        Object.entries(mbtiDistribution).sort(
+                          (a, b) => b[1] - a[1]
+                        )[0][0]
+                      }
                     />
                   </ListItem>
                 )}
-                
+
                 <ListItem>
                   <ListItemIcon>
                     <TrendingUp color="primary" />
                   </ListItemIcon>
                   <ListItemText
                     primary="Personality Diversity"
-                    secondary={`${Object.keys(mbtiDistribution).length} different types identified`}
+                    secondary={`${
+                      Object.keys(mbtiDistribution).length
+                    } different types identified`}
                   />
                 </ListItem>
               </List>
@@ -547,22 +704,24 @@ function PersonalityEvaluation() {
         fullWidth
       >
         <DialogTitle>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <Psychology sx={{ mr: 2 }} />
             MBTI Personality Assessment
           </Box>
           {selectedCandidate && (
             <Typography variant="subtitle2" color="textSecondary">
-              {selectedCandidate.first_name} {selectedCandidate.last_name} - {selectedCandidate.position_applied}
+              {selectedCandidate.first_name} {selectedCandidate.last_name} -{" "}
+              {selectedCandidate.position_applied}
             </Typography>
           )}
         </DialogTitle>
-        
+
         <DialogContent>
           <Typography variant="body2" color="textSecondary" sx={{ mb: 3 }}>
-            Please rate each statement from 1 (Strongly Disagree) to 5 (Strongly Agree)
+            Please rate each statement from 1 (Strongly Disagree) to 5 (Strongly
+            Agree)
           </Typography>
-          
+
           {mbtiQuestions.map((question) => (
             <Box key={question.id} sx={{ mb: 3 }}>
               <Typography variant="body1" sx={{ mb: 1 }}>
@@ -570,8 +729,13 @@ function PersonalityEvaluation() {
               </Typography>
               <FormControl fullWidth size="small">
                 <Select
-                  value={assessmentResponses[question.id.toString()] || ''}
-                  onChange={(e) => handleAssessmentResponse(question.id.toString(), Number(e.target.value))}
+                  value={assessmentResponses[question.id.toString()] || ""}
+                  onChange={(e) =>
+                    handleAssessmentResponse(
+                      question.id.toString(),
+                      Number(e.target.value)
+                    )
+                  }
                 >
                   <MenuItem value={1}>1 - Strongly Disagree</MenuItem>
                   <MenuItem value={2}>2 - Disagree</MenuItem>
@@ -583,13 +747,15 @@ function PersonalityEvaluation() {
             </Box>
           ))}
         </DialogContent>
-        
+
         <DialogActions>
           <Button onClick={() => setAssessmentOpen(false)}>Cancel</Button>
           <Button
             onClick={submitAssessment}
             variant="contained"
-            disabled={Object.keys(assessmentResponses).length < mbtiQuestions.length}
+            disabled={
+              Object.keys(assessmentResponses).length < mbtiQuestions.length
+            }
             startIcon={<AutoAwesome />}
           >
             Calculate MBTI Type
