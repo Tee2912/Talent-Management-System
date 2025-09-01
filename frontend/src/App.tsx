@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Container, Box, IconButton, Tooltip, useTheme } from '@mui/material';
 import { DarkMode, LightMode, NotificationsNone, HelpOutline, TrackChanges } from '@mui/icons-material';
 import PageTransition from './components/PageTransition';
-import Dashboard from './pages/Dashboard';
+import DashboardPersonalized from './pages/DashboardPersonalized';
 import Candidates from './pages/Candidates';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import InterviewManagement from './pages/InterviewManagement';
@@ -89,7 +89,7 @@ function App() {
         <Container maxWidth="xl" sx={{ py: 3 }}>
           <PageTransition animation="fadeUp">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<DashboardPersonalized />} />
               <Route path="/candidates" element={<Candidates />} />
               <Route path="/candidate-chat" element={<CandidateChat />} />
               <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />

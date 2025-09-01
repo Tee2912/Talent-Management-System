@@ -17,8 +17,8 @@ import {
   IconButton,
 } from '@mui/material';
 import {
-  Dashboard as DashboardIcon,
   PeopleAlt as PeopleIcon,
+  Home as HomeIcon,
   Assessment as AnalyticsIcon,
   Event as ScheduleIcon,
   AutoAwesome as AIIcon,
@@ -47,12 +47,6 @@ interface NavigationSection {
 }
 
 const navigationSections: NavigationSection[] = [
-  {
-    title: "Overview",
-    items: [
-      { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
-    ]
-  },
   {
     title: "Candidate Management",
     items: [
@@ -100,7 +94,6 @@ function Navigation() {
   
   // State to track which sections are expanded
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    "Overview": true, // Overview always expanded since it's just Dashboard
     "Candidate Management": false, 
     "Interview Management": false,
     "Analytics & Insights": false,
@@ -196,6 +189,62 @@ function Navigation() {
         </Box>
         
         <List sx={{ p: '8px' }}>
+          {/* Standalone Home Item */}
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={location.pathname === '/'}
+              onClick={() => handleNavigation('/')}
+              sx={{
+                py: 1.5,
+                px: 2,
+                borderRadius: '8px',
+                mb: 1,
+                transition: 'all 0.2s ease',
+                '&:hover': {
+                  backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                  transform: 'translateX(4px)',
+                },
+                '&.Mui-selected': {
+                  backgroundColor: alpha(theme.palette.primary.main, 0.12),
+                  borderLeft: `3px solid ${theme.palette.primary.main}`,
+                  '&:hover': {
+                    backgroundColor: alpha(theme.palette.primary.main, 0.16),
+                  },
+                },
+              }}
+            >
+              <ListItemIcon 
+                sx={{ 
+                  color: location.pathname === '/' 
+                    ? theme.palette.primary.main 
+                    : alpha(theme.palette.text.secondary, 0.7),
+                  minWidth: 36,
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transform: location.pathname === '/' ? 'scale(1.1)' : 'scale(1)',
+                }}
+              >
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText 
+                primary={
+                  <Typography 
+                    variant="body2" 
+                    sx={{ 
+                      color: location.pathname === '/' 
+                        ? theme.palette.primary.main 
+                        : theme.palette.text.primary,
+                      fontWeight: location.pathname === '/' ? 600 : 500,
+                      fontSize: '0.9rem',
+                    }}
+                  >
+                    Home
+                  </Typography>
+                }
+              />
+            </ListItemButton>
+          </ListItem>
+          
+          {/* Collapsible Sections */}
           {navigationSections.map((section, sectionIndex) => (
             <React.Fragment key={section.title}>
               {/* Section Header - Clickable to expand/collapse */}
