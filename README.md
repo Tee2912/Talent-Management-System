@@ -44,7 +44,7 @@ hireiq-pro/
 ## Technology Stack
 
 **Backend:**
-- Python 3.13
+- Python 3.11
 - FastAPI
 - scikit-learn, pandas, NumPy
 - LangChain, Langfuse for AI orchestration
@@ -60,7 +60,7 @@ hireiq-pro/
 ## Getting Started
 
 ### Prerequisites
-- Python 3.9+
+- Python 3.11
 - Node.js 16+
 - Docker and Docker Compose (optional, for containerized setup)
 
