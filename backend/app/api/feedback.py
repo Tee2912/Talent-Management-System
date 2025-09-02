@@ -167,6 +167,29 @@ async def get_feedback_templates():
         "templates": FEEDBACK_DATA["feedback_templates"]
     }
 
+@router.get("/history")
+async def get_feedback_history(limit: int = 20):
+    """Get feedback history with optional limit"""
+    try:
+        # Get all feedback entries
+        all_feedback = FEEDBACK_DATA.get("feedback_entries", [])
+        
+        # Sort by date (most recent first) and limit
+        sorted_feedback = sorted(all_feedback, 
+                               key=lambda x: x.get("created_at", ""), 
+                               reverse=True)
+        limited_feedback = sorted_feedback[:limit]
+        
+        return {
+            "success": True,
+            "data": limited_feedback,
+            "total": len(all_feedback),
+            "limit": limit,
+            "returned": len(limited_feedback)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error retrieving feedback history: {str(e)}")
+
 @router.post("/templates")
 async def create_feedback_template(template_data: Dict[str, Any]):
     """Create a new feedback template"""

@@ -4,20 +4,45 @@ from app.models.schemas import Candidate, CandidateCreate, CandidateUpdate
 import json
 import os
 from datetime import datetime
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
+# Debug route to test if router is working
+@router.get("/debug", response_model=dict)
+async def debug_candidates():
+    """Debug endpoint to test router connectivity"""
+    logger.info("DEBUG endpoint called")
+    return {"message": "Candidates router is working", "data_file": DATA_FILE, "file_exists": os.path.exists(DATA_FILE)}
+
 # Simple file-based storage for demo (replace with database in production)
-DATA_FILE = "candidates.json"
+DATA_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "candidates.json")
+
+# Log the file path for debugging
+logger.info(f"Candidates DATA_FILE path: {DATA_FILE}")
+logger.info(f"Candidates file exists: {os.path.exists(DATA_FILE)}")
+if os.path.exists(DATA_FILE):
+    logger.info(f"Candidates file size: {os.path.getsize(DATA_FILE)} bytes")
 
 def load_candidates() -> List[dict]:
     """Load candidates from JSON file"""
+    logger.info(f"Loading candidates from: {DATA_FILE}")
+    logger.info(f"File exists: {os.path.exists(DATA_FILE)}")
+    
     if not os.path.exists(DATA_FILE):
+        logger.warning(f"Candidates file not found: {DATA_FILE}")
         return []
     try:
         with open(DATA_FILE, 'r') as f:
-            return json.load(f)
-    except (json.JSONDecodeError, FileNotFoundError):
+            data = json.load(f)
+            logger.info(f"Successfully loaded {len(data)} candidates")
+            return data
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        logger.error(f"Error loading candidates: {e}")
         return []
 
 def save_candidates(candidates: List[dict]):
@@ -62,19 +87,44 @@ async def get_candidates(
     is_active: Optional[bool] = None
 ):
     """Get all candidates with filtering options"""
-    candidates = load_candidates()
+    logger.info(f"GET /candidates called with skip={skip}, limit={limit}, position={position}, is_active={is_active}")
     
-    # Apply filters
-    if position:
-        candidates = [c for c in candidates if c.get('position_applied', '').lower() == position.lower()]
-    
-    if is_active is not None:
-        candidates = [c for c in candidates if c.get('is_active') == is_active]
-    
-    # Apply pagination
-    candidates = candidates[skip:skip + limit]
-    
-    return [Candidate(**c) for c in candidates]
+    try:
+        candidates = load_candidates()
+        logger.info(f"Loaded {len(candidates)} candidates from file")
+        
+        # Apply filters
+        if position:
+            candidates = [c for c in candidates if c.get('position_applied', '').lower() == position.lower()]
+        
+        if is_active is not None:
+            candidates = [c for c in candidates if c.get('is_active') == is_active]
+        
+        # Apply pagination
+        candidates = candidates[skip:skip + limit]
+        
+        logger.info(f"Returning {len(candidates)} candidates after filtering and pagination")
+        
+        # Convert to Pydantic models with error handling
+        result = []
+        for i, c in enumerate(candidates):
+            try:
+                candidate = Candidate(**c)
+                result.append(candidate)
+            except Exception as e:
+                logger.error(f"Error converting candidate {i} to Pydantic model: {e}")
+                logger.error(f"Candidate data: {c}")
+                # Skip invalid candidates rather than failing the entire request
+                continue
+        
+        logger.info(f"Successfully converted {len(result)} candidates to Pydantic models")
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error in get_candidates: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 @router.get("/{candidate_id}", response_model=Candidate)
 async def get_candidate(candidate_id: int):

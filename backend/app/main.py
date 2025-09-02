@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import candidates, analytics, bias_detection, personality, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration, resume_analyzer, ai_copilot, enhanced_personality
+from app.api import analytics, bias_detection, personality, interviews, advanced_analytics, notifications, reports, feedback, calendar_integration, resume_analyzer, ai_copilot, enhanced_personality, enhanced_analytics_demo
+from app.api.candidates import router as candidates_router
 from app.config import settings
 
 app = FastAPI(
     title="HireIQ Pro - Smart Hiring System API",
     description="AI-powered bias detection and intelligent hiring platform with LangChain, Langfuse, and n8n integration",
-    version="2.0.0"
+    version="2.0.0",
+    redirect_slashes=True  # Enable automatic redirects for trailing slashes
 )
 
 # Configure CORS
@@ -18,10 +20,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include routers
-app.include_router(candidates.router, prefix="/api/v1/candidates", tags=["candidates"])
+# Include routers with proper path handling
+app.include_router(candidates_router, prefix="/api/v1/candidates", tags=["candidates"])
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytics"])
-app.include_router(advanced_analytics.router, tags=["advanced-analytics"])
+app.include_router(advanced_analytics.router, prefix="/api/v1/analytics", tags=["advanced-analytics"])
+app.include_router(enhanced_analytics_demo.router, prefix="/api/v1/demo-analytics", tags=["demo-analytics"])
 app.include_router(bias_detection.router, prefix="/api/bias-detection", tags=["bias-detection"])
 app.include_router(personality.router, prefix="/api/v1/personality", tags=["personality"])
 app.include_router(enhanced_personality.router, prefix="/api/personality", tags=["enhanced-personality"])

@@ -370,11 +370,12 @@ async def delete_interview(interview_id: int):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error deleting interview: {str(e)}")
 
-@router.get("/templates/", response_model=List[InterviewTemplate])
+@router.get("/templates", response_model=List[InterviewTemplate])
 async def get_interview_templates():
     """Get all interview templates"""
     try:
-        return get_mock_templates()
+        templates = get_mock_templates()
+        return [InterviewTemplate(**t) for t in templates]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error loading templates: {str(e)}")
 

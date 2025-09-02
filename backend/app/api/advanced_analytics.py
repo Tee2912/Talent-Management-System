@@ -7,7 +7,7 @@ from collections import defaultdict, Counter
 import statistics
 from ..models.schemas import *
 
-router = APIRouter(prefix="/api/v1/analytics", tags=["Advanced Analytics"])
+router = APIRouter(tags=["Advanced Analytics"])
 
 def load_data():
     """Load all data sources for analytics"""
