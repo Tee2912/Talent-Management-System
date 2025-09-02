@@ -27,7 +27,6 @@ import {
   RateReview as FeedbackIcon,
   PsychologyAlt as PsychologyIcon,
   VerifiedUser as BiasDetectionIcon,
-  Forum as ChatIcon,
   MarkunreadMailbox as EmailIcon,
   Tune as SettingsIcon,
   TrackChanges,
@@ -52,7 +51,6 @@ const navigationSections: NavigationSection[] = [
     items: [
       { text: 'Candidates', icon: <PeopleIcon />, path: '/candidates' },
       { text: 'Resume Analyzer', icon: <ResumeIcon />, path: '/resume-analyzer' },
-      { text: 'Candidate Chat', icon: <ChatIcon />, path: '/candidate-chat' },
     ]
   },
   {

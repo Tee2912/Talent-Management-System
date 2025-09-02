@@ -15,7 +15,6 @@ import Settings from './pages/Settings';
 import BiasDetection from './pages/BiasDetection';
 import CalendarIntegration from './pages/CalendarIntegration';
 import InterviewFeedback from './pages/InterviewFeedback';
-import CandidateChat from './pages/CandidateChat';
 import EmailNotifications from './pages/EmailNotifications';
 import Navigation, { drawerWidth } from './components/Navigation';
 import { ColorModeContext } from './theme';
@@ -91,7 +90,6 @@ function App() {
             <Routes>
               <Route path="/" element={<DashboardPersonalized />} />
               <Route path="/candidates" element={<Candidates />} />
-              <Route path="/candidate-chat" element={<CandidateChat />} />
               <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
               <Route path="/interviews" element={<InterviewManagement />} />
               <Route path="/calendar" element={<CalendarIntegration />} />

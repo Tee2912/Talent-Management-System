@@ -36,7 +36,6 @@ import {
   RateReview as FeedbackIcon,
   PsychologyAlt as PsychologyIcon,
   VerifiedUser as BiasDetectionIcon,
-  Forum as ChatIcon,
   MarkunreadMailbox as EmailIcon,
   BarChart as TableauIcon,
   TrendingUp,
