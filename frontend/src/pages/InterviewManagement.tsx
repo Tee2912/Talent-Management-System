@@ -173,7 +173,7 @@ function InterviewManagement() {
 
   const fetchCandidates = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/candidates');
+      const response = await fetch('/api/v1/candidates');
       if (response.ok) {
         const data = await response.json();
         setCandidates(data);

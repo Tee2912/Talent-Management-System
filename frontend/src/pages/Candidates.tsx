@@ -41,7 +41,7 @@ function Candidates() {
     try {
       // Try to fetch from backend first, fall back to mock data if backend is not available
       try {
-        const response = await fetch('/api/v1/candidates/');
+        const response = await fetch('/api/v1/candidates');
         if (response.ok) {
           const data = await response.json();
           if (data.length > 0) {

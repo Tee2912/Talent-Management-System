@@ -251,7 +251,7 @@ function EnhancedPersonalityEvaluation() {
 
   const fetchCandidates = async () => {
     try {
-      const response = await fetch("/api/candidates/");
+      const response = await fetch("/api/v1/candidates");
       if (response.ok) {
         const data = await response.json();
         setCandidates(data);

@@ -54,7 +54,7 @@ interface BiasInsights {
   recommendations?: string[];
 }
 
-const BiasDetection: React.FC = () => {
+const BiasDetectionPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [biasAnalysis, setBiasAnalysis] = useState<BiasAnalysis | null>(null);
   const [biasInsights, setBiasInsights] = useState<BiasInsights | null>(null);
@@ -149,20 +149,6 @@ const BiasDetection: React.FC = () => {
       case 'low': return 'info';
       default: return 'success';
     }
-  };
-
-  const formatPercentage = (value: number | undefined | null): string => {
-    if (value == null || isNaN(value) || !isFinite(value)) {
-      return '0.0%';
-    }
-    return `${(value * 100).toFixed(1)}%`;
-  };
-
-  const formatPercentageValue = (value: number | undefined | null): number => {
-    if (value == null || isNaN(value) || !isFinite(value)) {
-      return 0;
-    }
-    return value * 100;
   };
 
   const getBiasScoreColor = (score: number) => {
@@ -263,12 +249,12 @@ const BiasDetection: React.FC = () => {
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         <LinearProgress
                           variant="determinate"
-                          value={formatPercentageValue(biasAnalysis.bias_score)}
+                          value={biasAnalysis.bias_score * 100}
                           color={getBiasScoreColor(biasAnalysis.bias_score)}
                           sx={{ flexGrow: 1 }}
                         />
                         <Typography variant="body2">
-                          {formatPercentage(biasAnalysis.bias_score)}
+                          {(biasAnalysis.bias_score * 100).toFixed(1)}%
                         </Typography>
                       </Box>
                     </Grid>
@@ -365,12 +351,12 @@ const BiasDetection: React.FC = () => {
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         <LinearProgress
                           variant="determinate"
-                          value={formatPercentageValue(textAnalysis.bias_score)}
+                          value={textAnalysis.bias_score * 100}
                           color={getBiasScoreColor(textAnalysis.bias_score)}
                           sx={{ flexGrow: 1 }}
                         />
                         <Typography variant="body2">
-                          {formatPercentage(textAnalysis.bias_score)}
+                          {(textAnalysis.bias_score * 100).toFixed(1)}%
                         </Typography>
                       </Box>
                     </Grid>
@@ -467,7 +453,7 @@ const BiasDetection: React.FC = () => {
                         <Grid item xs={12} md={3}>
                           <Paper sx={{ p: 2, textAlign: 'center' }}>
                             <Typography variant="h4" color="secondary">
-                              {formatPercentage(biasInsights.summary.overall_hiring_rate)}
+                              {(biasInsights.summary.overall_hiring_rate * 100).toFixed(1)}%
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                               Hiring Rate
@@ -525,4 +511,4 @@ const BiasDetection: React.FC = () => {
   );
 };
 
-export default BiasDetection;
+export default BiasDetectionPage;

@@ -226,7 +226,7 @@ function PersonalityEvaluation() {
   const fetchCandidates = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/v1/candidates/");
+      const response = await fetch("/api/v1/candidates");
       if (response.ok) {
         const data = await response.json();
         setCandidates(data);
