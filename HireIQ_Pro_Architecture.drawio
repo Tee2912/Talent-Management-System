@@ -1,307 +1,143 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2025-09-01T00:00:00.000Z" agent="5.0" version="24.7.8" etag="draw.io" type="device">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
   <diagram name="HireIQ Pro Architecture" id="HireIQ-Architecture">
-    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1895" dy="1313" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        
-        <!-- Title -->
-        <mxCell id="title" value="HireIQ Pro - System Architecture (Refined v2.0.0)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontColor=#2E3440;" vertex="1" parent="1">
+        <mxCell id="title" value="HireIQ Pro - Architecture Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontColor=#2E3440;" parent="1" vertex="1">
           <mxGeometry x="527" y="20" width="600" height="40" as="geometry" />
         </mxCell>
-
-        <!-- Status Indicator -->
-        <mxCell id="status-indicator" value="✅ Implemented  🚧 In Progress  📋 Planned" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#4CAF50;" vertex="1" parent="1">
-          <mxGeometry x="527" y="60" width="600" height="20" as="geometry" />
+        <mxCell id="client-layer" value="Client Layer" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#E1F5FE;strokeColor=#01579B;fontColor=#01579B;" parent="1" vertex="1">
+          <mxGeometry x="100" y="69" width="300" height="150" as="geometry" />
         </mxCell>
-
-        <!-- Client Layer -->
-        <mxCell id="client-layer" value="Client Layer ✅" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#E1F5FE;strokeColor=#01579B;fontColor=#01579B;" vertex="1" parent="1">
-          <mxGeometry x="100" y="100" width="300" height="120" as="geometry" />
+        <mxCell id="react-frontend" value="&lt;b&gt;React Frontend v18&lt;br&gt;&lt;/b&gt;• TypeScript&lt;br&gt;• Material-UI&lt;br&gt;• Chart.js&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" parent="client-layer" vertex="1">
+          <mxGeometry x="20" y="55" width="260" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="react-frontend" value="React Frontend v18&#xa;Port 3000 - RUNNING&#xa;&#xa;• TypeScript ✅&#xa;• Material-UI ✅&#xa;• Chart.js ✅&#xa;• 14 Pages Implemented" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="client-layer">
-          <mxGeometry x="20" y="30" width="260" height="70" as="geometry" />
+        <mxCell id="api-layer" value="API Gateway Layer&amp;nbsp;" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#7B1FA2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="70" width="300" height="150" as="geometry" />
         </mxCell>
-
-        <!-- API Gateway Layer -->
-        <mxCell id="api-layer" value="API Gateway Layer ✅" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#7B1FA2;" vertex="1" parent="1">
-          <mxGeometry x="500" y="100" width="300" height="120" as="geometry" />
+        <mxCell id="fastapi-backend" value="&lt;b&gt;FastAPI&lt;/b&gt;&amp;nbsp;&lt;br&gt;• CORS Configured&amp;nbsp;&lt;br&gt;• 13 API Routers Active" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#E1BEE7;strokeColor=#8E24AA;fontColor=#4A148C;" parent="api-layer" vertex="1">
+          <mxGeometry x="20" y="50" width="260" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="fastapi-backend" value="FastAPI Backend v2.0.0&#xa;Port 8000 - RUNNING&#xa;&#xa;• Python 3.11 ✅&#xa;• Virtual Environment ✅&#xa;• CORS Configured ✅&#xa;• 13 API Routers Active" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#E1BEE7;strokeColor=#8E24AA;fontColor=#4A148C;" vertex="1" parent="api-layer">
-          <mxGeometry x="20" y="30" width="260" height="70" as="geometry" />
-        </mxCell>
-
-        <!-- Core Business Logic -->
-        <mxCell id="business-layer" value="Core Business Logic APIs ✅" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontColor=#388E3C;" vertex="1" parent="1">
+        <mxCell id="business-layer" value="Core Business Logic APIs ✅" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontColor=#388E3C;" parent="1" vertex="1">
           <mxGeometry x="100" y="260" width="700" height="200" as="geometry" />
         </mxCell>
-        
-        <!-- API Modules Row 1 - All Implemented -->
-        <mxCell id="candidates-api" value="Candidates&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="candidates-api" value="Candidates&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="20" y="30" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="analytics-api" value="Analytics&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="analytics-api" value="Analytics&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="120" y="30" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="advanced-analytics-api" value="Advanced&#xa;Analytics ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="advanced-analytics-api" value="Advanced&#xa;Analytics ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="220" y="30" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="bias-api" value="Bias Detection&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="bias-api" value="Bias Detection&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="320" y="30" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="ai-copilot-api" value="AI Copilot&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="ai-copilot-api" value="AI Copilot&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="420" y="30" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="chat-api" value="Chat&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="chat-api" value="Chat&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="520" y="30" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="interviews-api" value="Interviews&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="interviews-api" value="Interviews&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="620" y="30" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- API Modules Row 2 -->
-        <mxCell id="resume-api" value="Resume&#xa;Analyzer ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="resume-api" value="Resume&#xa;Analyzer ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="20" y="110" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="notifications-api" value="Notifications&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="notifications-api" value="Notifications&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="120" y="110" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="reports-api" value="Reports&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="reports-api" value="Reports&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="220" y="110" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="calendar-api" value="Calendar&#xa;Integration ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="calendar-api" value="Calendar&#xa;Integration ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="320" y="110" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="personality-api" value="Personality&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="personality-api" value="Personality&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="420" y="110" width="80" height="60" as="geometry" />
         </mxCell>
-        
-        <mxCell id="feedback-api" value="Feedback&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="business-layer">
+        <mxCell id="feedback-api" value="Feedback&#xa;API ✅" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" parent="business-layer" vertex="1">
           <mxGeometry x="520" y="110" width="80" height="60" as="geometry" />
         </mxCell>
-
-        <!-- AI & Intelligence Layer -->
-        <mxCell id="ai-layer" value="AI &amp; Intelligence Layer 🚧" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontColor=#F57C00;" vertex="1" parent="1">
-          <mxGeometry x="900" y="100" width="650" height="360" as="geometry" />
+        <mxCell id="ai-layer" value="AI &amp;amp; Intelligence Layer&amp;nbsp;" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontColor=#F57C00;" parent="1" vertex="1">
+          <mxGeometry x="900" y="70" width="680" height="340" as="geometry" />
         </mxCell>
-        
-        <mxCell id="ai-orchestrator" value="AI Orchestrator ✅&#xa;&#xa;• Central AI coordination&#xa;• Resume intelligence analysis&#xa;• Basic functionality active&#xa;• Ready for enhancement" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFE0B2;strokeColor=#FF9800;fontColor=#E65100;" vertex="1" parent="ai-layer">
-          <mxGeometry x="20" y="30" width="150" height="80" as="geometry" />
+        <mxCell id="ai-orchestrator" value="&lt;b&gt;AI Orchestrator&amp;nbsp;&lt;br&gt;&lt;/b&gt;&lt;br&gt;• Central AI coordination&lt;br&gt;• Resume intelligence analysis&lt;br&gt;• Basic functionality active&lt;br&gt;• Ready for enhancement" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFE0B2;strokeColor=#FF9800;fontColor=#E65100;" parent="ai-layer" vertex="1">
+          <mxGeometry x="20" y="49" width="150" height="111" as="geometry" />
         </mxCell>
-        
-        <mxCell id="langchain" value="LangChain 🚧&#xa;Framework Ready&#xa;&#xa;• Chain definitions prepared&#xa;• AI agents framework&#xa;• Memory management ready&#xa;• Awaiting full integration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" vertex="1" parent="ai-layer">
-          <mxGeometry x="190" y="30" width="140" height="80" as="geometry" />
+        <mxCell id="langchain" value="&lt;b&gt;LangChain&amp;nbsp;&lt;/b&gt;&lt;br&gt;Framework Ready&lt;br&gt;&lt;br&gt;• Chain definitions prepared&lt;br&gt;• AI agents framework&lt;br&gt;• Memory management ready&lt;br&gt;• Awaiting full integration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;arcSize=27;" parent="ai-layer" vertex="1">
+          <mxGeometry x="190" y="30" width="140" height="140" as="geometry" />
         </mxCell>
-        
-        <mxCell id="langfuse" value="Langfuse 🚧&#xa;Monitoring Ready&#xa;&#xa;• Performance tracking ready&#xa;• Cost optimization prepared&#xa;• A/B testing framework&#xa;• Observability setup" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" vertex="1" parent="ai-layer">
-          <mxGeometry x="350" y="30" width="140" height="80" as="geometry" />
+        <mxCell id="langfuse" value="&lt;b&gt;Langfuse&amp;nbsp;&lt;/b&gt;&lt;div&gt;Monitoring Ready&lt;br&gt;&lt;br&gt;• Performance tracking ready&lt;br&gt;• Cost optimization prepared&lt;br&gt;• A/B testing framework&lt;br&gt;• Observability setup&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" parent="ai-layer" vertex="1">
+          <mxGeometry x="350" y="30" width="140" height="140" as="geometry" />
         </mxCell>
-        
-        <mxCell id="chromadb" value="ChromaDB 🚧&#xa;Vector Store Ready&#xa;&#xa;• Semantic search prepared&#xa;• Embeddings storage ready&#xa;• Similar candidates framework&#xa;• Database configured" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" vertex="1" parent="ai-layer">
-          <mxGeometry x="510" y="30" width="140" height="80" as="geometry" />
+        <mxCell id="chromadb" value="&lt;b&gt;ChromaDB&amp;nbsp;&lt;br&gt;&lt;/b&gt;Vector Store Ready&lt;br&gt;&lt;br&gt;• Semantic search prepared&lt;br&gt;• Embeddings storage ready&lt;br&gt;• Similar candidates framework&lt;br&gt;• Database configured" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" parent="ai-layer" vertex="1">
+          <mxGeometry x="510" y="40" width="140" height="120" as="geometry" />
         </mxCell>
-        
-        <mxCell id="n8n-workflows" value="n8n Workflow Engine 🚧&#xa;&#xa;• Smart screening workflow ✅&#xa;• Interview scheduling workflow ✅&#xa;• Background check automation&#xa;• Onboarding automation ready" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" vertex="1" parent="ai-layer">
-          <mxGeometry x="20" y="130" width="200" height="100" as="geometry" />
+        <mxCell id="n8n-workflows" value="&lt;b&gt;n8n Workflow Engine&amp;nbsp;&lt;br&gt;&lt;/b&gt;&lt;br&gt;• Smart screening workflow&amp;nbsp;&lt;br&gt;• Interview scheduling workflow&amp;nbsp;&lt;br&gt;• Background check automation&lt;br&gt;• Onboarding automation ready" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" parent="ai-layer" vertex="1">
+          <mxGeometry x="20" y="190.5" width="200" height="100" as="geometry" />
         </mxCell>
-        
-        <mxCell id="sentence-transformers" value="Sentence Transformers 🚧&#xa;&#xa;• Text embeddings ready&#xa;• Semantic similarity prepared&#xa;• Multi-language support&#xa;• Vector generation ready" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" vertex="1" parent="ai-layer">
-          <mxGeometry x="240" y="130" width="180" height="100" as="geometry" />
+        <mxCell id="sentence-transformers" value="&lt;b&gt;Sentence Transformers&amp;nbsp;&lt;br&gt;&lt;/b&gt;&lt;br&gt;• Text embeddings ready&lt;br&gt;• Semantic similarity prepared&lt;br&gt;• Multi-language support&lt;br&gt;• Vector generation ready" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFF8E1;strokeColor=#FFC107;fontColor=#F57C00;" parent="ai-layer" vertex="1">
+          <mxGeometry x="240" y="180" width="180" height="121" as="geometry" />
         </mxCell>
-        
-        <mxCell id="workflow-definitions" value="Workflow Definitions ✅&#xa;&#xa;• smart_candidate_screening.json ✅&#xa;• automated_interview_scheduling.json ✅&#xa;• Custom workflow templates&#xa;• JSON-based configuration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFE0B2;strokeColor=#FF9800;fontColor=#E65100;" vertex="1" parent="ai-layer">
-          <mxGeometry x="440" y="130" width="200" height="100" as="geometry" />
+        <mxCell id="workflow-definitions" value="&lt;b&gt;Workflow Definitions&amp;nbsp;&lt;br&gt;&lt;/b&gt;&lt;br&gt;• smart_candidate_screening.json&amp;nbsp;&lt;br&gt;• automated_interview_scheduling.json&amp;nbsp;&lt;div&gt;• Custom workflow templates&lt;br&gt;• JSON-based configuration&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFE0B2;strokeColor=#FF9800;fontColor=#E65100;" parent="ai-layer" vertex="1">
+          <mxGeometry x="450" y="180" width="200" height="121" as="geometry" />
         </mxCell>
-        
-        <!-- Implementation Status Indicators -->
-        <mxCell id="ai-status" value="✅ Basic AI Operations Active&#xa;🚧 Advanced AI Features In Progress&#xa;📋 Full AI Integration Planned" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#E8F5E8;strokeColor=#4CAF50;fontColor=#2E7D32;" vertex="1" parent="ai-layer">
-          <mxGeometry x="20" y="250" width="620" height="60" as="geometry" />
-        </mxCell>
-
-        <!-- Data Layer -->
-        <mxCell id="data-layer" value="Data Layer" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#FAFAFA;strokeColor=#616161;fontColor=#616161;" vertex="1" parent="1">
+        <mxCell id="data-layer" value="Data Layer" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#FAFAFA;strokeColor=#616161;fontColor=#616161;" parent="1" vertex="1">
           <mxGeometry x="100" y="480" width="700" height="120" as="geometry" />
         </mxCell>
-        
-        <mxCell id="candidates-data" value="candidates.json&#xa;&#xa;Candidate profiles,&#xa;applications, status" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" vertex="1" parent="data-layer">
+        <mxCell id="candidates-data" value="&lt;b&gt;candidates.json&lt;br&gt;&lt;/b&gt;&lt;br&gt;Candidate profiles,&lt;br&gt;applications, status" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" parent="data-layer" vertex="1">
           <mxGeometry x="20" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="interviews-data" value="interviews.json&#xa;&#xa;Interview records,&#xa;scores, feedback" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" vertex="1" parent="data-layer">
+        <mxCell id="interviews-data" value="&lt;b&gt;interviews.json&lt;br&gt;&lt;/b&gt;&lt;br&gt;Interview records,&lt;br&gt;scores, feedback" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" parent="data-layer" vertex="1">
           <mxGeometry x="190" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="job-data" value="job_description_full.json&#xa;&#xa;Job requirements,&#xa;skills, criteria" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" vertex="1" parent="data-layer">
+        <mxCell id="job-data" value="&lt;b&gt;job_description_full.json&lt;br&gt;&lt;/b&gt;&lt;br&gt;Job requirements,&lt;br&gt;skills, criteria" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" parent="data-layer" vertex="1">
           <mxGeometry x="360" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="mock-data" value="Mock Data&#xa;&#xa;Sample hiring data,&#xa;demographics, analytics" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" vertex="1" parent="data-layer">
+        <mxCell id="mock-data" value="&lt;b&gt;Mock Data&lt;br&gt;&lt;/b&gt;&lt;br&gt;Sample hiring data,&lt;br&gt;demographics, analytics" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" parent="data-layer" vertex="1">
           <mxGeometry x="530" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-
-        <!-- External Services -->
-        <mxCell id="external-layer" value="External Services" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#FFEBEE;strokeColor=#D32F2F;fontColor=#D32F2F;" vertex="1" parent="1">
-          <mxGeometry x="900" y="480" width="650" height="120" as="geometry" />
+        <mxCell id="external-layer" value="External Services" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#FFEBEE;strokeColor=#D32F2F;fontColor=#D32F2F;" parent="1" vertex="1">
+          <mxGeometry x="900" y="480" width="680" height="120" as="geometry" />
         </mxCell>
-        
-        <mxCell id="azure-openai" value="Azure OpenAI API&#xa;&#xa;GPT-4o, text analysis,&#xa;intelligent responses" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" vertex="1" parent="external-layer">
+        <mxCell id="azure-openai" value="&lt;b&gt;Azure OpenAI API&lt;br&gt;&lt;/b&gt;&lt;br&gt;GPT-4o, text analysis,&lt;br&gt;intelligent responses" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" parent="external-layer" vertex="1">
           <mxGeometry x="20" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="calendar-services" value="Calendar APIs&#xa;&#xa;Google Calendar,&#xa;Outlook integration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" vertex="1" parent="external-layer">
+        <mxCell id="calendar-services" value="&lt;b&gt;Calendar APIs (MOCK)&lt;br&gt;&lt;/b&gt;&lt;br&gt;Google Calendar,&lt;br&gt;Outlook integration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" parent="external-layer" vertex="1">
           <mxGeometry x="190" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="slack-integration" value="Slack Integration&#xa;&#xa;Notifications,&#xa;team collaboration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" vertex="1" parent="external-layer">
+        <mxCell id="slack-integration" value="&lt;b&gt;Slack Integration (MOCK)&lt;br&gt;&lt;/b&gt;&lt;br&gt;Notifications,&lt;br&gt;team collaboration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" parent="external-layer" vertex="1">
           <mxGeometry x="360" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="linkedin-api" value="LinkedIn API&#xa;&#xa;Candidate sourcing,&#xa;profile enrichment" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" vertex="1" parent="external-layer">
+        <mxCell id="linkedin-api" value="&lt;b&gt;LinkedIn API (MOCK)&lt;br&gt;&lt;/b&gt;&lt;br&gt;Candidate sourcing,&lt;br&gt;profile enrichment" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" parent="external-layer" vertex="1">
           <mxGeometry x="530" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-
-        <!-- Deployment Layer -->
-        <mxCell id="deployment-layer" value="Deployment &amp; Infrastructure" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontColor=#1565C0;" vertex="1" parent="1">
+        <mxCell id="deployment-layer" value="Deployment &amp; Infrastructure" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontColor=#1565C0;" parent="1" vertex="1">
           <mxGeometry x="100" y="640" width="700" height="120" as="geometry" />
         </mxCell>
-        
-        <mxCell id="docker-compose" value="Docker Compose&#xa;&#xa;Multi-container setup&#xa;fair-hiring-network" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="deployment-layer">
+        <mxCell id="docker-compose" value="&lt;b&gt;Docker Compose&lt;br&gt;&lt;/b&gt;&lt;br&gt;Multi-container setup&lt;br&gt;fair-hiring-network" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" parent="deployment-layer" vertex="1">
           <mxGeometry x="20" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="python-venv" value="Python Virtual Env&#xa;&#xa;Isolated dependencies&#xa;Python 3.11" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="deployment-layer">
+        <mxCell id="python-venv" value="&lt;b&gt;Python Virtual Env&lt;br&gt;&lt;/b&gt;&lt;br&gt;Isolated dependencies&lt;br&gt;Python 3.11" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" parent="deployment-layer" vertex="1">
           <mxGeometry x="190" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="npm-packages" value="NPM Packages&#xa;&#xa;Node.js dependencies&#xa;React ecosystem" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="deployment-layer">
+        <mxCell id="npm-packages" value="&lt;b&gt;NPM Packages&lt;br&gt;&lt;/b&gt;&lt;br&gt;Node.js dependencies&lt;br&gt;React ecosystem" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" parent="deployment-layer" vertex="1">
           <mxGeometry x="360" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="dev-servers" value="Development Servers&#xa;&#xa;Hot reload, debugging&#xa;CORS configuration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="deployment-layer">
+        <mxCell id="dev-servers" value="&lt;b&gt;Development Servers&lt;br&gt;&lt;/b&gt;&lt;br&gt;Hot reload, debugging&lt;br&gt;CORS configuration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" parent="deployment-layer" vertex="1">
           <mxGeometry x="530" y="30" width="150" height="70" as="geometry" />
         </mxCell>
-
-        <!-- Connection Arrows -->
-        <!-- Frontend to Backend -->
-        <mxCell id="fe-to-be" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2196F3;strokeWidth=2;" edge="1" parent="1" source="react-frontend" target="fastapi-backend">
+        <mxCell id="fe-to-be" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2196F3;strokeWidth=2;" parent="1" source="react-frontend" target="fastapi-backend" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fe-to-be-label" value="HTTP/REST API" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#1976D2;" vertex="1" connectable="0" parent="fe-to-be">
+        <mxCell id="fe-to-be-label" value="HTTP/REST API" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#1976D2;" parent="fe-to-be" vertex="1" connectable="0">
           <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        
-        <!-- Backend to Business Logic -->
-        <mxCell id="be-to-business" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4CAF50;strokeWidth=2;" edge="1" parent="1" source="fastapi-backend" target="candidates-api">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="650" y="200" as="sourcePoint" />
-            <mxPoint x="200" y="270" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Business Logic to AI -->
-        <mxCell id="business-to-ai" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF9800;strokeWidth=2;" edge="1" parent="1" source="ai-copilot-api" target="ai-orchestrator">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="760" y="300" as="sourcePoint" />
-            <mxPoint x="920" y="150" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="business-to-ai-label" value="AI Requests" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#F57C00;" vertex="1" connectable="0" parent="business-to-ai">
-          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- AI Internal Connections -->
-        <mxCell id="orchestrator-to-langchain" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF5722;strokeWidth=1;" edge="1" parent="ai-layer" source="ai-orchestrator" target="langchain">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="orchestrator-to-langfuse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF5722;strokeWidth=1;" edge="1" parent="ai-layer" source="ai-orchestrator" target="langfuse">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="orchestrator-to-chromadb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF5722;strokeWidth=1;" edge="1" parent="ai-layer" source="ai-orchestrator" target="chromadb">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="orchestrator-to-n8n" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF5722;strokeWidth=1;" edge="1" parent="ai-layer" source="ai-orchestrator" target="n8n-workflows">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Business Logic to Data -->
-        <mxCell id="candidates-to-data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#616161;strokeWidth=2;" edge="1" parent="1" source="candidates-api" target="candidates-data">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="160" y="440" as="sourcePoint" />
-            <mxPoint x="195" y="510" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- AI to External Services -->
-        <mxCell id="langchain-to-azure" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D32F2F;strokeWidth=2;" edge="1" parent="1" source="langchain" target="azure-openai">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1350" y="150" as="sourcePoint" />
-            <mxPoint x="1025" y="510" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="langchain-to-azure-label" value="AI API Calls" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#D32F2F;" vertex="1" connectable="0" parent="langchain-to-azure">
-          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Legend -->
-        <mxCell id="legend" value="Legend" style="swimlane;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#F8F9FA;strokeColor=#6C757D;fontColor=#495057;" vertex="1" parent="1">
-          <mxGeometry x="900" y="640" width="300" height="120" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend-frontend" value="Frontend Layer" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="legend">
-          <mxGeometry x="10" y="25" width="80" height="20" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend-backend" value="Backend APIs" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#C8E6C9;strokeColor=#4CAF50;fontColor=#1B5E20;" vertex="1" parent="legend">
-          <mxGeometry x="100" y="25" width="80" height="20" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend-ai" value="AI Services" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#FFE0B2;strokeColor=#FF9800;fontColor=#E65100;" vertex="1" parent="legend">
-          <mxGeometry x="190" y="25" width="80" height="20" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend-data" value="Data Storage" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontColor=#424242;" vertex="1" parent="legend">
-          <mxGeometry x="10" y="55" width="80" height="20" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend-external" value="External APIs" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#FFCDD2;strokeColor=#F44336;fontColor=#B71C1C;" vertex="1" parent="legend">
-          <mxGeometry x="100" y="55" width="80" height="20" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend-deployment" value="Infrastructure" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#BBDEFB;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="legend">
-          <mxGeometry x="190" y="55" width="80" height="20" as="geometry" />
-        </mxCell>
-
-        <!-- Additional Connections -->
-        <mxCell id="calendar-api-to-external" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9C27B0;strokeWidth=1;dashed=1;" edge="1" parent="1" source="calendar-api" target="calendar-services">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="notifications-to-slack" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9C27B0;strokeWidth=1;dashed=1;" edge="1" parent="1" source="notifications-api" target="slack-integration">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
       </root>
     </mxGraphModel>
   </diagram>
