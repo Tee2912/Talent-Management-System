@@ -1,202 +1,528 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Box,
+  Paper,
   Typography,
   Button,
+  Grid,
   Card,
   CardContent,
-  Alert,
-  Grid,
   Chip,
-} from "@mui/material";
-import { Security, Warning, CheckCircle } from "@mui/icons-material";
-import SecurityIcon from "@mui/icons-material/Security";
+  LinearProgress,
+  Alert,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  CircularProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
+} from '@mui/material';
+import {
+  Warning,
+  CheckCircle,
+  Analytics,
+  Psychology,
+  TrendingUp,
+  Assessment,
+  Security
+} from '@mui/icons-material';
 
-function BiasDetection() {
-  const [biasScore, setBiasScore] = useState<number | null>(null);
-  const [analyzing, setAnalyzing] = useState(false);
-  const [recommendations, setRecommendations] = useState<string[]>([]);
+interface BiasAnalysis {
+  bias_detected: boolean;
+  bias_score: number;
+  confidence: string;
+  bias_level?: string;
+  metrics?: any;
+  recommendations?: string[];
+  analysis_timestamp?: string;
+}
 
-  const runBiasAnalysis = async () => {
-    setAnalyzing(true);
+interface BiasInsights {
+  summary?: any;
+  demographics?: any;
+  scoring?: any;
+  recommendations?: string[];
+}
+
+const BiasDetection: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [biasAnalysis, setBiasAnalysis] = useState<BiasAnalysis | null>(null);
+  const [biasInsights, setBiasInsights] = useState<BiasInsights | null>(null);
+  const [healthStatus, setHealthStatus] = useState<any>(null);
+  const [candidates, setCandidates] = useState<any[]>([]);
+  const [selectedAttribute, setSelectedAttribute] = useState('gender');
+  const [testText, setTestText] = useState('The candidate seems very aggressive and pushy. Not sure if she would be a good cultural fit for our team.');
+  const [textAnalysis, setTextAnalysis] = useState<any>(null);
+
+  useEffect(() => {
+    checkHealthStatus();
+    loadCandidates();
+  }, []);
+
+  const checkHealthStatus = async () => {
     try {
-      // Try to fetch from backend first, fall back to mock data if backend is not available
-      try {
-        const response = await fetch("/api/v1/bias/analyze", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            candidate_ids: [], // Analyze all candidates
-          }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setBiasScore(data.overall_bias_score);
-          setRecommendations(data.recommendations || []);
-        } else {
-          throw new Error("Backend not available");
-        }
-      } catch (backendError) {
-        // Use mock data when backend is not available
-        console.log("Backend not available, using mock data for bias analysis");
-
-        // Simulate analysis delay
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        const mockBiasScore = 0.28; // Low bias detected
-        const mockRecommendations = [
-          "Consider diversifying your interview panel composition",
-          "Review job descriptions for potentially biased language",
-          "Implement structured interview questions",
-          "Provide unconscious bias training for hiring managers",
-          "Track diversity metrics throughout the hiring process",
-        ];
-
-        setBiasScore(mockBiasScore);
-        setRecommendations(mockRecommendations);
-      }
+      const response = await fetch('/api/bias-detection/health');
+      const data = await response.json();
+      setHealthStatus(data);
     } catch (error) {
-      console.error("Bias analysis failed:", error);
-    } finally {
-      setAnalyzing(false);
+      console.error('Error checking health status:', error);
     }
   };
 
-  const getBiasIcon = (score: number) => {
-    if (score <= 0.3) return <CheckCircle sx={{ color: "success.main" }} />;
-    if (score <= 0.6) return <Warning sx={{ color: "warning.main" }} />;
-    return <Security sx={{ color: "error.main" }} />;
+  const loadCandidates = async () => {
+    try {
+      const response = await fetch('/api/candidates');
+      const data = await response.json();
+      setCandidates(data);
+    } catch (error) {
+      console.error('Error loading candidates:', error);
+    }
   };
 
-  const getBiasColor = (score: number) => {
-    if (score <= 0.3) return "success";
-    if (score <= 0.6) return "warning";
-    return "error";
+  const runBiasAnalysis = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/bias-detection/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          protected_attribute: selectedAttribute,
+          candidates: candidates
+        })
+      });
+      const data = await response.json();
+      setBiasAnalysis(data);
+    } catch (error) {
+      console.error('Error running bias analysis:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const getBiasText = (score: number) => {
-    if (score <= 0.3) return "Low Bias Detected";
-    if (score <= 0.6) return "Moderate Bias Detected";
-    return "High Bias Detected";
+  const getBiasInsights = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/bias-detection/insights');
+      const data = await response.json();
+      setBiasInsights(data.insights);
+    } catch (error) {
+      console.error('Error getting bias insights:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const analyzeText = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/bias-detection/text-analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: testText,
+          candidate_info: { gender: 'female' }
+        })
+      });
+      const data = await response.json();
+      setTextAnalysis(data.text_analysis);
+    } catch (error) {
+      console.error('Error analyzing text:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getBiasLevelColor = (level: string) => {
+    switch (level) {
+      case 'high': return 'error';
+      case 'medium': return 'warning';
+      case 'low': return 'info';
+      default: return 'success';
+    }
+  };
+
+  const formatPercentage = (value: number | undefined | null): string => {
+    if (value == null || isNaN(value) || !isFinite(value)) {
+      return '0.0%';
+    }
+    return `${(value * 100).toFixed(1)}%`;
+  };
+
+  const formatPercentageValue = (value: number | undefined | null): number => {
+    if (value == null || isNaN(value) || !isFinite(value)) {
+      return 0;
+    }
+    return value * 100;
+  };
+
+  const getBiasScoreColor = (score: number) => {
+    if (score > 0.7) return 'error';
+    if (score > 0.4) return 'warning';
+    if (score > 0.2) return 'info';
+    return 'success';
   };
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ display: "flex", alignItems: "center", gap: 1 }}
-      >
-        <SecurityIcon />
-        Bias Detection
+      <Typography variant="h4" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Security />
+        Bias Detection Dashboard
       </Typography>
 
+      {/* Health Status */}
+      <Card sx={{ mb: 3 }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            System Health Status
+          </Typography>
+          {healthStatus ? (
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={3}>
+                <Chip
+                  icon={healthStatus.ai_orchestrator_available ? <CheckCircle /> : <Warning />}
+                  label={`AI Orchestrator: ${healthStatus.ai_orchestrator_available ? 'Online' : 'Offline'}`}
+                  color={healthStatus.ai_orchestrator_available ? 'success' : 'error'}
+                />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Chip
+                  icon={<Analytics />}
+                  label={`Candidates: ${healthStatus.total_candidates}`}
+                  color="info"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="body2">
+                  Capabilities: {healthStatus.analysis_capabilities?.join(', ')}
+                </Typography>
+              </Grid>
+            </Grid>
+          ) : (
+            <CircularProgress size={24} />
+          )}
+        </CardContent>
+      </Card>
+
       <Grid container spacing={3}>
+        {/* Demographic Bias Analysis */}
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Run Bias Analysis
+              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Assessment />
+                Demographic Bias Analysis
               </Typography>
-              <Typography variant="body2" color="textSecondary" paragraph>
-                Analyze all hiring decisions for potential bias in the
-                recruitment process.
-              </Typography>
+              
+              <FormControl fullWidth sx={{ mb: 2 }}>
+                <InputLabel>Protected Attribute</InputLabel>
+                <Select
+                  value={selectedAttribute}
+                  onChange={(e) => setSelectedAttribute(e.target.value)}
+                  label="Protected Attribute"
+                >
+                  <MenuItem value="gender">Gender</MenuItem>
+                  <MenuItem value="ethnicity">Ethnicity</MenuItem>
+                  <MenuItem value="age">Age</MenuItem>
+                </Select>
+              </FormControl>
+
               <Button
                 variant="contained"
                 onClick={runBiasAnalysis}
-                disabled={analyzing}
-                startIcon={<Security />}
+                disabled={loading}
+                fullWidth
+                sx={{ mb: 2 }}
               >
-                {analyzing ? "Analyzing..." : "Run Analysis"}
+                {loading ? <CircularProgress size={24} /> : 'Run Analysis'}
               </Button>
+
+              {biasAnalysis && (
+                <Box>
+                  <Alert 
+                    severity={biasAnalysis.bias_detected ? 'warning' : 'success'}
+                    sx={{ mb: 2 }}
+                  >
+                    {biasAnalysis.bias_detected ? 'Bias Detected' : 'No Significant Bias Detected'}
+                  </Alert>
+
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Bias Score
+                      </Typography>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={formatPercentageValue(biasAnalysis.bias_score)}
+                          color={getBiasScoreColor(biasAnalysis.bias_score)}
+                          sx={{ flexGrow: 1 }}
+                        />
+                        <Typography variant="body2">
+                          {formatPercentage(biasAnalysis.bias_score)}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Confidence
+                      </Typography>
+                      <Chip 
+                        label={biasAnalysis.confidence} 
+                        size="small"
+                        color={biasAnalysis.confidence === 'high' ? 'success' : 'warning'}
+                      />
+                    </Grid>
+                  </Grid>
+
+                  {biasAnalysis.bias_level && (
+                    <Box sx={{ mt: 2 }}>
+                      <Typography variant="body2" color="textSecondary">
+                        Bias Level
+                      </Typography>
+                      <Chip 
+                        label={biasAnalysis.bias_level} 
+                        color={getBiasLevelColor(biasAnalysis.bias_level)}
+                      />
+                    </Box>
+                  )}
+
+                  {biasAnalysis.recommendations && (
+                    <Box sx={{ mt: 2 }}>
+                      <Typography variant="body2" color="textSecondary" gutterBottom>
+                        Recommendations
+                      </Typography>
+                      <List dense>
+                        {biasAnalysis.recommendations.map((rec, index) => (
+                          <ListItem key={index} sx={{ py: 0 }}>
+                            <ListItemText 
+                              primary={rec}
+                              primaryTypographyProps={{ variant: 'body2' }}
+                            />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                  )}
+                </Box>
+              )}
             </CardContent>
           </Card>
         </Grid>
 
-        {biasScore !== null && (
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                  {getBiasIcon(biasScore)}
-                  <Typography variant="h6" sx={{ ml: 1 }}>
-                    Analysis Results
-                  </Typography>
-                </Box>
-                <Chip
-                  label={getBiasText(biasScore)}
-                  color={getBiasColor(biasScore)}
-                  sx={{ mb: 2 }}
-                />
-                <Typography variant="body2">
-                  Overall Bias Score: {biasScore.toFixed(3)}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        )}
-
-        {recommendations.length > 0 && (
-          <Grid item xs={12}>
-            <Alert severity="info">
-              <Typography variant="h6" gutterBottom>
-                Recommendations
+        {/* Text Bias Analysis */}
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Psychology />
+                Text Bias Analysis
               </Typography>
-              <ul>
-                {recommendations.map((rec, index) => (
-                  <li key={index}>
-                    <Typography variant="body2">{rec}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </Alert>
-          </Grid>
-        )}
 
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Evaluation Text"
+                value={testText}
+                onChange={(e) => setTestText(e.target.value)}
+                sx={{ mb: 2 }}
+              />
+
+              <Button
+                variant="contained"
+                onClick={analyzeText}
+                disabled={loading}
+                fullWidth
+                sx={{ mb: 2 }}
+              >
+                {loading ? <CircularProgress size={24} /> : 'Analyze Text'}
+              </Button>
+
+              {textAnalysis && (
+                <Box>
+                  <Alert 
+                    severity={textAnalysis.bias_detected ? 'warning' : 'success'}
+                    sx={{ mb: 2 }}
+                  >
+                    {textAnalysis.bias_detected ? 'Bias Indicators Found' : 'No Bias Indicators Detected'}
+                  </Alert>
+
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Bias Score
+                      </Typography>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={formatPercentageValue(textAnalysis.bias_score)}
+                          color={getBiasScoreColor(textAnalysis.bias_score)}
+                          sx={{ flexGrow: 1 }}
+                        />
+                        <Typography variant="body2">
+                          {formatPercentage(textAnalysis.bias_score)}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Indicators Found
+                      </Typography>
+                      <Typography variant="h6">
+                        {textAnalysis.total_bias_indicators}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
+                  {textAnalysis.detected_patterns && Object.keys(textAnalysis.detected_patterns).length > 0 && (
+                    <Box sx={{ mt: 2 }}>
+                      <Typography variant="body2" color="textSecondary" gutterBottom>
+                        Detected Bias Patterns
+                      </Typography>
+                      {Object.entries(textAnalysis.detected_patterns).map(([type, patterns]: [string, any]) => (
+                        <Box key={type} sx={{ mb: 1 }}>
+                          <Chip 
+                            label={type.replace('_', ' ')} 
+                            size="small"
+                            color="warning"
+                            sx={{ mr: 1 }}
+                          />
+                          <Typography variant="caption" display="block">
+                            {patterns.join(', ')}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
+
+                  {textAnalysis.recommendations && (
+                    <Box sx={{ mt: 2 }}>
+                      <Typography variant="body2" color="textSecondary" gutterBottom>
+                        Recommendations
+                      </Typography>
+                      <List dense>
+                        {textAnalysis.recommendations.map((rec: string, index: number) => (
+                          <ListItem key={index} sx={{ py: 0 }}>
+                            <ListItemText 
+                              primary={rec}
+                              primaryTypographyProps={{ variant: 'body2' }}
+                            />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                  )}
+                </Box>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Comprehensive Insights */}
         <Grid item xs={12}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
-                About Bias Detection
+              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <TrendingUp />
+                Comprehensive Bias Insights
               </Typography>
-              <Typography variant="body2" paragraph>
-                Our bias detection system analyzes hiring decisions using
-                machine learning algorithms to identify potential discrimination
-                based on demographic factors.
-              </Typography>
-              <Typography variant="body2" paragraph>
-                <strong>Fairness Metrics:</strong>
-              </Typography>
-              <ul>
-                <li>
-                  <Typography variant="body2">
-                    <strong>Demographic Parity:</strong> Equal hiring rates
-                    across demographic groups
-                  </Typography>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    <strong>Equalized Odds:</strong> Equal true positive and
-                    false positive rates
-                  </Typography>
-                </li>
-                <li>
-                  <Typography variant="body2">
-                    <strong>Calibration:</strong> Consistent score
-                    interpretation across groups
-                  </Typography>
-                </li>
-              </ul>
+
+              <Button
+                variant="contained"
+                onClick={getBiasInsights}
+                disabled={loading}
+                sx={{ mb: 2 }}
+              >
+                {loading ? <CircularProgress size={24} /> : 'Generate Insights'}
+              </Button>
+
+              {biasInsights && (
+                <Box>
+                  {biasInsights.summary && (
+                    <Box sx={{ mb: 3 }}>
+                      <Typography variant="h6" gutterBottom>
+                        Summary
+                      </Typography>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12} md={3}>
+                          <Paper sx={{ p: 2, textAlign: 'center' }}>
+                            <Typography variant="h4" color="primary">
+                              {biasInsights.summary.total_candidates}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              Total Candidates
+                            </Typography>
+                          </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                          <Paper sx={{ p: 2, textAlign: 'center' }}>
+                            <Typography variant="h4" color="secondary">
+                              {formatPercentage(biasInsights.summary.overall_hiring_rate)}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              Hiring Rate
+                            </Typography>
+                          </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                          <Paper sx={{ p: 2, textAlign: 'center' }}>
+                            <Typography variant="h4" color={biasInsights.summary.bias_risk_level === 'high' ? 'error' : 'success'}>
+                              {biasInsights.summary.bias_risk_level || 'Low'}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              Risk Level
+                            </Typography>
+                          </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                          <Paper sx={{ p: 2, textAlign: 'center' }}>
+                            <Typography variant="h4" color="info">
+                              {biasInsights.summary.confidence || 'Medium'}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              Confidence
+                            </Typography>
+                          </Paper>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  )}
+
+                  {biasInsights.recommendations && (
+                    <Box>
+                      <Typography variant="h6" gutterBottom>
+                        Key Recommendations
+                      </Typography>
+                      <List>
+                        {biasInsights.recommendations.map((rec: string, index: number) => (
+                          <ListItem key={index}>
+                            <ListItemText 
+                              primary={rec}
+                              primaryTypographyProps={{ variant: 'body1' }}
+                            />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                  )}
+                </Box>
+              )}
             </CardContent>
           </Card>
         </Grid>
       </Grid>
     </Box>
   );
-}
+};
 
 export default BiasDetection;
