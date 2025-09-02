@@ -44,7 +44,12 @@ function Candidates() {
         const response = await fetch('/api/v1/candidates/');
         if (response.ok) {
           const data = await response.json();
-          setCandidates(data);
+          if (data.length > 0) {
+            setCandidates(data);
+          } else {
+            console.log('Backend returned no candidates, using mock data');
+            setCandidates(MOCK_CANDIDATES);
+          }
         } else {
           throw new Error('Backend not available');
         }
