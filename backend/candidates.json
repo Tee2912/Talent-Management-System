@@ -32,7 +32,33 @@
     "interview_rounds": 5,
     "years_since_graduation": 8,
     "previous_companies": 2,
-    "location": "Chicago"
+    "location": "Chicago",
+    "mbti_type": "INFP",
+    "personality_scores": {
+      "extraversion": 0,
+      "intuition": 100,
+      "thinking": 0,
+      "judging": 50
+    },
+    "personality_traits": [
+      "The Mediator",
+      "Idealistic, creative, and caring"
+    ],
+    "assessment_date": "2025-09-04T00:45:43.196698",
+    "assessment_responses": {
+      "1": 1,
+      "2": 3,
+      "3": 3,
+      "4": 4,
+      "5": 3,
+      "6": 3,
+      "7": 4,
+      "8": 5,
+      "9": 1,
+      "10": 3,
+      "11": 3,
+      "12": 4
+    }
   },
   {
     "id": 2,

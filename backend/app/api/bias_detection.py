@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict, Any
 from app.models.schemas import BiasAnalysisRequest, BiasAnalysisResult
+from datetime import datetime
 import json
 import os
 import sys
@@ -472,12 +473,56 @@ async def analyze_text_bias(request: Dict[str, Any]):
         return {
             "status": "success",
             "text_analysis": text_analysis,
-            "analysis_type": "rule_based_text_analysis",
+            "analysis_type": text_analysis.get("analysis_type", "rule_based_text_analysis"),
             "text_length": len(text)
         }
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Text analysis failed: {str(e)}")
+
+@router.post("/text-analyze-advanced")
+async def analyze_text_bias_advanced(request: Dict[str, Any]):
+    """Advanced text bias analysis using ML and NLP techniques"""
+    
+    text = request.get("text", "")
+    candidate_info = request.get("candidate_info", {})
+    
+    if not text:
+        raise HTTPException(status_code=400, detail="text is required")
+    
+    try:
+        # Import and use the advanced text bias analyzer directly
+        from app.models.text_bias_analyzer import analyze_text_bias, get_bias_analyzer_info
+        
+        # Get analyzer capabilities info
+        analyzer_info = get_bias_analyzer_info()
+        
+        # Perform comprehensive analysis
+        analysis_result = analyze_text_bias(text, candidate_info)
+        
+        return {
+            "status": "success",
+            "analysis_method": "advanced_ml_nlp",
+            "analyzer_capabilities": analyzer_info,
+            "text_analysis": {
+                "bias_detected": analysis_result['bias_detected'],
+                "bias_score": analysis_result['bias_score'],
+                "confidence": analysis_result['confidence'],
+                "risk_level": analysis_result['risk_level'],
+                "detected_patterns": analysis_result['detected_patterns'],
+                "sentiment_analysis": analysis_result['sentiment_analysis'],
+                "linguistic_analysis": analysis_result['linguistic_analysis'],
+                "recommendations": analysis_result['recommendations']
+            },
+            "detailed_analysis": analysis_result['detailed_analysis'],
+            "text_length": len(text),
+            "analysis_timestamp": datetime.now().isoformat()
+        }
+    
+    except ImportError as e:
+        raise HTTPException(status_code=503, detail=f"Advanced analyzer not available: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Advanced text analysis failed: {str(e)}")
 
 @router.get("/health")
 async def bias_detection_health():

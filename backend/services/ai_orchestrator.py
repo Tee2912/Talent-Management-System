@@ -507,7 +507,40 @@ class BiasDetectionEngine:
         })
 
     def _analyze_text_bias(self, text: str, candidate_info: Dict[str, Any]) -> Dict[str, Any]:
-        """Rule-based text analysis for bias indicators"""
+        """Advanced text analysis for bias indicators using ML and NLP"""
+        
+        try:
+            # Try to use the advanced text bias analyzer
+            from app.models.text_bias_analyzer import analyze_text_bias
+            
+            # Use the advanced analyzer
+            result = analyze_text_bias(text, candidate_info or {})
+            
+            # Convert to expected format
+            return {
+                'bias_detected': result['bias_detected'],
+                'bias_score': result['bias_score'],
+                'detected_patterns': result['detected_patterns'],
+                'confidence': result['confidence'],
+                'risk_level': result['risk_level'],
+                'sentiment_analysis': result['sentiment_analysis'],
+                'linguistic_analysis': result['linguistic_analysis'],
+                'total_bias_indicators': sum(len(patterns) for patterns in result['detected_patterns'].values()),
+                'text_length': len(text),
+                'analysis_type': 'advanced_ml_nlp_analysis',
+                'recommendations': result['recommendations']
+            }
+            
+        except ImportError:
+            # Fallback to rule-based analysis if advanced analyzer is not available
+            return self._fallback_text_bias_analysis(text, candidate_info)
+        except Exception as e:
+            # Log the error and use fallback
+            print(f"Error in advanced text bias analysis: {e}")
+            return self._fallback_text_bias_analysis(text, candidate_info)
+    
+    def _fallback_text_bias_analysis(self, text: str, candidate_info: Dict[str, Any]) -> Dict[str, Any]:
+        """Fallback rule-based text analysis for bias indicators"""
         
         # Define bias indicator patterns
         bias_patterns = {
