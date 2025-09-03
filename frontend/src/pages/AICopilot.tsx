@@ -30,8 +30,11 @@ import {
   Lightbulb as InsightIcon,
   Analytics as AnalyticsIcon,
   Person as PersonIcon,
+  Chat as ChatIcon,
 } from '@mui/icons-material';
 import PageTransition from '../components/PageTransition';
+import ConversationExamples from '../components/ConversationExamples';
+import { mockAIService } from '../services/mockAIService';
 
 interface ChatMessage {
   id: string;
@@ -76,6 +79,10 @@ interface AIInsights {
 }
 
 function AICopilot() {
+  // Mock mode state - set to true when no backend API is available
+  const [mockMode, setMockMode] = useState(true);
+  const [showExamples, setShowExamples] = useState(false);
+  
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -133,15 +140,30 @@ function AICopilot() {
 
   const loadAIInsights = useCallback(async () => {
     try {
+      if (mockMode) {
+        // Use mock service when in mock mode
+        const insights = await mockAIService.getAIInsights();
+        setAIInsights(insights);
+        return;
+      }
+      
+      // Try to fetch from real API
       const response = await fetch('/api/v1/ai-copilot/ai-insights/dashboard');
       const data = await response.json();
       if (data.success) {
         setAIInsights(data.ai_insights);
+        setMockMode(false); // Successfully connected to real API
+      } else {
+        throw new Error('API response unsuccessful');
       }
     } catch (error) {
-      console.error('Error loading AI insights:', error);
+      console.error('Error loading AI insights, falling back to mock mode:', error);
+      // Fall back to mock service if API fails
+      setMockMode(true);
+      const insights = await mockAIService.getAIInsights();
+      setAIInsights(insights);
     }
-  }, [setAIInsights]);
+  }, [mockMode, setAIInsights, setMockMode]);
 
   useEffect(() => {
     // Load AI insights dashboard on component mount
@@ -165,17 +187,47 @@ function AICopilot() {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const messageToSend = currentMessage;
     setCurrentMessage('');
     setIsLoading(true);
 
     try {
+      if (mockMode) {
+        // Use mock AI service
+        const { response: aiResponse, recommendations } = await mockAIService.sendMessage(
+          messageToSend, 
+          selectedContext
+        );
+        
+        setMessages(prev => [...prev, aiResponse]);
+        setRecommendations(recommendations);
+
+        // Add recommendations as separate messages
+        if (recommendations && recommendations.length > 0) {
+          recommendations.forEach((rec: SmartRecommendation, index: number) => {
+            setTimeout(() => {
+              const recMessage: ChatMessage = {
+                id: (Date.now() + index + 2).toString(),
+                text: `💡 **${rec.title}**: ${rec.description}\n\n**Confidence**: ${Math.round(rec.confidence * 100)}%\n**Priority**: ${rec.priority.toUpperCase()}`,
+                sender: 'ai',
+                timestamp: new Date(),
+                type: 'recommendation'
+              };
+              setMessages(prev => [...prev, recMessage]);
+            }, (index + 1) * 500); // Stagger recommendation messages
+          });
+        }
+        return;
+      }
+
+      // Try real API first
       const response = await fetch('/api/v1/ai-copilot/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          query: currentMessage,
+          query: messageToSend,
           context: selectedContext,
           candidate_id: selectedContext === 'candidate_analysis' && selectedCandidate ? selectedCandidate : null,
           job_id: selectedContext === 'job_matching' ? 1 : null
@@ -210,15 +262,29 @@ function AICopilot() {
       }
 
     } catch (error) {
-      console.error('Error sending message:', error);
-      const errorMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        text: 'I apologize, but I encountered an error processing your request. Please try again.',
-        sender: 'ai',
-        timestamp: new Date(),
-        type: 'warning'
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      console.error('Error with real API, falling back to mock service:', error);
+      
+      // Fall back to mock service
+      try {
+        setMockMode(true);
+        const { response: aiResponse, recommendations } = await mockAIService.sendMessage(
+          messageToSend, 
+          selectedContext
+        );
+        
+        setMessages(prev => [...prev, aiResponse]);
+        setRecommendations(recommendations);
+      } catch (mockError) {
+        console.error('Error with mock service:', mockError);
+        const errorMessage: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          text: 'I apologize, but I encountered an error processing your request. Please try again.',
+          sender: 'ai',
+          timestamp: new Date(),
+          type: 'warning'
+        };
+        setMessages(prev => [...prev, errorMessage]);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -264,7 +330,84 @@ function AICopilot() {
           <AIIcon sx={{ color: 'primary.main' }} />
           AI Assistant
           <Chip label="Smart Features Enabled" color="primary" variant="outlined" size="small" />
+          {mockMode && (
+            <Chip 
+              label="🎭 Demo Mode" 
+              color="warning" 
+              variant="filled" 
+              size="small"
+              sx={{ ml: 1 }}
+            />
+          )}
         </Typography>
+
+        {/* Mock Mode Banner & Quick Actions */}
+        {mockMode && (
+          <Alert 
+            severity="info" 
+            sx={{ mb: 2, background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)' }}
+            action={
+              <Button 
+                color="primary" 
+                size="small" 
+                onClick={() => setMockMode(false)}
+                sx={{ whiteSpace: 'nowrap' }}
+              >
+                Try Live API
+              </Button>
+            }
+          >
+            <Typography variant="body2">
+              <strong>🚀 AI Copilot Demo Mode</strong> - Experience realistic AI conversations without API keys! 
+              Try asking about candidates, bias detection, or workflow automation.
+            </Typography>
+          </Alert>
+        )}
+
+        {/* Quick Action Buttons */}
+        <Box sx={{ mb: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setCurrentMessage("Can you analyze Sarah Johnson for me?")}
+            startIcon={<PersonIcon />}
+          >
+            Analyze Candidate
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setCurrentMessage("Check this for bias: 'Looking for a young, energetic team player'")}
+            startIcon={<WarningIcon />}
+          >
+            Test Bias Detection
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setCurrentMessage("Help me automate candidate screening")}
+            startIcon={<SparkleIcon />}
+          >
+            Setup Automation
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setCurrentMessage("What are best practices for bias-free hiring?")}
+            startIcon={<InsightIcon />}
+          >
+            Get Best Practices
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() => setShowExamples(true)}
+            startIcon={<ChatIcon />}
+            sx={{ ml: 'auto' }}
+          >
+            View All Examples
+          </Button>
+        </Box>
 
         <Grid container spacing={3} sx={{ flexGrow: 1 }}>
           {/* AI Insights Dashboard */}
@@ -554,6 +697,17 @@ function AICopilot() {
             </Grid>
           </Paper>
         )}
+
+        {/* Conversation Examples Dialog */}
+        <ConversationExamples
+          open={showExamples}
+          onClose={() => setShowExamples(false)}
+          onSelectExample={(message) => {
+            setCurrentMessage(message);
+            // Optionally auto-send the message
+            // setTimeout(() => sendMessage(), 100);
+          }}
+        />
       </Box>
     </PageTransition>
   );

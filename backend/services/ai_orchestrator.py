@@ -700,6 +700,17 @@ class AIOrchestrator:
         # Initialize bias detection engine
         self.bias_detector = BiasDetectionEngine()
         
+        # Initialize mock AI for development mode
+        self.mock_mode = not (LANGCHAIN_AVAILABLE and openai_api_key)
+        self.mock_ai = None
+        if self.mock_mode:
+            try:
+                from .mock_ai_responses import mock_ai
+                self.mock_ai = mock_ai
+                logger.info("Mock AI responses initialized for development mode")
+            except ImportError:
+                logger.warning("Mock AI responses not available")
+        
         # Initialize memory for conversations
         if LANGCHAIN_AVAILABLE:
             self.memory = ConversationBufferMemory(
@@ -716,13 +727,18 @@ class AIOrchestrator:
         logger.info("AI Orchestrator initialized with comprehensive functionality")
 
     async def general_intelligence_query(self, query: str, context: str) -> Dict[str, Any]:
-        """Handle general AI queries using LangChain"""
+        """Handle general AI queries using LangChain or mock responses"""
         try:
+            # Use mock responses if in mock mode
+            if self.mock_mode and self.mock_ai:
+                return self.mock_ai.get_general_response(query, context)
+            
             if not self.llm:
                 return {
-                    "summary": "I'm here to help with your hiring needs! While my full AI capabilities are still being configured, I can assist with candidate analysis, bias detection, and hiring recommendations based on the data available.",
+                    "response": "I'm here to help with your hiring needs! While my full AI capabilities are still being configured, I can assist with candidate analysis, bias detection, and hiring recommendations based on the data available.",
                     "confidence": 0.8,
-                    "source": "Basic AI Assistant"
+                    "source": "Basic AI Assistant",
+                    "recommendations": []
                 }
 
             if self.langfuse:
@@ -790,6 +806,10 @@ class AIOrchestrator:
     async def analyze_candidate_intelligence(self, candidate_id: int, query: str) -> Dict[str, Any]:
         """Analyze a candidate using AI with comprehensive insights"""
         try:
+            # Use mock responses if in mock mode
+            if self.mock_mode and self.mock_ai:
+                return self.mock_ai.get_candidate_analysis(str(candidate_id), query)
+            
             # Mock candidate data - in production, this would fetch from database
             candidates = {
                 1: {
@@ -814,11 +834,11 @@ class AIOrchestrator:
             
             candidate = candidates.get(candidate_id)
             if not candidate:
-                return {"summary": "Candidate not found in our database."}
+                return {"response": "Candidate not found in our database.", "candidate_analysis": None}
 
             if not self.llm:
                 return {
-                    "summary": f"Based on available data for {candidate['name']}: {candidate['resume_summary']}. They have {candidate['experience']} years of experience in {candidate['position']}. Key skills include: {', '.join(candidate['skills'][:3])}.",
+                    "response": f"Based on available data for {candidate['name']}: {candidate['resume_summary']}. They have {candidate['experience']} years of experience in {candidate['position']}. Key skills include: {', '.join(candidate['skills'][:3])}.",
                     "candidate_analysis": candidate,
                     "recommendations": [
                         "Review technical assessment scores",
@@ -886,6 +906,10 @@ class AIOrchestrator:
     async def smart_job_matching(self, query: str, job_id: Optional[int]) -> Dict[str, Any]:
         """Perform intelligent job-candidate matching"""
         try:
+            # Use mock responses if in mock mode
+            if self.mock_mode and self.mock_ai:
+                return self.mock_ai.get_job_matching_response(query, job_id)
+            
             # Mock job data
             jobs = {
                 1: {
@@ -900,7 +924,7 @@ class AIOrchestrator:
             
             if not self.llm:
                 return {
-                    "summary": f"For the {job['title']} position, I recommend candidates with {job['experience_required']}+ years experience in: {', '.join(job['required_skills'])}. The role involves {job['description'].lower()}",
+                    "response": f"For the {job['title']} position, I recommend candidates with {job['experience_required']}+ years experience in: {', '.join(job['required_skills'])}. The role involves {job['description'].lower()}",
                     "job_analysis": job,
                     "matching_criteria": {
                         "must_have": job['required_skills'][:2],
