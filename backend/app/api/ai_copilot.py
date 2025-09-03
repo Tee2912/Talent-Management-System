@@ -10,7 +10,14 @@ from datetime import datetime
 import json
 
 import os
-from ...services.ai_orchestrator import AIOrchestrator
+import sys
+from pathlib import Path
+
+# Add the backend directory to the path for imports
+backend_dir = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(backend_dir))
+
+from services.ai_orchestrator import AIOrchestrator
 
 # Initialize the AI Orchestrator with environment variables
 ai_orchestrator = AIOrchestrator(
