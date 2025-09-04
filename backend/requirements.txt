@@ -15,9 +15,9 @@ httpx==0.25.2
 openai==1.51.0
 
 # AI Framework Enhancements - LangChain & LangFuse Integration
-langchain==0.1.20
-langchain-openai==0.1.8
-langchain-community==0.0.38
+langchain==0.2.16
+langchain-openai==0.1.25
+langchain-community==0.2.16
 langfuse==2.7.3
 chromadb==0.4.22
 sentence-transformers==2.2.2
